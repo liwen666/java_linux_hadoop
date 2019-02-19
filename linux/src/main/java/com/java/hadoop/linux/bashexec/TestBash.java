@@ -81,7 +81,7 @@ public class TestBash {
     }
 
     @Test
-    public void deleteFile() throws Exception {
+    public void clearFile() throws Exception {
         FtpJSch.getConnect();
         Vector ls = FtpJSch.sftp.ls("/home/liwen/");
         for (Object str : ls) {
@@ -94,4 +94,7 @@ public class TestBash {
         }
     }
 
+    @Test
+    public void deleteFile() throws Exception {
+    }
 }

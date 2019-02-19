@@ -1,13 +1,11 @@
 package com.java.hadoop.linux;
 
+import java.io.IOException;
 import java.io.InputStream;
- 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
- 
+
+import com.alibaba.fastjson.JSONObject;
+import com.jcraft.jsch.*;
+
 /**
  * java 登录linux系统，并读取执行shell命令结果
  * @author wanghonggang
@@ -115,5 +113,28 @@ public class LinuxShell {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	static class TestShell{
+		private static  JSch jSch = new JSch();
+
+		public static void main(String[] args) throws JSchException, IOException {
+			Session hadoop = jSch.getSession("hadoop", "192.168.42.210", 22);
+			hadoop.setPassword("hadoop");
+			hadoop.setConfig("StrictHostKeyChecking", "no");
+			hadoop.connect();
+			ChannelShell shell = (ChannelShell) hadoop.openChannel("shell");
+			shell.connect();
+			InputStream inputStream = shell.getInputStream();
+
+
+
+			hadoop.disconnect();
+			shell.disconnect();
+			inputStream.close();
+
+
+		}
+
 	}
 }
