@@ -25,7 +25,7 @@ public class JavaInstall {
      * 登录linux系统
      */
     @Test
-    public void exec() {
+    public void installJava() {
         try {
 //			登录hadoop 的shell和ftp
             Login("hadoop", "192.168.42.210", 22);
@@ -57,6 +57,7 @@ public class JavaInstall {
                 ChannelSftp.LsEntry cl = (ChannelSftp.LsEntry) str;
                 if(cl.getLongname().endsWith("jdk-8u191-linux-x64.tar.gz")){
                     System.out.println(str+"   java 已经被安装");
+
                     mark= true;
                     break;
                 }

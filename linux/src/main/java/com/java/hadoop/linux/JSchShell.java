@@ -65,13 +65,18 @@ public class JSchShell {
                 System.out.print(s);
               }
                 try{Thread.sleep(1000);}catch(Exception ee){}
-              if(!(in.available()>0)){
-                  break;
+                if(!(in.available()>0)){
+//                if(channel.isClosed()){
+                    System.out.println(channel.isClosed()+"============");
+                    System.out.println(channel.getExitStatus());
+                    System.out.println(channel.isConnected());
+                    break;
               }
             }
             os.close();
             in.close();
             channel.disconnect();
+            System.out.println(channel.isClosed()+"关闭连接");
             session.disconnect();
             System.out.println("DONE");
         }catch(Exception e){

@@ -37,7 +37,7 @@ public class JansiColorTest {
          */
 //        Ansi.ansi().eraseScreen().bgYellow().fg(GREEN).a(colorTx1)
 
-        System.out.println("\033[42;31;4m我滴个颜什\033[0m");
+        System.out.println("没变色\033[42;31;4m我滴个颜什\033[0m没变色");
         System.out.println("\033[42;31m我滴个颜什\033[0m");
         System.out.println("jjjjj");
         System.out.println("\033[30;4m" + "我滴个颜什" + "\033[0m");

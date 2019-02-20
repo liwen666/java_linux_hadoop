@@ -57,6 +57,7 @@ public class TestBash {
             FtpJSch.sftp.put(r.getInputStream(), r.getFilename());
         }
     }
+
     @Test
     public void execShell() throws Exception {
         LinuxShell.login(ip, 22, username,password);
