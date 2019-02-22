@@ -1,11 +1,15 @@
 package com.java.hadoop;
 
 import com.java.hadoop.linux.adduser.AddUser;
+import com.java.hadoop.linux.baseconfig.LinuxBaseConfig;
 import com.java.hadoop.linux.javainstall.JavaInstall;
 import com.java.hadoop.linux.port.FireWallController;
 
 public class AppConfigInstall {
     public static void main(String[] args) throws Exception {
+        //初始化linux 的依赖配置
+        LinuxBaseConfig lbc = new LinuxBaseConfig();
+        lbc.addDependies();
         //创建用户
         AddUser au = new AddUser();
         au.addUser();

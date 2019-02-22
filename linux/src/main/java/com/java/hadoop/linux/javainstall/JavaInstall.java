@@ -83,7 +83,7 @@ public class JavaInstall {
             /**修改profile文件  修改环境变量*/
             if(!mark){
                 LinuxConfig linuxConfig = new LinuxConfig();
-                linuxConfig.upLoadProfileFile("#Java Env");
+                linuxConfig.upLoadProfileFile(new String[]{"#Java Env"});
                 executeShell("source /etc/profile");
                 System.out.println("java 安装完成！");
             }

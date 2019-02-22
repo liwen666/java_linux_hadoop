@@ -29,3 +29,19 @@
      --delete  -D chain		Delete matching rule from chain
      --delete  -D chain rulenum
      iptables -D INPUT 1
+     
+     
+      yum install -y telnet 
+      
+             w3m http://www.baidu.com -o display_charset=GB2312
+              nc -z -w 1 192.168.42.210  80  
+              telnet 192.168.42.210 8080     
+  ##echo  sudo echo --help
+   在linux系统中添加sudo权限
+   命令   visudo 
+   内容： 
+      root    ALL=(ALL)       ALL
+      hadoop  ALL=(ALL)       ALL
+
+    "Raspberry" > test.txt  保存内容
+    echo "Intel Galileo" >> test.txt 不保存内容
