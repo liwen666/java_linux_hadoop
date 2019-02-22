@@ -4,6 +4,10 @@
 
 [hadoop@localhost .ssh]$ chmod 600 ./authorized_keys
 
+#红帽系统的特殊配置
+    cat /etc/ssh/sshd_config | grep uth | grep -v "#"
+    
+    
 -rw-------. 1 hadoop hadoop  410 Feb 21 23:22 authorized_keys
 -rw-------. 1 hadoop hadoop 1679 Feb 21 23:21 id_rsa
 -rw-r--r--. 1 hadoop hadoop  410 Feb 21 23:21 id_rsa.pub

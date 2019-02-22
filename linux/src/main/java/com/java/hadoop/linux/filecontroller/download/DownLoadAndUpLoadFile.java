@@ -41,6 +41,10 @@ public class DownLoadAndUpLoadFile {
 //        上传文件
         List <LinuxFileDomain> linuxFileDomains=findLinuxFile("root");
         for(LinuxFileDomain l :linuxFileDomains){
+            //跳过特殊文件
+            if(l.getFileName().equals("sshd_config")){
+            continue;
+            }
             Resource resource = LinuxUtil.findResource("com.java.hadoop.linux.filecontroller.download", l.getFileName());
             LinuxUtil.upLoadFile(resource,ftpsession,l.getFilePath());
         }

@@ -1,6 +1,7 @@
 {"root":[
 {"fileName":"hosts","filePath":"/etc/"},
 {"fileName":"network","filePath":"/etc/sysconfig/"},
+{"fileName":"sshd_config","filePath":"/etc/ssh/"},
 {"fileName":"hostname","filePath":"/etc/"}
 ],
 "hadoop":[
