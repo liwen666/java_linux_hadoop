@@ -23,6 +23,7 @@ public class HadoopInstall {
 
     private Session ftpsession;
     private Session execSession;
+
     /**
      * 登录linux系统
      */
@@ -57,39 +58,48 @@ public class HadoopInstall {
             Vector ls = sftp.ls("/home/hadoop");
             for (Object str : ls) {
                 ChannelSftp.LsEntry cl = (ChannelSftp.LsEntry) str;
-                if(cl.getLongname().endsWith("hadoop-2.8.5.tar.gz")){
-                    System.out.println(str+"   hadoop 已经被安装");
-                    mark= true;
+                if (cl.getLongname().endsWith("hadoop-2.8.5.tar.gz")) {
+                    System.out.println(str + "   hadoop 已经被安装");
+                    mark = true;
                     break;
                 }
             }
-            if(!mark){
+            if (!mark) {
                 File javaFile = new File("H:\\开发安装包\\大数据分布式需要的技术\\hadoop-2.8.5.tar.gz");
-                sftp.put(new FileInputStream(javaFile),javaFile.getName());
+                sftp.put(new FileInputStream(javaFile), javaFile.getName());
             }
             /*******************************************************************/
 
             /**
              * 解压缩
              */
-           /****************************解压java文件***********************/
-            if(!mark){
+            /****************************解压java文件***********************/
+            if (!mark) {
                 String s1 = executeShell("mkdir -vp hadoop");
-                System.out.println(s1+"创建目录");
+                System.out.println(s1 + "创建目录");
                 String s2 = executeShell("tar zxvf hadoop-2.8.5.tar.gz  -C /home/hadoop/hadoop");
-                System.out.println("解压hadoop_____________________"+s2);
+                System.out.println("解压hadoop_____________________" + s2);
             }
-           /****************************解压java文件***********************/
+            /****************************解压java文件***********************/
 
             /**修改profile文件  修改环境变量*/
 //            if(!mark){
-                LinuxConfig linuxConfig = new LinuxConfig();
-                linuxConfig.upLoadProfileFile(new String[]{"#hadoop Env","#Java Env"});
-                executeShell("source /etc/profile");
-                System.out.println("hadoop  安装完成！");
+            LinuxConfig linuxConfig = new LinuxConfig();
+            JSch sftpRootJsch = new JSch();
+            Session ftpsessionRoot = sftpRootJsch.getSession("root", "192.168.42.210", 22);
+            ftpsessionRoot.setPassword("root");
+            // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
+            ftpsessionRoot.setConfig("StrictHostKeyChecking", "no");
+            // 连接超时
+            ftpsessionRoot.connect(1000 * 10);
+            ChannelSftp sftpRoot = (ChannelSftp) ftpsessionRoot.openChannel("sftp");
+            sftpRoot.connect();
+            linuxConfig.upLoadProfileFile(new String[]{"#hadoop Env", "#Java Env"}, sftpRoot);
+            executeShell("source /etc/profile");
+            System.out.println("hadoop  安装完成！");
 //            }
             /****************************配置环境变量***********************/
-
+            ftpsessionRoot.disconnect();
             sftp.disconnect();
             ftpsession.disconnect();
             execSession.disconnect();
@@ -115,8 +125,8 @@ public class HadoopInstall {
         ftpsession.connect(1000 * 10);
         //下载密钥
 //        LinuxUtil.userFileDownload("hadoop",ftpsession);
-//        LinuxUtil.userFileUpload("hadoop",ftpsession);
-        
+        LinuxUtil.userFileUpload("hadoop",ftpsession);
+
 
         ftpsession.disconnect();
         execSession.disconnect();
@@ -126,24 +136,33 @@ public class HadoopInstall {
     public void sshAuthorization() throws Exception {
 
 
-
-
-        Login("hadoop", "192.168.42.136", 22);
+//        Login("hadoop", "192.168.42.210", 22);
+        Login("hadoop", "192.168.42.211", 22);
         execSession.setPassword("hadoop");
+        ftpsession.setPassword("hadoop");
         // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
         execSession.setConfig("StrictHostKeyChecking", "no");
-        execSession.setConfig("userauth.gssapi-with-mic", "no");
+        ftpsession.setConfig("userauth.gssapi-with-mic", "no");
+        execSession.setConfig("StrictHostKeyChecking", "no");
+        ftpsession.setConfig("userauth.gssapi-with-mic", "no");
         // 连接超时
         execSession.connect(1000 * 10);
+        ftpsession.connect(1000 * 10);
 //        LinuxUtil.executeShell("chmod 600 /home/hadoop/.ssh/authorized_keys",execSession);
         String s = executeShell("df -h");
         System.out.println(s);
         String pwd = executeShell("pwd");
         System.out.println(pwd);
-
-        LinuxUtil.userFileUpload("hadoop",execSession);
-        LinuxUtil.executeShell("chmod 600 /home/hadoop/.ssh/authorized_keys",execSession);
+        ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
+        sftp.connect();
+        try {
+            sftp.mkdir("/home/hadoop/.ssh");
+        } catch (SftpException e) {
+        }
+        LinuxUtil.userFileUpload("hadoop", execSession);
+        LinuxUtil.executeShell("chmod 600 /home/hadoop/.ssh/authorized_keys", execSession);
         execSession.disconnect();
+        ftpsession.disconnect();
     }
 
     @Test
@@ -185,14 +204,13 @@ public class HadoopInstall {
         ftpsession.connect(1000 * 10);
 
         List<LinuxFileDomain> hadoop = LinuxUtil.findLinuxFile("root");
-        for(LinuxFileDomain l :hadoop){
+        for (LinuxFileDomain l : hadoop) {
             Resource resource = LinuxUtil.findResource("com.java.hadoop.linux.filecontroller.download.slaver_root", l.getFileName());
-            LinuxUtil.upLoadFile(resource,ftpsession,l.getFilePath());
+            LinuxUtil.upLoadFile(resource, ftpsession, l.getFilePath());
         }
         ftpsession.disconnect();
         execSession.disconnect();
     }
-
 
 
     public void Login(String user, String host, int port) throws JSchException {
@@ -253,12 +271,12 @@ public class HadoopInstall {
     public static void main(String[] args) throws JSchException, IOException, InterruptedException {
 
 
-                Socket socket = Util.createSocket("192.168.42.136", 22,1000);
+        Socket socket = Util.createSocket("192.168.42.136", 22, 1000);
         SocketChannel channel = socket.getChannel();
         InputStream inputStream = socket.getInputStream();
         OutputStream outputStream = socket.getOutputStream();
         socket.setTcpNoDelay(true);
-        byte [] result = new byte[1024];
+        byte[] result = new byte[1024];
 //        outputStream.write("ls -l ".getBytes());
 //        outputStream.flush();
 //        inputStream.read(result);
@@ -266,15 +284,14 @@ public class HadoopInstall {
         outputStream.write("pwd".getBytes());
         outputStream.flush();
         Thread.sleep(2000);
-        while (inputStream.available()>0){
+        while (inputStream.available() > 0) {
             inputStream.read(result);
-            System.out.println(new String (result));
+            System.out.println(new String(result));
             Thread.sleep(2000);
         }
 
 
     }
-
 
 
 }

@@ -2,6 +2,7 @@ package com.java.hadoop.linux;
 
 import com.java.hadoop.linux.filecontroller.FtpJSch;
 import com.java.hadoop.linux.filecontroller.basefile.ResolutionAppConfig;
+import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.SftpException;
 import com.temp.common.base.util.PackageScanUtil;
 import org.springframework.core.io.Resource;
@@ -17,8 +18,7 @@ import java.io.IOException;
 public class LinuxConfig {
 
     //修改环境变量
-    public void upLoadProfileFile(String[] appCfgs) throws IOException, SftpException {
-        FtpJSch.getConnect();
+    public void upLoadProfileFile(String[] appCfgs, ChannelSftp ftpsession) throws IOException, SftpException {
         Resource[] resource = PackageScanUtil.findResource("com.java.hadoop.linux.filecontroller.basefile");
         for (Resource r : resource) {
             File file = r.getFile();
@@ -37,9 +37,9 @@ public class LinuxConfig {
                     sb.append(configstr);
                 }
                 byte[] bytes = sb.toString().getBytes();
-                FtpJSch.sftp.cd("/etc");
+                ftpsession.cd("/etc");
                 ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
-                FtpJSch.sftp.put(byteArrayInputStream, file.getName().substring(5, file.getName().length()));
+                ftpsession.put(byteArrayInputStream, file.getName().substring(5, file.getName().length()));
 
             }
         }

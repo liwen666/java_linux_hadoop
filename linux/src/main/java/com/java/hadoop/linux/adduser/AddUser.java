@@ -101,6 +101,45 @@ public class AddUser {
 
 
     }
+    @Test
+    public void addUserByParam(String userName,String host,int port,String passWord) throws Exception {
+        Login(userName, host, port);
 
+        execSession.setPassword(passWord);
+        ftpsession.setPassword(passWord);
+        // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
+        execSession.setConfig("StrictHostKeyChecking", "no");
+        ftpsession.setConfig("StrictHostKeyChecking", "no");
+        // 连接超时
+        execSession.connect(1000 * 10);
+        ftpsession.connect(1000 * 10);
+        ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
+        //必须得连接，否则无法操作
+        sftp.connect();
+
+        try {
+            sftp.cd("/root/bash");
+        } catch (SftpException e) {
+            sftp.mkdir("/root/bash");
+            sftp.cd("/root/bash");
+        }
+        Resource[] resource = PackageScanUtil.findResource("com.java.hadoop.linux.adduser");
+        for(Resource r:resource){
+            if(r.getFilename().endsWith(".sh")){
+                System.out.println(r.getFilename());
+                sftp.put(r.getInputStream(), r.getFilename());
+                sftp.chmod(777,r.getFilename());
+            }
+
+        }
+
+        //测试循环shell
+        String s = LinuxUtil.executeShell("sh /root/bash/useraddconfig.sh \n", execSession);
+        System.out.println(s);
+        //添加用户
+        sftp.disconnect();
+        ftpsession.disconnect();
+        execSession.disconnect();
+    }
 
 }

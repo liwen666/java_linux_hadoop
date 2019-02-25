@@ -1,9 +1,14 @@
-[hadoop@localhost ~]$ cd ~/.ssh/
+ cd ~/.ssh/
 [hadoop@localhost .ssh]$ ssh-keygen -t rsa 
 [hadoop@localhost .ssh]$ cat id_rsa.pub >> authorized_keys
 
 [hadoop@localhost .ssh]$ chmod 600 ./authorized_keys
-
+#问题解析
+     再linux终端创建  .ssh   测试通过ssh免密码登录
+     删除master的  known_hosts   重新通过ssh连接  更新 从服务器的ssh密码
+     
+     分别对两个系统进行ssh登录设置，然后把生成的authorized_keys  内容合并，拷贝
+     到每个系统中即可达成ssh无密码登录
 #红帽系统的特殊配置
     cat /etc/ssh/sshd_config | grep uth | grep -v "#"
     

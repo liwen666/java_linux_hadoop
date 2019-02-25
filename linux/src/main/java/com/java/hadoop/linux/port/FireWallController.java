@@ -85,6 +85,21 @@ public class FireWallController {
         execSession.disconnect();
 
     }
+    @Test
+    public void execShellByParam(String userName,String host,int port,String passWord) throws Exception {
+        upLoadShell();
+        Login(userName, host, port);
+        execSession.setPassword(passWord);
+        execSession.setConfig("StrictHostKeyChecking", "no");
+        execSession.connect();
+        String s = LinuxUtil.executeShell("sh /home/hadoop/bash/fire-wall.sh \n", execSession);
+        LinuxUtil.executeShell("service iptables save \n", execSession);
+        System.out.println(s);
+        //添加用户
+        ftpsession.disconnect();
+        execSession.disconnect();
+
+    }
 
     //添加端口开放设置
     @Test
@@ -128,6 +143,48 @@ public class FireWallController {
         ftpsession.disconnect();
 
     }
+    @Test
+    public void modifyPortSetByParam(String userName,String host,int port,String passWord) throws Exception {
+        Login(userName, host, port);
+        execSession.setPassword(passWord);
+        execSession.setConfig("StrictHostKeyChecking", "no");
+        execSession.connect();
+        String s = LinuxUtil.executeShell("iptables -L INPUT -4n --line-numbers", execSession);
+        BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(s.getBytes("utf8"))));
+        BufferedReader shReader = new BufferedReader(new InputStreamReader(new FileInputStream(LinuxUtil.findResource("com.java.hadoop.linux", "fire-wall.sh").getFile())));
+        Set<String> ports = new HashSet<String>();
+        while (shReader.ready()) {
+            String s1 = shReader.readLine().trim();
+            if (s1.startsWith("iptables")) {
+                ports.add(s1.split(" ")[6]);
+            }
+        }
+
+        while (br.ready()) {
+            String s1 = br.readLine().trim();
+            int i = s1.lastIndexOf(":");
+            String num = s1.split(" ")[0];
+            String port1 = s1.substring(i == -1 ? 0 : i + 1, s1.length());
+            if (ports.contains(port1)) {
+                System.out.println(num + "   " + port1);
+                addDletePort(num);
+            }
+        }
+        //删除端口
+        String num=null;
+        while ((num=getPort())!=null){
+            System.out.println(num);
+            LinuxUtil.executeShell("iptables -D INPUT "+num,execSession);
+        }
+        //执行脚本添加端口
+        br.close();
+        shReader.close();
+//        execShell();
+        execSession.disconnect();
+        ftpsession.disconnect();
+
+    }
+
 
     private void addDletePort(String num) {
         store.add(num);

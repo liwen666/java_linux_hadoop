@@ -2,10 +2,7 @@ package com.java.hadoop.linux.baseconfig;
 
 import com.java.hadoop.linux.LinuxShell;
 import com.java.hadoop.linux.LinuxUtil;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
+import com.jcraft.jsch.*;
 import com.temp.common.base.util.PackageScanUtil;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
@@ -99,6 +96,46 @@ public class LinuxBaseConfig {
         execSession = jsch.getSession(user, host, port);
         ftpsession = jsch.getSession(user, host, port);
 
+
+    }
+    @Test
+    public void addDependiesByParam(String userName,String host,int port,String passWord) throws Exception {
+        Login(userName, host, port);
+
+        execSession.setPassword(passWord);
+        ftpsession.setPassword(passWord);
+        // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
+        execSession.setConfig("StrictHostKeyChecking", "no");
+        ftpsession.setConfig("StrictHostKeyChecking", "no");
+        // 连接超时
+        execSession.connect(1000 * 10);
+        ftpsession.connect(1000 * 10);
+        ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
+        //必须得连接，否则无法操作
+        sftp.connect();
+
+        try {
+            sftp.cd("/home/hadoop/bash");
+        } catch (SftpException e) {
+            sftp.mkdir("/home/hadoop/bash");
+            sftp.cd("/home/hadoop/bash");
+        }
+        Resource[] resource = PackageScanUtil.findResource("com.java.hadoop.linux.baseconfig");
+        //上传初始化脚本
+        for(Resource r:resource){
+            if(r.getFilename().endsWith(".sh")){
+                System.out.println(r.getFilename());
+                sftp.put(r.getInputStream(), r.getFilename());
+                sftp.chmod(777,r.getFilename());
+            }
+
+        }
+        String s = LinuxUtil.executeShell("sh /home/hadoop/bash/baseconfig.sh \n", execSession);
+        System.out.println(s);
+        //添加用户
+        sftp.disconnect();
+        ftpsession.disconnect();
+        execSession.disconnect();
 
     }
 

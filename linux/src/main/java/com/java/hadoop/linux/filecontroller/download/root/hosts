@@ -2,4 +2,4 @@
 127.0.0.1   Master
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.42.210  Master
-192.168.42.136  Slaver
+192.168.42.211  Slaver

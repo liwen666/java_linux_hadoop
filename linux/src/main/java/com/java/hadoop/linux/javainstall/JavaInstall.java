@@ -83,7 +83,7 @@ public class JavaInstall {
             /**修改profile文件  修改环境变量*/
             if(!mark){
                 LinuxConfig linuxConfig = new LinuxConfig();
-                linuxConfig.upLoadProfileFile(new String[]{"#Java Env"});
+                linuxConfig.upLoadProfileFile(new String[]{"#Java Env"},sftp);
                 executeShell("source /etc/profile");
                 System.out.println("java 安装完成！");
             }
@@ -105,6 +105,96 @@ public class JavaInstall {
         }
     }
 
+    public void installJavaByParam(String userName,String host,int port,String passWord) {
+        try {
+//			登录hadoop 的shell和ftp
+            Login(userName, host, port);
+            execSession.setPassword(passWord);
+            ftpsession.setPassword(passWord);
+            // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
+            execSession.setConfig("StrictHostKeyChecking", "no");
+            ftpsession.setConfig("StrictHostKeyChecking", "no");
+            // 连接超时
+            execSession.connect(1000 * 10);
+            ftpsession.connect(1000 * 10);
+            String s = executeShell("df -h");
+            System.out.println(s);
+            String pwd = executeShell("pwd");
+            System.out.println(pwd);
+//			__________________________________________________________________
+//			上传java文件 到hadoop用户目录
+
+            ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
+            //必须得连接，否则无法操作
+            sftp.connect();
+            sftp.cd("/home/hadoop");
+            /**
+             * 将u盘的java上传到linux*******************************************************88
+             */
+            boolean mark = false;
+            Vector ls = sftp.ls("/home/hadoop");
+            for (Object str : ls) {
+                ChannelSftp.LsEntry cl = (ChannelSftp.LsEntry) str;
+                if(cl.getLongname().endsWith("jdk-8u191-linux-x64.tar.gz")){
+                    System.out.println(str+"   java 已经被安装");
+                    mark= true;
+                    break;
+                }
+            }
+            if(!mark){
+                File javaFile = new File("H:\\开发安装包\\java\\jdk-8u191-linux-x64.tar.gz");
+                sftp.put(new FileInputStream(javaFile),javaFile.getName());
+            }
+            /*******************************************************************/
+
+            /**
+             * 解压缩
+             */
+            /****************************解压java文件***********************/
+            if(!mark){
+                String s1 = executeShell("mkdir -vp java");
+                System.out.println(s1+"创建目录");
+                String s2 = executeShell("tar zxvf jdk-8u191-linux-x64.tar.gz  -C /home/hadoop/java");
+                System.out.println("解压java_____________________"+s2);
+            }
+            /****************************解压java文件***********************/
+
+            /**修改profile文件  修改环境变量*/
+            if(!mark){
+                LinuxConfig linuxConfig = new LinuxConfig();
+                JSch sftpRootJsch = new JSch();
+               Session ftpsessionRoot = sftpRootJsch.getSession("root", host, port);
+                ftpsessionRoot.setPassword("root");
+                // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
+                ftpsessionRoot.setConfig("StrictHostKeyChecking", "no");
+                // 连接超时
+                ftpsessionRoot.connect(1000 * 10);
+                ChannelSftp sftpRoot = (ChannelSftp) ftpsessionRoot.openChannel("sftp");
+                sftpRoot.connect();
+
+                linuxConfig.upLoadProfileFile(new String[]{"#Java Env"},sftpRoot);
+                executeShell("source /etc/profile");
+                 ftpsessionRoot.disconnect();
+                System.out.println("java 安装完成！");
+
+            }
+            /****************************配置环境变量***********************/
+
+
+
+
+
+
+            sftp.disconnect();
+            ftpsession.disconnect();
+            execSession.disconnect();
+        } catch (JSchException e) {
+            System.out.println("登录时发生错误！");
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

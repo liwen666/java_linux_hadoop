@@ -5,6 +5,7 @@
 {"fileName":"hostname","filePath":"/etc/"}
 ],
 "hadoop":[
-{"fileName":"authorized_keys","filePath":"/home/hadoop/.ssh/"}
+{"fileName":"authorized_keys","filePath":"/home/hadoop/.ssh/"},
+{"fileName":"id_rsa.pub","filePath":"/home/hadoop/.ssh/"}
 ]
 }

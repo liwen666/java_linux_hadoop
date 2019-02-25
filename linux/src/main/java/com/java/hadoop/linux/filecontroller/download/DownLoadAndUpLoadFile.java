@@ -45,6 +45,23 @@ public class DownLoadAndUpLoadFile {
             if(l.getFileName().equals("sshd_config")){
             continue;
             }
+            Resource resource = LinuxUtil.findResource("com.java.hadoop.linux.filecontroller.download.root", l.getFileName());
+            LinuxUtil.upLoadFile(resource,ftpsession,l.getFilePath());
+        }
+        ftpsession.disconnect();
+        execSession.disconnect();
+    }
+    @Test
+    public void sshSlaverFileUpload() throws Exception {
+//        登录root 的shell和ftp
+        Login("root", "192.168.42.211", 22,"root");
+//        上传文件
+        List <LinuxFileDomain> linuxFileDomains=findLinuxFile("root");
+        for(LinuxFileDomain l :linuxFileDomains){
+            //跳过特殊文件
+            if(l.getFileName().equals("sshd_config")){
+                continue;
+            }
             Resource resource = LinuxUtil.findResource("com.java.hadoop.linux.filecontroller.download", l.getFileName());
             LinuxUtil.upLoadFile(resource,ftpsession,l.getFilePath());
         }
