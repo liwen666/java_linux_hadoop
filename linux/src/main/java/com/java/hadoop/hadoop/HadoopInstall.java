@@ -31,7 +31,8 @@ public class HadoopInstall {
     public void installHadoop() {
         try {
 //			登录hadoop 的shell和ftp
-            Login("hadoop", "192.168.42.210", 22);
+            Login("hadoop", "192.168.42.211", 22);
+//            Login("hadoop", "192.168.42.210", 22);
             execSession.setPassword("hadoop");
             ftpsession.setPassword("hadoop");
             // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
@@ -65,7 +66,8 @@ public class HadoopInstall {
                 }
             }
             if (!mark) {
-                File javaFile = new File("H:\\开发安装包\\大数据分布式需要的技术\\hadoop-2.8.5.tar.gz");
+//                File javaFile = new File("H:\\开发安装包\\大数据分布式需要的技术\\hadoop-2.8.5.tar.gz");
+                File javaFile = new File("H:\\hadoop-2.8.5.tar.gz");
                 sftp.put(new FileInputStream(javaFile), javaFile.getName());
             }
             /*******************************************************************/
@@ -78,7 +80,9 @@ public class HadoopInstall {
                 String s1 = executeShell("mkdir -vp hadoop");
                 System.out.println(s1 + "创建目录");
                 String s2 = executeShell("tar zxvf hadoop-2.8.5.tar.gz  -C /home/hadoop/hadoop");
-                System.out.println("解压hadoop_____________________" + s2);
+                executeShell("cp /home/hadoop/hadoop/hadoop-2.8.5/etc/hadoop/mapred-site.xml.template /home/hadoop/hadoop/hadoop-2.8.5/etc/hadoop/mapred-site.xml");
+                executeShell("mkdir -vp /home/hadoop/hadoop/hadoop-2.8.5/hdfs/{tmp,data,name}");
+//                System.out.println("解压hadoop_____________________" + s2);
             }
             /****************************解压java文件***********************/
 

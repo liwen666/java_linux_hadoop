@@ -39,5 +39,45 @@
      如果想加快SSH的登录的速度，可以把路径 /etc/ssh/sshd_config 文件中 UseDNS yes 修改为 no
      重启sshd服务，service sshd restart
      
+     
+  #集群搭建
+        2.在hadoop-2.7.3文件夹里面先创建4个文件夹：
+        
+            hadoop-2.7.3/hdfs
+            hadoop-2.7.3/hdfs/tmp
+            hadoop-2.7.3/hdfs/name
+            hadoop-2.7.3/hdfs/data
+            
+            
+            
+   #启动hadoop
+   10.开启hadoop
+   hdfs namenode -formate
+   
+     两种方法：
+   方法1 
+   start-all.sh
+   方法2
+   先start-dfs.sh,再start-yarn.sh
 
+#页面浏览
+http://192.168.42.210:50070/dfshealth.html#tab-overview
+    测试集群
+    hadoop   jar   /home/hadoop/hadoop/hadoop-2.8.5/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.8.5.jar  pi 10 10
+    
+    
+    
+    关闭所有节点
+    1.关闭所有的节点：
+    
+    ./stop-all.sh
+    
+    2.namenode格式化 
+    
+     hadoop namenode -format
+     
+     
+            
+     3 查看磁盘状态
+     hadoop dfsadmin -report
 

@@ -1,9 +1,12 @@
 package com.java.hadoop.linux;
 
 import com.alibaba.fastjson.JSONObject;
+import com.java.hadoop.filemanager.FileData;
+import com.java.hadoop.filemanager.LinuxFileMnangerDomain;
 import com.java.hadoop.linux.filecontroller.FtpJSch;
 import com.java.hadoop.linux.filecontroller.download.LinuxFileDomain;
 import com.jcraft.jsch.*;
+import lombok.Cleanup;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -106,16 +109,17 @@ public class LinuxUtil {
         return buffer.toString();
     }
 
-    public static Resource findResource(String packageParten,String fileName) throws IOException {
+    public static Resource findResource(String packageParten, String fileName) throws IOException {
         String packageSearchPath = "classpath*:" + packageParten.replaceAll("\\.", "/") + "/**/*";
         Resource[] resources = (new PathMatchingResourcePatternResolver()).getResources(packageSearchPath);
-        for(Resource r:resources){
-            if(r.getFilename().equals(fileName)){
+        for (Resource r : resources) {
+            if (r.getFilename().equals(fileName)) {
                 return r;
             }
         }
         return null;
     }
+
     public static Resource[] findResources(String packageParten) throws IOException {
         String packageSearchPath = "classpath*:" + packageParten.replaceAll("\\.", "/") + "/**/*";
         Resource[] resources = (new PathMatchingResourcePatternResolver()).getResources(packageSearchPath);
@@ -136,37 +140,17 @@ public class LinuxUtil {
         return resource.getFilename() == null ? null : resource.getFilename();
     }
 
-    public static void download(String fileName,String directory, Session shellSession,String authDir) throws JSchException {
+    public static void download(String fileName, String directory, Session shellSession, String authDir) throws JSchException {
         ChannelSftp sftp = (ChannelSftp) shellSession.openChannel("sftp");
         Object o = System.getProperties().get("user.dirs");
         String basePath = System.getProperty("user.dir");
-        String dir=basePath+"\\src\\main\\java\\com\\java\\hadoop\\linux\\filecontroller\\download\\"+authDir;
-            File f = new File(dir);
-            f.mkdirs();
-        try {
-            sftp.connect();
-            sftp.cd(directory);
-            File file = new File(dir+"/"+fileName);
-            System.out.println(file.exists());
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            sftp.get(fileName, new FileOutputStream(file));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public static void sshFileCustomer(String fileName,String directory, Session shellSession,String authDir,String ip) throws JSchException {
-        ChannelSftp sftp = (ChannelSftp) shellSession.openChannel("sftp");
-        Object o = System.getProperties().get("user.dirs");
-        String basePath = System.getProperty("user.dir");
-        String dir=basePath+"\\src\\main\\java\\com\\java\\hadoop\\ssh\\"+ip.replaceAll("\\.","-")+"\\"+authDir;
+        String dir = basePath + "\\src\\main\\java\\com\\java\\hadoop\\linux\\filecontroller\\download\\" + authDir;
         File f = new File(dir);
         f.mkdirs();
         try {
             sftp.connect();
             sftp.cd(directory);
-            File file = new File(dir+"/"+fileName);
+            File file = new File(dir + "/" + fileName);
             System.out.println(file.exists());
             if (!file.exists()) {
                 file.createNewFile();
@@ -177,37 +161,59 @@ public class LinuxUtil {
         }
     }
 
-    public static void userFileDownload(String userName,Session ftpsession) throws Exception {
-        //下载 用户文件
-        List<LinuxFileDomain> linuxFileDomains=findLinuxFile(userName);
-        for(LinuxFileDomain l :linuxFileDomains){
-            LinuxUtil.download(l.getFileName(),l.getFilePath(),ftpsession,userName);
+    public static void sshFileCustomer(String fileName, String directory, Session shellSession, String authDir, String ip) throws JSchException {
+        ChannelSftp sftp = (ChannelSftp) shellSession.openChannel("sftp");
+        String basePath = System.getProperty("user.dir");
+        String dir = basePath + "linux\\src\\main\\java\\com\\java\\hadoop\\ssh\\" + ip.replaceAll("\\.", "-") + "\\" + authDir;
+        File f = new File(dir);
+        f.mkdirs();
+        try {
+            sftp.connect();
+            sftp.cd(directory);
+            File file = new File(dir + "/" + fileName);
+            System.out.println(file.exists());
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            sftp.get(fileName, new FileOutputStream(file));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public static void userFileUpload(String userName,Session ftpsession) throws Exception {
-//        上传文件
-        List <LinuxFileDomain> linuxFileDomains=findLinuxFile(userName);
-        for(LinuxFileDomain l :linuxFileDomains){
-            Resource resource = LinuxUtil.findResource("com.java.hadoop.linux.filecontroller.download", l.getFileName());
-            LinuxUtil.upLoadFile(resource,ftpsession,l.getFilePath());
+    public static void userFileDownload(String userName, Session ftpsession) throws Exception {
+        //下载 用户文件
+        List<LinuxFileDomain> linuxFileDomains = findLinuxFile(userName);
+        for (LinuxFileDomain l : linuxFileDomains) {
+            LinuxUtil.download(l.getFileName(), l.getFilePath(), ftpsession, userName);
         }
     }
-    public static void sshFileUploadCustomer(String userName,Session ftpsession,String ip) throws Exception {
+
+    public static void userFileUpload(String userName, Session ftpsession) throws Exception {
+//        上传文件
+        List<LinuxFileDomain> linuxFileDomains = findLinuxFile(userName);
+        for (LinuxFileDomain l : linuxFileDomains) {
+            Resource resource = LinuxUtil.findResource("com.java.hadoop.linux.filecontroller.download", l.getFileName());
+            LinuxUtil.upLoadFile(resource, ftpsession, l.getFilePath());
+        }
+    }
+
+    public static void sshFileUploadCustomer(String userName, Session ftpsession, String ip) throws Exception {
         ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
         String basePath = "com.java.hadoop.ssh";
-        String dirbasePath=basePath+"."+ip.replaceAll("\\.","-")+"."+userName;
+        String dirbasePath = basePath + "." + ip.replaceAll("\\.", "-") + "." + userName;
 //        上传文件
-            Resource[] resources = LinuxUtil.findResources(dirbasePath);
-            for(Resource r:resources){
-                LinuxUtil.upLoadFile(r,ftpsession,"/home/hadoop/.ssh/");
-            }
+        Resource[] resources = LinuxUtil.findResources(dirbasePath);
+        for (Resource r : resources) {
+            LinuxUtil.upLoadFile(r, ftpsession, "/home/hadoop/.ssh/");
+        }
 
     }
+
     public static List<LinuxFileDomain> findLinuxFile(String userName) throws IOException {
         Resource resource = LinuxUtil.findResource("com.java.hadoop.linux.filecontroller.download", "file_cfg.json");
         InputStream inputStream = resource.getInputStream();
-        byte []cache = new byte[1024];
+        byte[] cache = new byte[1024];
         inputStream.read(cache);
         String s = new String(cache);
         JSONObject jsonObject = JSONObject.parseObject(s);
@@ -216,4 +222,49 @@ public class LinuxUtil {
         return linuxFileDomains;
     }
 
+    public static List<LinuxFileMnangerDomain> findLinuxFileManager(String ip, String userName) throws IOException {
+        Resource resource = LinuxUtil.findResource("com.java.hadoop.filemanager", "file_linux_cfg.json");
+        @Cleanup InputStream inputStream = resource.getInputStream();
+        byte[] cache = new byte[1024];
+        inputStream.read(cache);
+        String s = new String(cache);
+        List<LinuxFileMnangerDomain> linuxFileMnangerDomains = JSONObject.parseArray(s, LinuxFileMnangerDomain.class);
+        return linuxFileMnangerDomains;
+    }
+
+
+    public static void findFile(String ip, String userName, String filePath, String fileName, Session ftpsession) throws JSchException, SftpException, IOException {
+        ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
+        sftp.connect();
+        sftp.cd(filePath);
+        String basePath = System.getProperty("user.dir");
+        String packagePath = basePath + "/" + "linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\" + ip.replaceAll("\\.", "-") + "/" + userName;
+        File filePackage = new File(packagePath);
+        filePackage.mkdirs();
+        File file = new File(packagePath + "/" + fileName);
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        sftp.get(fileName, fileOutputStream);
+//        fileOutputStream.close();
+
+    }
+
+    public static FileData findLinuxFileDomain(String ip, String userName) throws IOException {
+        Resource resource = LinuxUtil.findResource("com.java.hadoop.filemanager", "file_linux_cfg.json");
+        @Cleanup InputStream inputStream = resource.getInputStream();
+        byte[] cache = new byte[1024*100];
+        inputStream.read(cache);
+        String s = new String(cache);
+        List<LinuxFileMnangerDomain> linuxFileMnangerDomains = JSONObject.parseArray(s, LinuxFileMnangerDomain.class);
+        for (LinuxFileMnangerDomain lfmd : linuxFileMnangerDomains) {
+            if (ip.equals(lfmd.getIp())) {
+                FileData fileData = lfmd.getFileDataMap().get(userName);
+                return fileData;
+            }
+
+        }
+            return null;
+    }
 }

@@ -7,8 +7,9 @@ export PATH=$PATH:$JAVA_HOME/bin",
 export PATH=/usr/local/mysql/bin:$PATH",
 
 "#hadoop Env":"
-export PATH=/home/hadoop/hadoop/hadoop-2.8.5/bin:$PATH"
-
+export HADOOP_HOME=/home/hadoop/hadoop/hadoop-2.8.5
+export PATH="$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop"
 }
 
 
