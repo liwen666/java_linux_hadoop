@@ -254,8 +254,8 @@ public class LinuxUtil {
     public static FileData findLinuxFileDomain(String ip, String userName) throws IOException {
         Resource resource = LinuxUtil.findResource("com.java.hadoop.filemanager", "file_linux_cfg.json");
         @Cleanup InputStream inputStream = resource.getInputStream();
-        byte[] cache = new byte[1024*100];
-        inputStream.read(cache);
+        byte[] cache = new byte[1024*1000];
+        int read = inputStream.read(cache);
         String s = new String(cache);
         List<LinuxFileMnangerDomain> linuxFileMnangerDomains = JSONObject.parseArray(s, LinuxFileMnangerDomain.class);
         for (LinuxFileMnangerDomain lfmd : linuxFileMnangerDomains) {
@@ -266,5 +266,21 @@ public class LinuxUtil {
 
         }
             return null;
+    }
+    public static FileData findLinuxFileAppDomain(String ip, String userName,String appName) throws IOException {
+        Resource resource = LinuxUtil.findResource("com.java.hadoop.filemanager", appName+".json");
+        @Cleanup InputStream inputStream = resource.getInputStream();
+        byte[] cache = new byte[1024*100];
+        int read = inputStream.read(cache);
+        String s = new String(cache);
+        List<LinuxFileMnangerDomain> linuxFileMnangerDomains = JSONObject.parseArray(s, LinuxFileMnangerDomain.class);
+        for (LinuxFileMnangerDomain lfmd : linuxFileMnangerDomains) {
+            if (ip.equals(lfmd.getIp())) {
+                FileData fileData = lfmd.getFileDataMap().get(userName);
+                return fileData;
+            }
+
+        }
+        return null;
     }
 }

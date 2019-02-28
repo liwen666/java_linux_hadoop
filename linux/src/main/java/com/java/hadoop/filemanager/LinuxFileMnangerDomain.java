@@ -34,7 +34,7 @@ public class LinuxFileMnangerDomain  {
     }
 @Test
     public  void arrayToJavaList() throws IOException {
-        FileInputStream fis = new FileInputStream("E:\\github_program\\java_linux_hadoop\\linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\file_linux_cfg.json");
+        FileInputStream fis = new FileInputStream("E:\\github_program\\java_linux_hadoop\\linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\spark.json");
         byte [] bytes = new byte[1024];
         int read = fis.read(bytes);
         String s = new String(bytes, 0, read);

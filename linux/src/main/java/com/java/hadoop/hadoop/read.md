@@ -55,7 +55,7 @@
    hdfs namenode -formate
    
      两种方法：
-   方法1 
+   方法1   可能会与其他的脚步有冲突   如spark
    start-all.sh
    方法2
    先start-dfs.sh,再start-yarn.sh
