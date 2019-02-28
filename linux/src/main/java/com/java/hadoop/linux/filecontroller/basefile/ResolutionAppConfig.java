@@ -14,9 +14,9 @@ public class ResolutionAppConfig {
         String appConfig = null;
         for(Resource r:resource){
             String filename = r.getFilename();
-            if("appconfig".equals(filename)){
+            if("appconfig.json".equals(filename)){
                 InputStream inputStream = r.getInputStream();
-                byte [] cache = new byte[1024*10];
+                byte [] cache = new byte[1024*100];
                 int read = inputStream.read(cache);
                 String configStr = new String(cache);
                 System.out.println(configStr);
@@ -26,6 +26,10 @@ public class ResolutionAppConfig {
             }
 
         }
+       String a = " " +
+               "export JAVA_HOME=/home/hadoop/java/jdk1.8.0_191 " +
+               "export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar " +
+               "export PATH=$PATH:$JAVA_HOME/bin";
         return appConfig;
 
     }

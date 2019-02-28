@@ -1,4 +1,4 @@
-
+#HADOOP  就是对多个文件通过流的方式进行各种数据的统计，例如单词
 #centos 7.6 需要安装的依赖
 #1 安装网络服务    
     yum install net-tools

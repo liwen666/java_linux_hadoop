@@ -23,7 +23,7 @@ public class FireWallController {
 
     @Test //查看linux系统的磁盘状态
     public void testLinux() {
-        String ip = "192.168.42.210";
+        String ip = "192.168.42.220";
         String username = "root";
         String password = "root";
         LinuxShell.login(ip, 22, username, password);
@@ -42,7 +42,7 @@ public class FireWallController {
      * 因为文件格式的原因上传的文件无法执行
      */
     public void upLoadShell() throws Exception {
-        Login("root", "192.168.42.210", 22);
+        Login("root", "192.168.42.220", 22);
 
         execSession.setPassword("root");
         ftpsession.setPassword("root");
@@ -73,7 +73,7 @@ public class FireWallController {
     @Test
     public void execShell() throws Exception {
         upLoadShell();
-        Login("root", "192.168.42.210", 22);
+        Login("root", "192.168.42.220", 22);
         execSession.setPassword("root");
         execSession.setConfig("StrictHostKeyChecking", "no");
         execSession.connect();
@@ -104,7 +104,7 @@ public class FireWallController {
     //添加端口开放设置
     @Test
     public void modifyPortSet() throws Exception {
-        Login("root", "192.168.42.210", 22);
+        Login("root", "192.168.42.220", 22);
         execSession.setPassword("root");
         execSession.setConfig("StrictHostKeyChecking", "no");
         execSession.connect();
@@ -202,7 +202,7 @@ public class FireWallController {
 
     @Test
     public void shellExec() throws Exception {
-        Login("root", "192.168.42.210", 22);
+        Login("root", "192.168.42.220", 22);
         execSession.setPassword("root");
         execSession.setConfig("StrictHostKeyChecking", "no");
         execSession.connect();

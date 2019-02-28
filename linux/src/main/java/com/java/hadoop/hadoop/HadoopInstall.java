@@ -31,7 +31,8 @@ public class HadoopInstall {
     public void installHadoop() {
         try {
 //			登录hadoop 的shell和ftp
-            Login("hadoop", "192.168.42.211", 22);
+            Login("hadoop", "192.168.42.220", 22);
+//            Login("hadoop", "192.168.42.210", 22);
 //            Login("hadoop", "192.168.42.210", 22);
             execSession.setPassword("hadoop");
             ftpsession.setPassword("hadoop");
@@ -56,18 +57,22 @@ public class HadoopInstall {
              * 将u盘的java上传到linux*******************************************************88
              */
             boolean mark = false;
-            Vector ls = sftp.ls("/home/hadoop");
+            try {
+                sftp.mkdir("/home/hadoop/hadoop/");
+            } catch (SftpException e) {
+            }
+            Vector ls = sftp.ls("/home/hadoop/hadoop/");
             for (Object str : ls) {
                 ChannelSftp.LsEntry cl = (ChannelSftp.LsEntry) str;
-                if (cl.getLongname().endsWith("hadoop-2.8.5.tar.gz")) {
+                if (cl.getLongname().endsWith("hadoop-2.8.5")) {
                     System.out.println(str + "   hadoop 已经被安装");
                     mark = true;
                     break;
                 }
             }
             if (!mark) {
-//                File javaFile = new File("H:\\开发安装包\\大数据分布式需要的技术\\hadoop-2.8.5.tar.gz");
-                File javaFile = new File("H:\\hadoop-2.8.5.tar.gz");
+                File javaFile = new File("H:\\开发安装包\\大数据分布式需要的技术\\hadoop-2.8.5.tar.gz");
+//                File javaFile = new File("H:\\hadoop-2.8.5.tar.gz");
                 sftp.put(new FileInputStream(javaFile), javaFile.getName());
             }
             /*******************************************************************/

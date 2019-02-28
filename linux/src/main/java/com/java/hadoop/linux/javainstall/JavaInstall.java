@@ -132,10 +132,14 @@ public class JavaInstall {
              * 将u盘的java上传到linux*******************************************************88
              */
             boolean mark = false;
-            Vector ls = sftp.ls("/home/hadoop");
+            try {
+                sftp.mkdir("/home/hadoop/java/");
+            } catch (SftpException e) {
+            }
+            Vector ls = sftp.ls("/home/hadoop/java/");
             for (Object str : ls) {
                 ChannelSftp.LsEntry cl = (ChannelSftp.LsEntry) str;
-                if(cl.getLongname().endsWith("jdk-8u191-linux-x64.tar.gz")){
+                if(cl.getLongname().endsWith("jdk1.8.0_191")){
                     System.out.println(str+"   java 已经被安装");
                     mark= true;
                     break;
