@@ -1,0 +1,77 @@
+
+--2.4.1.1平台数据库用户、表空间创建
+--创建临时表空间 
+create temporary tablespace ZYZFTEMP 
+tempfile 'C:\app\Administrator\oradata\orcl2/ZYZFTEMP.dbf' 
+size 50m 
+autoextend on 
+next 50m maxsize unlimited
+extent management local; 
+--创建数据表空间 
+create tablespace ZYZF
+logging 
+datafile 'C:\app\Administrator\oradata\orcl2/ZYZF.dbf ' 
+size 50m 
+autoextend on 
+next 50m maxsize unlimited 
+extent management local; 
+
+
+--创建用户 
+create user analysis_service identified by 1
+default tablespace ZYZF
+temporary tablespace ZYZFTEMP
+profile DEFAULT
+account unlock;
+
+grant connect to analysis_service with admin option;
+grant exp_full_database to analysis_service;
+grant imp_full_database to analysis_service;
+grant javasyspriv to analysis_service;
+grant java_admin to analysis_service;
+grant resource to analysis_service with admin option;
+grant administer database trigger to analysis_service with admin option;
+grant alter any index to analysis_service;
+grant alter any procedure to analysis_service;
+grant alter any table to analysis_service;
+grant alter session to analysis_service;
+grant alter tablespace to analysis_service;
+grant analyze any to analysis_service;
+grant audit any to analysis_service;
+grant comment any table to analysis_service;
+grant create any index to analysis_service;
+grant create any materialized view to analysis_service with admin option;
+grant create any procedure to analysis_service;
+grant create any sequence to analysis_service;
+grant create any synonym to analysis_service with admin option;
+grant create any table to analysis_service with admin option;
+grant create any trigger to analysis_service;
+grant create any view to analysis_service with admin option;
+grant create cluster to analysis_service;
+grant create database link to analysis_service;
+grant create job to analysis_service;
+grant create library to analysis_service;
+grant create materialized view to analysis_service;
+grant create procedure to analysis_service;
+grant create profile to analysis_service;
+grant create sequence to analysis_service;
+grant create session to analysis_service;
+grant create synonym to analysis_service;
+grant create table to analysis_service;
+grant create trigger to analysis_service;
+grant create type to analysis_service;
+grant create view to analysis_service;
+grant debug any procedure to analysis_service;
+grant debug connect session to analysis_service;
+grant delete any table to analysis_service with admin option;
+grant drop any index to analysis_service;
+grant drop any materialized view to analysis_service;
+grant drop any synonym to analysis_service with admin option;
+grant drop any table to analysis_service;
+grant drop any view to analysis_service;
+grant insert any table to analysis_service with admin option;
+grant on commit refresh to analysis_service;
+grant select any dictionary to analysis_service;
+grant select any table to analysis_service with admin option;
+grant unlimited tablespace to analysis_service with admin option;
+grant update any table to analysis_service with admin option;
