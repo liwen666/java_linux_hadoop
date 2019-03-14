@@ -3,6 +3,8 @@
  iptables -I INPUT -p tcp --dport 3306 -j ACCEPT
  iptables -I INPUT -p tcp --dport 6379 -j ACCEPT
  iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
+ iptables -I INPUT -p tcp --dport 2181 -j ACCEPT
+ iptables -I INPUT -p tcp --dport 9092 -j ACCEPT
  iptables -I INPUT -p tcp --dport 8088 -j ACCEPT
  iptables -I INPUT -p tcp --dport 9000 -j ACCEPT
  iptables -I INPUT -p tcp --dport 50010 -j ACCEPT
