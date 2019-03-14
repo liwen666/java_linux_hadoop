@@ -38,6 +38,7 @@ public class KafkaProducerDemo {
             String data="hello kafka message:"+key;
             kafkaProducer.send(new ProducerRecord<String, String>(TOPIC, key, data), new Callback() {
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                    System.out.println(recordMetadata);
 
                 }
             });
