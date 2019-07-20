@@ -10,6 +10,7 @@ public class TomcatSite {
 
 
 //        fileManager.getLinuxFileCategory("192.168.100.109","root","oracle",22,"server.xml",filePath);
+//        fileManager.getLinuxFileCategory("192.168.42.138","root","root",22,"catalina.sh","/develop/tomcat8_28085_dcpay_commission_local/bin");
 //        fileManager.getLinuxFileCategory("192.168.100.109","root","oracle",22,"catalina.sh","/tomcat/analysis_service/apache-tomcat-8.0.53/bin");
 //        fileManager.getLinuxFileCategory("192.168.100.109","root","oracle",22,"tomcat-users.xml",filePath);
 //        fileManager.getLinuxFileCategory("192.168.100.109","root","oracle",22,"context.xml",filePath);
@@ -20,9 +21,10 @@ public class TomcatSite {
 
 
 //        fileManager.upLinuxFileCategory("192.168.100.109","root","oracle",22,"server.xml");
+        fileManager.upLinuxFileCategory("192.168.42.138","root","root",22,"catalina.sh");
 //        fileManager.upLinuxFileCategory("192.168.100.109","root","oracle",22,"catalina.sh");
 //        fileManager.upLinuxFileCategory("192.168.100.109","root","oracle",22,"tomcat-users.xml");
-        fileManager.upLinuxFileCategory("192.168.100.109","root","oracle",22,"context.xml");
+//        fileManager.upLinuxFileCategory("192.168.100.109","root","oracle",22,"context.xml");
 
         //配置端口
 //        FireWallController fwc = new FireWallController();
