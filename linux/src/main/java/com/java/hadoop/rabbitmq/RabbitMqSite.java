@@ -11,8 +11,9 @@ public class RabbitMqSite {
 
 
         //从服务器配置
-//        配置server.properties
-//        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"rabbitmq.config","/etc/rabbitmq");
+//        配置获取模板配置文件
+//        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"rabbitmq.config","/etc/rabbitmq/");
+//        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"rabbitmq.config.example","/usr/share/doc/rabbitmq-server-3.6.6/");
 
 
 
