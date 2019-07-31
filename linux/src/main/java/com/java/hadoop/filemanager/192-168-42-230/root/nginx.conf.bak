@@ -78,58 +78,6 @@ http {
         #}
     }
 
-    server {
-            listen       800;
-            server_name  localhost;
-
-    #      location / {
-    #           root /home/deploy/nginx/html/dcpaysassadmin/;
-    #           try_files $uri $uri/ /index.html;
-    #           index  index.html index.htm;
-    #       }
-
-     #       location ~ ^/(rabbit) {
-      #      location ~/(rabbit) {
-            location =/rabbit {
-                proxy_pass http://192.168.42.230:15672/#/;        ###lw
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header Host $host;
-            }
-              location / {
-                         root   html;
-                         index  index.html index.htm;
-             }
-             location = /helloworld {
-                     return 602;
-             }
-             location /helloworld {
-                     return 603;
-             }
-
-             ## 生产环境中如下两个 location 在另外一个文件中，通过 include 包含进来
-             location /ii {
-                     return 604;
-             }
-             location ~ /ii/[^\/]+/[^\/]+ {
-                     return 605;
-             }
-             ##
-
-             location ~ ^/helloworld/(scripts|styles|images).* {
-                     return 606;
-             }
-             location ~ /(js|css|img|api){
-                 proxy_pass http://192.168.42.230:15672;        ###lw
-                     proxy_set_header X-Real-IP $remote_addr;
-                     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                     proxy_set_header Host $host;
-                   #               return 609;
-                          }
-
-    }
-
-
 
     # another virtual host using mix of IP-, name-, and port-based configuration
     #
