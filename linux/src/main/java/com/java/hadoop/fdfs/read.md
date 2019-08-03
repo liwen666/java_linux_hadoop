@@ -1,95 +1,113 @@
-第一、下载erlang和rabbitmq-server的rpm:
-使用wget 命令
-wget http://www.rabbitmq.com/releases/erlang/erlang-19.0.4-1.el7.centos.x86_64.rpm
 
-wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.6/rabbitmq-server-3.6.6-1.el7.noarch.rpm
+yum install gcc
 
+1   获取libfastcommon安装包：
 
-第二、安装erlang:
+wget https://github.com/happyfish100/libfastcommon/archive/V1.0.38.tar.gz
+解压安装包：tar -zxvf V1.0.38.tar.gz
 
-　　rpm -ivh erlang-19.0.4-1.el7.centos.x86_64.rpm
+进入目录：cd libfastcommon-1.0.38
 
-验证是否安装成功
-  
-    erl
- > 1+4.
-  输出5
- halt().
+执行编译：./make.sh
 
-退出erl控制台
+安装：./make.sh install
 
 
-第三、安装rabbitmq:
+2  安装FastDFS
+获取fdfs安装包：
 
-　　　　rpm -ivh rabbitmq-server-3.6.6-1.el7.noarch.rpm 
+wget https://github.com/happyfish100/fastdfs/archive/V5.11.tar.gz
+解压安装包：tar -zxvf V5.11.tar.gz
 
+进入目录：cd fastdfs-5.11
 
-　 yum install socat
+执行编译：./make.sh
 
-　rpm -ivh rabbitmq-server-3.6.6-1.el7.noarch.rpm 
-
-
-yum install net-tools
-yum install lsof
-
- 第四、启动和关闭:
-
-/sbin/service rabbitmq-server stop #关闭
-
-/sbin/service rabbitmq-server start #启动
-
-/sbin/service rabbitmq-server status #状态
+安装：./make.sh install
+查看可执行命令：ls -la /usr/bin/fdfs*
 
 
-5开启管理后台
+3.配置tracker服务
+ cd /etc/fdfs/
 
-rabbitmq-plugins enable rabbitmq_management
+cp tracker.conf.sample tracker.conf
+vi tracker.conf
+
+创建  目录
+
+mkdir -vp /home/liwen/fastdfs/tracker
+    内容 
+      base_path=/home/liwen/fastdfs/tracker  #tracker存储data和log的跟路径，必须提前创建好
+port=22122 #tracker默认22122
+http.server_port=80 #http端口，需要和nginx相同
+
+4 启动tracker
+启动tracker（支持start|stop|restart）：
+
+/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf start
+
+可能遇到的报错：
+
+/usr/bin/fdfs_trackerd: error while loading shared libraries: libfastcommon.so: cannot open shared object file: No such file or directory
+
+解决方案：建立libfastcommon.so软链接
+ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so
+ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so
 
 
-http://192.168.42.230:15672/
+5   配置storage 服务
 
-配置
-然而，发现刚开始的时候并没有任何配置文件。只好照着官方的介绍，到 /usr/share/doc/rabbitmq-server-3.7.7/ 目录下复制一份模板到 /etc/rabbitmq 目录下进行修改
+cd /etc/fdfs/
 
-配置rabbitmq
+cp storage.conf.sample storage.conf
 
-cd /usr/share/doc/rabbitmq-server-3.6.6
- 
-cp rabbitmq.config.example /etc/rabbitmq/rabbitmq.config
+vi storage.conf
 
-6  配置用户访问权限
-# 新版配置文件 rabbitmq.conf 打开以下注释
-loopback_users.guest = false
- 
-# 旧版配置文件 rabbitmq.config 打开以下注释，并记得去掉后面的逗号
- 使用guest用户进行远程访问  
-{loopback_users, []},
+内容
+base_path=/home/liwen/fastdfs/storage   #storage存储data和log的跟路径，必须提前创建好
+port=23000  #storge默认23000，同一个组的storage端口号必须一致
+group_name=group1  #默认组名，根据实际情况修改
+store_path_count=1  #存储路径个数，需要和store_path个数匹配
+store_path0=/home/liwen/fastdfs/storage  #如果为空，则使用base_path
+tracker_server=192.168.42.230:22122 #配置该storage监听的tracker的ip和port
+
+启动storage（支持start|stop|restart）：
+
+/usr/bin/fdfs_storaged /etc/fdfs/storage.conf start
+
+6  通过monitor来查看storage是否成功绑定：
+
+/usr/bin/fdfs_monitor /etc/fdfs/storage.conf
 
 
-修改打开文件数量
 
-# 打开rabbitmq-server.service，（没办法，找不到官方说的limits.conf）
-vim /etc/systemd/system/multi-user.target.wants/rabbitmq-server.service
- 
-# 同样在Service模块下，加入LimitNOFILE = 300000
-[Service]
-LimitNOFILE = 300000
- 
-# 重启rabbitmq，访问管理后台，发现打开文件数并没有修改成功，依旧是1024
- 
-# 打开 sysctl.conf
-vim /etc/sysctl.conf
- 
-# 添加：
-fs.file-max = 65535
- 
-# 重新启动机子
-reboot
- 
-#再次访问管理后台，发现打开数已改为300000
---------------------- 
-作者：旅行者yky 
-来源：CSDN 
-原文：https://blog.csdn.net/y_k_y/article/details/81350274 
-版权声明：本文为博主原创文章，转载请附上博文链接！
+
+7  安装Nginx
+
+wget http://nginx.org/download/nginx-1.15.2.tar.gz
+
+
+wget https://github.com/happyfish100/fastdfs-nginx-module/archive/V1.20.tar.gz
+
+tar -zxvf nginx-1.15.2.tar.gz
+
+tar -xvf V1.20.tar.gz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

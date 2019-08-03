@@ -15,13 +15,15 @@ public class FastFdfsSite {
 //        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"nginx.conf","/usr/local/nginx/conf/");
 //        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"tracker.conf","/etc/fdfs/");
 //        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"storage.conf","/etc/fdfs/");
-//        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"config","/home/liwen/fastdfs-nginx-module-1.20/src");
+//        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"config","/usr/local/fastdfs-nginx-module/src");
+//        fileManager.getLinuxFileCategory("192.168.42.230","root","root",22,"mod_fastdfs.conf","/etc/fdfs/");
 
 
 
 
 
 
+//        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"mod_fastdfs.conf");
         fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"nginx.conf");
 //        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"lwnginx.conf");
 //        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"config");
