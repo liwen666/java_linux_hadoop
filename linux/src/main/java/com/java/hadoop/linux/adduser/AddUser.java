@@ -13,6 +13,12 @@ import java.io.InputStream;
 public class AddUser {
     private Session ftpsession;
     private Session execSession;
+
+    public static void main(String[] args) throws Exception {
+
+
+
+    }
     @Test //查看linux系统的磁盘状态
     public  void testLinux (){
         String ip="192.168.42.210";

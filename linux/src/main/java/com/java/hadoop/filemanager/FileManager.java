@@ -42,7 +42,7 @@ public class FileManager {
         String pwd = LinuxUtil.executeShell("pwd",execSession);
         System.out.println(pwd);
         LinuxUtil.findFile(ip,userName,filePath,fileName,ftpsession);
-        String fileCfg="E:\\github_program\\java_linux_hadoop\\linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\file_linux_cfg.json";
+        String fileCfg=System.getProperty("user.dir")+"\\linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\file_linux_cfg.json";
         @Cleanup  FileInputStream fis = new FileInputStream(fileCfg);
         byte [] bytes = new byte[1024*1024];
         int read = fis.read(bytes);
