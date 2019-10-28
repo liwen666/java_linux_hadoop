@@ -1,4 +1,5 @@
 #!/bin/bash
+#定义变量  Project_HOME=$(cd .. &&  pwd)
 #自定义函数遍历目录
 function ergodic(){
 #for file in `find . -name "*.py" -o -name "*.sh" -o -name "*.css" -o -name "*.js" -o -name "*.html"`
