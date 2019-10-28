@@ -1,6 +1,5 @@
 package com.java.hadoop.linux;
 
-import com.java.hadoop.linux.filecontroller.FtpJSch;
 import com.java.hadoop.linux.filecontroller.basefile.ResolutionAppConfig;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.SftpException;
@@ -25,11 +24,11 @@ public class LinuxConfig {
             String realName = file.getName().substring(5, file.getName().length());
             if ("profile".equals(realName)) {
 
-                    FileInputStream fileInputStream = new FileInputStream(file);
-                    byte[] cache = new byte[1024 * 1024];
-                    int read = fileInputStream.read(cache);
-                    String oldFileStr = new String(cache, 0, read);
-                    StringBuffer sb = new StringBuffer(oldFileStr);
+                FileInputStream fileInputStream = new FileInputStream(file);
+                byte[] cache = new byte[1024 * 1024];
+                int read = fileInputStream.read(cache);
+                String oldFileStr = new String(cache, 0, read);
+                StringBuffer sb = new StringBuffer(oldFileStr);
                 for (String appCfg : appCfgs) {
 //                配置java环境变量
                     String configstr = ResolutionAppConfig.getConfigstr(appCfg);

@@ -28,7 +28,7 @@ public class JavaInstall {
     public void installJava() {
         try {
 //			登录hadoop 的shell和ftp
-            Login("hadoop", "192.168.42.210", 22);
+            Login("hadoop", "192.168.42.220", 22);
             execSession.setPassword("hadoop");
             ftpsession.setPassword("hadoop");
             // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
@@ -63,7 +63,7 @@ public class JavaInstall {
                 }
             }
             if(!mark){
-                File javaFile = new File("H:\\开发安装包\\java\\jdk-8u191-linux-x64.tar.gz");
+                File javaFile = new File("E:\\kingston\\开发安装包\\java\\jdk-8u191-linux-x64.tar.gz");
                 sftp.put(new FileInputStream(javaFile),javaFile.getName());
             }
             /*******************************************************************/
@@ -146,7 +146,7 @@ public class JavaInstall {
                 }
             }
             if(!mark){
-                File javaFile = new File("H:\\开发安装包\\java\\jdk-8u191-linux-x64.tar.gz");
+                File javaFile = new File("E:\\kingston\\开发安装包\\java\\jdk-8u191-linux-x64.tar.gz");
                 sftp.put(new FileInputStream(javaFile),javaFile.getName());
             }
             /*******************************************************************/
