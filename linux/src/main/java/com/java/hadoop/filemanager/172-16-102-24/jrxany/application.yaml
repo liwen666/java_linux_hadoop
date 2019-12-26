@@ -1,0 +1,118 @@
+server:
+  port: 9090
+  context-path: /act-task-schedule
+spring:
+  application:
+    name: task-schedule-system
+  output:
+    ansi:
+      enabled: always
+  boot:
+    admin:
+      url: http://172.16.102.24:8889
+
+mybatis:
+  type-aliases-package: jrx.batch.scheduling.model
+  mapper-locations: classpath:mapper/*.xml
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params:
+  count: countSql
+  #是否开启任务执行监控，如果不开启，任务的执行状态不会更新
+batch:
+  scheduling:
+    monitor-plan: true
+    monitor-master: true
+    #容器地址
+    external-execution-url: http://localhost:9090/%s
+    #设置容器拉起超时时间，单位（秒）
+    partition-timeout-seconds: 60
+---
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    #等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 缺省:30秒
+    hikari:
+      connection-timeout: 60000
+      idle-timeout: 30000
+      max-lifetime: 60000
+      #spring.datasource.hikari.connection-test-query=SELECT 1
+      maximum-pool-size: 200
+      minimum-idle: 10
+      #spring.datasource.hikari.pool-name=HikariSchedulePool
+      validation-timeout: 3000
+
+      data-source-properties.cachePrepStmts: true
+      data-source-properties.prepStmtCacheSize: 250
+      data-source-properties.prepStmtCacheSqlLimit: 2048
+      data-source-properties.useServerPrepStmts: true
+      data-source-properties.useLocalSessionState: true
+      data-source-properties.rewriteBatchedStatements: true
+      data-source-properties.cacheResultSetMetadata: true
+      data-source-properties.cacheServerConfiguration: true
+      data-source-properties.elideSetAutoCommits: true
+      data-source-properties.maintainTimeStats: false
+#    url: jdbc:mysql://192.168.42.136:3306/batch_schedule_master?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+#    username: root
+#    password: root
+    url: jdbc:mysql://172.16.101.19:3306/batch_schedule_center?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123.com
+    driver-class-name: com.mysql.jdbc.Driver
+---
+#是否开启权限验证
+citic:
+  sso:
+    open: false
+    authentication-url:
+---
+
+#以下为data flow 配置相关
+#spring.cloud.task.initialize.enable=false
+spring:
+  batch:
+    initializer:
+      enabled: false
+    initialize-schema: never
+  cloud:
+    dataflow:
+      features:
+        analytics-enabled: false
+        streams-enabled: false
+    rdbms:
+      initialize:
+        enable: false
+    deployer:
+      local:
+        java-opts: -Xms128M -Xmx128M
+#        workingDirectoriesRoot: C:/Users/liwen/Desktop/jrx/worktask
+        workingDirectoriesRoot: /home/jrxany/batch_schedule/workspace
+    config:
+      enabled: false
+
+
+
+management:
+  context-path: /management
+  security:
+    enabled: false
+---
+#容器云请求状态地址和token
+batch:
+  scheduling:
+    opt:
+      url:
+    openshift:
+      token:
+
+#子节点配置，先写在配置文件，后期优化
+jrx:
+  batch:
+    node:
+      address:
+        node_local_test: http://172.16.102.24:9002
+        master_node: http://172.16.102.23:9001
+
+
