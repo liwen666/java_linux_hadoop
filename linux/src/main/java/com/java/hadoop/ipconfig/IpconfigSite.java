@@ -1,23 +1,23 @@
-package com.java.hadoop.pgsql;
+package com.java.hadoop.ipconfig;
 
 import com.java.hadoop.filemanager.FileManager;
 
-public class PgsqlSite {
+public class IpconfigSite {
     public static void main(String[] args) throws Exception {
         FileManager fileManager = new FileManager();
 
 
         //从服务器配置
 //        配置server.properties
-        fileManager.getLinuxFileCategory("192.168.42.200","root","root",22,"postgresql.conf","/var/lib/pgsql/data");
-        fileManager.getLinuxFileCategory("192.168.42.200","root","root",22,"pg_hba.conf","/var/lib/pgsql/data");
+//        fileManager.getLinuxFileCategory("192.168.42.200","root","root",22,"ifcfg-ens33","/etc/sysconfig/network-scripts");
+//        fileManager.getLinuxFileCategory("192.168.42.200","root","root",22,"pg_hba.conf","/var/lib/pgsql/data");
 
 
 
 
 
 
-//        fileManager.upLinuxFileCategory("192.168.42.200","root","root",22,"postgresql.conf");
+        fileManager.upLinuxFileCategory("192.168.42.200","root","root",22,"ifcfg-ens33");
 //        fileManager.upLinuxFileCategory("192.168.42.200","root","root",22,"pg_hba.conf");
 
         //配置端口
