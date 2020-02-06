@@ -3,9 +3,10 @@ pgsql的安装与配置
 sudo yum install postgresql-server postgresql-contrib
 sudo postgresql-setup initdb
 sudo systemctl start postgresql
+sudo systemctl restart postgresql
 sudo systemctl enable postgresql
 
-iptables -I INPUT -p tcp --dport  8043 -j ACCEPT
+iptables -I INPUT -p tcp --dport  5432 -j ACCEPT
 
 
 信任远程连接
@@ -58,3 +59,22 @@ psql -h 127.0.0.1 -d postgres -U postgres
   733  systemctl status postgresql.service
   734  systemctl start postgresql
   735  service postgresql restart
+  
+  
+  卸载pgsql
+  
+  
+  　a.yum 删除软件包：
+  
+  　　yum remove postgresql*
+  
+  　　b.删除相关目录文件：
+  
+         rm -rf  /var/lib/pgsql
+  
+  　　rm -rf  /usr/pgsql*
+  
+       c.删除pg相关用户组/用户
+  
+  　　userdel -r postgres
+  　　groupdel postgres
