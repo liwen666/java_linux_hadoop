@@ -1,0 +1,102 @@
+anyest:
+  client:
+    enable: true
+    ReadTimeout: 500000
+    ConnectTimeout: 50000
+  data:
+    es-cluster-name: elasticsearch
+    es-data-address-list:
+      - 172.16.101.41:9200
+      - 172.16.101.22:9200
+      - 172.16.101.12:9200
+    # RDBMS 用内部的关系库来保存事件数据，实体模型和统计模型的跑批数据
+    jdbc-driver-name: org.postgresql.Driver
+    jdbc-data-address: jdbc:postgresql://172.16.101.93:5432/any_est_lw?reWriteBatchedInserts=true
+    jdbc-data-username: gpadmin
+    jdbc-data-password: gpadmin
+    greenplum-schema-name: public
+
+    # ignite存储的方式
+    ignite-store-type: PRIMITIVE
+    #    ignite-write-behind-batch-size: 1000 # 持久化后写每批次写入数量
+    #    ignite-write-behind-flush-size: 15000 # 触发持久化后写的新增数据数量
+    #    ignite-write-behind-flush-frequency: 600000 # 持久化后写刷新频率，即每过多少毫秒就持久化一次
+    #    ignite-write-behind-flush-thread-count: 20 # 持久化后写使用线程数量
+    igniteProperties:
+      dataDirectory: /home/jrxany/igniteStore #持久化/日志记录路径
+      walDirectory: /home/jrxany/igniteStore/wal # wal预写日志路径
+      metricsLogFrequency: 60000 # 日志记录频率
+      memoryInitialSizeMB: 256 # 初始内存 MB ,集群中的主节点才需要设置
+      memoryMaxSizeMB: 2048 # 最大内存 MB ,集群中的主节点才需要设置
+      enabled-persistence: true #是否开启ignite自带持久化存储
+      # 本机使用单节点，避免集群乱入
+      tcpDiscoveryEnable: true #是否启用手动组播发现
+      clusterAddrList: # 集群发现地址
+        - 127.0.0.1
+        # - 172.16.101.29
+        # - 172.16.101.30
+        # - 172.16.101.31
+
+    # 是否开启缓存
+    cache:
+      enabled: true
+
+    # 是否开启日志记录
+    record:
+      enabled: false #即使为false，还是会根据数据集的saveRecord(Boolean)而进行记录
+
+    # 是否启用事件
+    event:
+      enabled: true
+      store-mode: ELASTICSEARCH
+      queueType: DISRUPTOR
+
+    # 是否启用统计服务
+    stat:
+      enabled: true
+      store-mode: ignite_gp
+      queue-thread-size: 5 #处理导入缓存线程数
+      batch-size: 30 #导入缓存批次量
+      queue-capacity: 20000 # 队列中的数据的总量
+
+
+    # 是否启用数据api服务
+    enable-data-api: true
+    # 外部服务地址
+    proxy-address-list:
+      - http://172.16.102.22:9230/third-api
+    #数据集导出路径，包含数据
+    data-object-export-path: /home/jrxany/igniteData
+    # 三方转存服务
+    enable-third-save: true
+
+  #  console:
+  #    props:
+  #      content-code: null  # 设为null即关闭
+
+  batch-import:
+    batchSize: 2000
+    threadNumber: 5
+  data-export:
+    exportPath: /Users/meng/Desktop/igniteData #ignite数据导出磁盘路径
+spring.jackson.parser:
+  allow_unquoted_field_names: true
+###################Eureka客户端配置########################
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    ip-address: 172.16.102.22
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    registryFetchIntervalSeconds: 5
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://172.16.102.22:9800/eureka
+    enable-self-preservation: false
