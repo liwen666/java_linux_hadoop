@@ -28,7 +28,7 @@ public class InstallZookeeper {
     public void installZookeeper() {
         try {
 //			登录hadoop 的shell和ftp
-            Login("jrxany", "172.16.102.23", 22);
+            Login("jrxany", "172.16.102.22", 22);
             execSession.setPassword("20191022");
             ftpsession.setPassword("20191022");
             // 设置第一次登陆的时候提示，可选值:(ask | yes | no)

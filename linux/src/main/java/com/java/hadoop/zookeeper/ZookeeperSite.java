@@ -12,14 +12,14 @@ public class ZookeeperSite {
 
         //从服务器配置
 //        配置server.properties
-//        fileManager.getLinuxFileCategory("172.16.102.23","jrxany","20191022",22,"zoo.cfg",filePath);
+//        fileManager.getLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"zoo.cfg",filePath);
 
 
 
 
 
 
-        fileManager.upLinuxFileCategory("172.16.102.23","jrxany","20191022",22,"zoo.cfg");
+        fileManager.upLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"zoo.cfg");
 //
         //配置端口
 //        FireWallController fwc = new FireWallController();
