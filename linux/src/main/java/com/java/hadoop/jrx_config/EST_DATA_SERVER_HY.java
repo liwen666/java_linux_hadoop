@@ -14,12 +14,14 @@ public class EST_DATA_SERVER_HY {
 
 
     public static void main(String[] args) throws Exception {
-        String filePath="/home/jrxany/20200108_version/data/anydata-server-3.3.1/config";
+//        String filePath="/home/jrxany/20200108_version/data/anydata-server-3.3.1/config";
+        String filePath="/home/jrxany/20200213_version/anyest-center-admin-3.3.1/config";
         FileManager fileManager = new FileManager();
 
 
 
         //从服务器配置
+//        fileManager.getLinuxFileCategory("172.16.102.21","jrxany","20191022",22,"application-hcy.yml",filePath);
         fileManager.getLinuxFileCategory("172.16.102.21","jrxany","20191022",22,"application-hcy.yml",filePath);
 
 

@@ -7,7 +7,9 @@ import java.util.Properties;
 public class KafkaProducerDemo {
     private  final Producer<String,String> kafkaProducer;
 
-    public final static String TOPIC="JAVA_TOPIC";
+//    public final static String TOPIC="testcsm";
+    public final static String TOPIC="test";
+    public final static String TOPIC2="ddlmaxwell";
 
     private KafkaProducerDemo(){
         kafkaProducer=createKafkaProducer() ;
@@ -30,19 +32,26 @@ public class KafkaProducerDemo {
     void produce(){
         for(int i=1;i<1000;i++){
             try {
+                String key=String.valueOf("key"+i);
+                String data="hello kafka message:"+key;
+                kafkaProducer.send(new ProducerRecord<String, String>(TOPIC, key, data), new Callback() {
+                    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                        System.out.println(recordMetadata);
+
+                    }
+                });
+                kafkaProducer.send(new ProducerRecord<String, String>(TOPIC2, key, data), new Callback() {
+                    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                        System.out.println(recordMetadata);
+
+                    }
+                });
+                System.out.println(data);
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            String key=String.valueOf("key"+i);
-            String data="hello kafka message:"+key;
-            kafkaProducer.send(new ProducerRecord<String, String>(TOPIC, key, data), new Callback() {
-                public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-                    System.out.println(recordMetadata);
 
-                }
-            });
-            System.out.println(data);
         }
     }
 
