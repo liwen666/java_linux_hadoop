@@ -9,7 +9,7 @@ public class KafkaProducerDemo {
 
 //    public final static String TOPIC="testcsm";
     public final static String TOPIC="test";
-    public final static String TOPIC2="ddlmaxwell";
+    public final static String TOPIC2="ddl_topic";
 
     private KafkaProducerDemo(){
         kafkaProducer=createKafkaProducer() ;

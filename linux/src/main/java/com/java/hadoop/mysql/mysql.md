@@ -22,7 +22,7 @@ mysql> GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
  启动脚本：/etc/rc.d/init.d (启动脚本文件 mysql的目录)
  
  
- show variables like ‘%log_bin%’;
+ SHOW VARIABLES LIKE '%log_bin%';
  
  
  maxwell
