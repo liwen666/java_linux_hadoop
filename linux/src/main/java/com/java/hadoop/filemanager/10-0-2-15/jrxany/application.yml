@@ -1,0 +1,191 @@
+#
+# 本地配置文件自行维护禁止提交！
+#
+server:
+  port: 9800
+  compression:
+    enabled: true
+#    mime-types: text/html,text/css,application/javascript,application/json
+    mime-types: text/html,text/css,application/javascript
+
+spring:
+# 禁止添加profiles.active！！！ 本地启动添加-Dspring.profiles.active=local启动参数。
+  application:
+    name: anyest-center-admin
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  boot:
+    admin:
+      context-path: /monitor
+      ui:
+        title: AnyEST-服务监控
+        cache:
+          no-cache: true
+
+###############  日志配置 ###############
+logging:
+  pattern:
+    console: '%clr(%gray(%d{yyyy-MM-dd HH:mm:ss.SSS}) - %boldRed(%5p) %blue([%5.20t]) %magenta(%-20.50logger{50}) %yellow(%2M) %green(%2L) : %msg%n)'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} - %5p [%5.20t] %-20.50logger{50} %2M %2L : %msg%n'
+  file:
+    max-history: 60
+  level:
+    springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator: off
+    jrx.anyest: debug
+    org.springframework.web.servlet.mvc: info
+    com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient: off
+    com.netflix.discovery.DiscoveryClient: off
+    com.netflix.discovery.InstanceInfoReplicator: error
+
+###############  swagger配置 ###############
+swagger:
+  docket:
+    groupName: jrx.anyest.rule
+    basePackage: jrx.anyest
+
+  api-info:
+    title: 管理平台接口
+    description: 管理平台restful文档
+    license: published by jrx
+    version: 1.0.0
+
+###############  权限配置 ###############
+# 综管配置
+auth:
+  setting:
+    swagger-open: true
+    # 是否开启日志记录，默认false
+    visitLog: true
+    # 是否登陆加密，默认false
+    secretLogin: true
+    # 综管登陆登陆界面
+    loginPage: /mc/page/login.html?logout=true
+    # 综管登陆成功后跳转界面
+    default-success-url: /mc/page/manage.html#/business/table
+    appResourceLoad: /
+    # 忽略鉴权url
+    allows:
+    - /mc/user/pwd
+    - /mc/user/securitycode/**
+    - /error/**
+    - /system/**
+    - /console/**
+    - /monitor/**
+    - /eureka/**
+    - /eurekaui
+    - /dash/static/**
+
+# 拦截器配置
+filter:
+  setting:
+    # 超时时间
+    timeout:  ${auth.setting.tokenExpTimeMinute}
+    # 综管地址前缀，可跳转访问
+    authAddress: http://${filter.setting.localUrl}
+#    authAddress: 127.0.0.1:9820
+    # 服务首页地址，可跳转访问（登陆成功后回调）
+    indexUrl: http://${filter.setting.localUrl}/index.html#/console/detail
+    # 服务key(综管获取)zAEKVoKaahulIZqwYB fYoRSJtTtiHxLFuNEJ
+    serviceId: ExUPXWZeWajuiNjeUs
+    # cookies前缀，防止多服务冲突
+    cookiesFix: any
+    # 是否集成综管jar包,默认false
+    hadAuth: true
+    # 忽略鉴权地址
+    allows:
+    -
+    - /
+    - /common/**
+    - /**/error/**
+    - /server/logout
+    - /server/login
+    - /report/**
+    - /data-synchron/**
+    - /system/**
+    - /data/charge/upload/*
+    - /static/**
+    - /dash/static/**
+    - /stat/excel
+    - /monitor/**
+    - /console/**
+    - /eureka/**
+    - /eurekaui
+    - /actuator/**
+    - /data/charge/export/data-model/*
+    - /server/**
+    - /resource/**
+    - /project/**
+###############  监控配置 ###############
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+###############  eureka配置 ###############
+eureka:
+  dashboard:
+    path: /eurekaui
+  server:
+    # 关闭自我保护机制，保证不可用服务及时踢出
+    enable-self-preservation: false
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}:${spring.application.name}:3.3.1-SNAPSHOT
+    ip-address: ${spring.cloud.client.ip-address}
+  client:
+    registryFetchIntervalSeconds: 30
+    #实例是否在eureka服务器上注册自己的信息以供其他服务发现
+    register-with-eureka: true
+    #此客户端是否获取eureka服务器注册表上的注册信息
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://${eureka.instance.ip-address}:${server.port}}/eureka/
+      #最初复制实例信息到eureka服务器所需的时间（s）
+    initial-instance-info-replication-interval-seconds: 30
+    #复制实例变化信息到eureka服务器所需要的时间间隔（s）
+    instance-info-replication-interval-seconds: 30
+    #eureka需要超时连接之前需要等待的时间
+#    eureka-server-connect-timeout-seconds: 60
+
+###############  ribbon配置 ###############
+ribbon:
+  restclient:
+    enabled: true
+  eureka:
+    enabled: true
+  OkToRetryOnAllOperations: false
+  ReadTimeout: 60000
+  ConnectTimeout: 120000
+  MaxAutoRetries: 2
+  MaxAutoRetriesNextServer: 1
+
+
+###############  feign配置 ###############
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: FULL
+  httpclient:
+    connection-timeout: 50000
+    max-connections: 500
+    max-connections-per-route: 50
+    enabled: true
+
+################# actuator info 中信息 #######################
+info:
+  name: ${spring.application.name}
+  description: Anyest Admin Console
+  java-version: 1.8.0_111
+  spring-boot-version: 2.1.4.RELEASE
+  spring-cloud-version: Greenwich.SR3

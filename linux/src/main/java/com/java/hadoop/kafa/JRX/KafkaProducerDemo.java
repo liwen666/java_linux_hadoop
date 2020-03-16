@@ -3,13 +3,13 @@ package com.java.hadoop.kafa.JRX;
 import org.apache.kafka.clients.producer.*;
 
 import java.util.Properties;
+import java.util.Random;
 
 public class KafkaProducerDemo {
     private  final Producer<String,String> kafkaProducer;
 
-//    public final static String TOPIC="testcsm";
-    public final static String TOPIC="test";
-    public final static String TOPIC2="ddl_topic";
+//    public final static String TOPIC="test_kafka_partition";
+    public final static String TOPIC="test_kafka_partion";
 
     private KafkaProducerDemo(){
         kafkaProducer=createKafkaProducer() ;
@@ -30,18 +30,14 @@ public class KafkaProducerDemo {
     }
 
     void produce(){
-        for(int i=1;i<1000;i++){
+        Random random = new Random(1);
+        for(int i=1;i<100;i++){
             try {
-                String key=String.valueOf("key"+i);
-                String data="hello kafka message:"+key;
-                kafkaProducer.send(new ProducerRecord<String, String>(TOPIC, key, data), new Callback() {
+                int ran1 = random.nextInt(5);
+                String data="hello kafka message:"+ran1;
+                kafkaProducer.send(new ProducerRecord<String, String>(TOPIC, ran1+"", data), new Callback() {
                     public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-                        System.out.println(recordMetadata);
-
-                    }
-                });
-                kafkaProducer.send(new ProducerRecord<String, String>(TOPIC2, key, data), new Callback() {
-                    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                        System.out.println("消息发送成功");
                         System.out.println(recordMetadata);
 
                     }

@@ -1,0 +1,133 @@
+anyest:
+  ################anyest-Engine-Client配置####################
+  client:
+    enable: true
+    ReadTimeout: 500000
+    ConnectTimeout: 50000
+  data:
+    es-cluster-name: elasticsearch
+    es-data-address-list:
+      #    - 127.0.0.1:9200
+      - 172.16.101.93:9200
+      - 172.16.101.94:9200
+      - 172.16.101.53:9200
+    #    jdbc-driver-name: com.pivotal.jdbc.GreenplumDriver
+    #    jdbc-data-address: jdbc:pivotal:greenplum://172.16.101.19:5432;DatabaseName=postgres
+
+    #    jdbc-driver-name: org.postgresql.Driver
+    #    jdbc-data-address: jdbc:postgresql://172.16.101.19:5432/postgres?reWriteBatchedInserts=true
+    #
+    #    jdbc-data-username: gpadmin
+    #    jdbc-data-password: gpadmin
+
+    #    jdbc-driver-name: com.pivotal.jdbc.GreenplumDriver
+    #    jdbc-data-address: jdbc:pivotal:greenplum://192.168.42.136:5432;DatabaseName=test_event_data
+    #    jdbc-data-username: postgres
+    #    jdbc-data-password: postgres
+    #    greenplum-schema-name: zxtestschema
+
+    jdbc-driver-name: org.postgresql.Driver
+    jdbc-data-address: jdbc:postgresql://172.16.101.93:5432/any_est_data?reWriteBatchedInserts=true
+    jdbc-data-username: gpadmin
+    jdbc-data-password: gpadmin
+    greenplum-schema-name: public
+#    jdbc-driver-name: org.postgresql.Driver
+#    jdbc-data-address: jdbc:postgresql://192.168.42.136:5432/postgres?reWriteBatchedInserts=true&nullCatalogMeansCurrent=true
+#    jdbc-data-username: postgres
+#    jdbc-data-password: postgres
+#    greenplum-schema-name: public
+
+    # RDBMS 用内部的关系库来保存事件数据，实体模型和统计模型的跑批数据
+    #    jdbc-driver-name: com.mysql.jdbc.Driver
+    #    jdbc-data-address: jdbc:mysql://127.0.0.1:3306/anyest3_test?useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    #    jdbc-data-username: root
+    #    jdbc-data-password: hbz961005
+
+    # 启用ignite的方式
+    ignite-store-type: primitive
+    #    ignite-write-behind-batch-size: 20 # 持久化后写每批次写入数量
+    #    ignite-write-behind-flush-size: 8 # 触发持久化后写的新增数据数量
+    #    ignite-write-behind-flush-frequency: 600000 # 持久化后写刷新频率，即每过多少毫秒就持久化一次
+    #    ignite-write-behind-flush-thread-count: 20 # 持久化后写使用线程数量
+    igniteProperties:
+      dataDirectory: /home/jrxany/jrx/anyest/export/igniteData #持久化/日志记录路径
+      walDirectory: /home/jrxany/jrx/anyest/export/igniteData/wal # wal预写日志路径
+      metricsLogFrequency: 6000 # 日志记录频率
+      #      memoryInitialSizeMB: 256 # 初始内存 MB ,集群中的主节点才需要设置
+      #      memoryMaxSizeMB: 2048 # 最大内存 MB ,集群中的主节点才需要设置
+      enabled-persistence: true #是否开启ignite自带持久化存储
+      # 本机使用单节点，避免集群乱入
+      tcpDiscoveryEnable: true #是否启用手动组播发现
+      clusterAddrList: # 集群发现地址
+        - 127.0.0.1
+    # 是否开启缓存
+    cache:
+      enabled: true
+
+    # 是否开启日志记录
+    record:
+      enabled: true
+
+    # 是否启用事件
+    event:
+      enabled: true
+      store-mode: elasticsearch
+
+    # 是否启用统计服务
+    stat:
+      enabled: true
+      #      store-mode: GREENPLUM
+      store-mode: ignite_gp
+      queue-thread-size: 1 #处理导入缓存线程数
+      batch-size: 30 #导入缓存批次量
+      queue-capacity: 20000 # 队列中的数据的总量
+
+
+    # 外部服务地址
+    proxy-address-list:
+      - http://172.16.102.22:9230/third-api
+    # 是否启用数据api服务
+    enable-data-api: true
+    #数据集导出路径，包含数据
+    data-object-export-path: /home/jrxany/jrx/anyest/export/igniteData
+    enable-strategy-save-all: true
+    enable-strategy-save-indi: true
+    enable-strategy-save-event: true
+  console:
+    props:
+      admin-console-urls:
+        #        - http://10.0.14.101:9804
+        - http://127.0.0.1:9800
+
+  batch-import:
+    batchSize: 2
+    threadNumber: 5
+  data-export:
+    exportPath: /home/jrxany/jrx/anyest/export/igniteData #ignite数据导出磁盘路径
+spring.jackson.parser:
+  allow_unquoted_field_names: true
+
+
+
+logging:
+  level:
+    org.apache.ignite.internal.IgniteKernal: error
+    org.apache.ignite.internal.processors.failure.FailureProcessor: error
+
+
+
+###################Eureka客户端配置########################
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+  client:
+    registryFetchIntervalSeconds: 5
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:9810/eureka

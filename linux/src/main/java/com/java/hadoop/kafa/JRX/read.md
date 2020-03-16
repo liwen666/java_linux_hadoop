@@ -8,6 +8,16 @@ advertised.listeners=PLAINTEXT://172.16.102.22:9092
 
 #创建topic
 
+kafka  每个分组记录消息小消费便宜量    只有偏移量有变化，后面的客户就不会再消费了。
+/home/jrxany/batch_node/kafka/kafka_2.12-2.1.1/bin/kafka-topics.sh --list --zookeeper localhost:2181
+#kafka创建topic  和分区  
+/home/jrxany/batch_node/kafka/kafka_2.12-2.1.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 5 --topic test_kafka_maxwell
+./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+#replication-factor  指的是topic的副本的数量   不能超过broker的数量   partitions指定分区数量
+##  create  describe    alter
+/home/jrxany/batch_node/kafka/kafka_2.12-2.1.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 5 --topic test_kafka_partion
+/home/jrxany/batch_node/kafka/kafka_2.12-2.1.1/bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test_kafka_partion
+/home/jrxany/batch_node/kafka/kafka_2.12-2.1.1/bin/kafka-topics.sh --alter --zookeeper localhost:2181 --topic test_kafka_partion --partitions 6
 
 ./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 #查看topic

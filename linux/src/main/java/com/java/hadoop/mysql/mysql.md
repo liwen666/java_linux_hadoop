@@ -3,6 +3,11 @@ mysql> GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
  FLUSH PRIVILEGES;
  
  
+ GRANT ALL on maxwell_test.* to 'maxwell'@'%' identified by 'root';
+ 
+ 
+  FLUSH PRIVILEGES;
+ 
  mysql  软连接
  
  ln /var/lib/mysql/mysql.sock   /tmp/mysql.sock
@@ -52,3 +57,9 @@ mysql> GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
  
  #Maxwell
  bin/maxwell --user='maxwell' --password='root' --host=192.168.42.136 --producer=stdout
+ 
+ 
+ 查看binlog   的偏移量
+  mysqlbinlog /var/lib/mysql/mysql-bin.000007 start-position start-position
+  
+  maxwell可以指定偏移量进行全量数据同步  

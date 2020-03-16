@@ -28,7 +28,7 @@ public class KafkaProducerDemo {
     }
 
     void produce(){
-        for(int i=1;i<1000;i++){
+        for(int i=1;i<100;i++){
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -38,6 +38,7 @@ public class KafkaProducerDemo {
             String data="hello kafka message:"+key;
             kafkaProducer.send(new ProducerRecord<String, String>(TOPIC, key, data), new Callback() {
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                    System.out.println("消息以成功");
                     System.out.println(recordMetadata);
 
                 }
