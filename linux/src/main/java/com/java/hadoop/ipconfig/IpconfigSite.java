@@ -17,7 +17,7 @@ public class IpconfigSite {
 
 
 
-        fileManager.upLinuxFileCategory("192.168.42.200","root","root",22,"ifcfg-ens33");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.200","root","root",22,"ifcfg-ens33");
 //        fileManager.upLinuxFileCategory("192.168.42.200","root","root",22,"pg_hba.conf");
 
         //配置端口

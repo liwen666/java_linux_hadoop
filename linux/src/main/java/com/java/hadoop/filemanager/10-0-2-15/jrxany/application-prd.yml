@@ -1,0 +1,70 @@
+###############  spring配置 ###############
+测试测试以
+spring:
+  # jpa配置
+  jpa:
+    # 非初始化库请注释
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    database: mysql
+    # 非初始化库请注释
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  # 数据源配置 (mysql/oracle)
+  datasource:
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      maximum-pool-size: 100
+      max-lifetime: 1200000
+      validation-timeout: 5000
+      idle-timeout: 600000
+      username: root
+      password: mysql
+      jdbc-url: jdbc:mysql://10.0.14.101:3306/any_test_0705?useSSL=false&characterEncoding=utf8
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+###############  swagger配置 ###############
+swagger:
+  enable: true
+
+###############  anyMarket配置 ###############
+jrx:
+  market:
+    file-path: data/file/
+
+###############  any Client配置 ###############
+anyest:
+  admin:
+    # 报表配置
+    invoke-type: REMOTE
+  client:
+    # 是否开启feign客户端
+    enable: true
+    # 是否使用clientApi
+    able-api: true
+    # 请求超时
+    ReadTimeout: 500000
+    # 连接超时
+    ConnectTimeout: 50000
+
+###############  权限配置 ###############
+# 综管配置
+auth:
+  setting:
+    # token超时时间 单位：分钟
+    tokenExpTimeMinute: 60
+
+# 拦截器配置
+filter:
+  setting:
+    # 设置默认人员,格式：userName-userId-nikeName
+    user: developer-242-开发人员
+    # 设置默认机构(可设置多个),格式：projectName-projectId,projectName2-projectId2
+    project: 测试机构-220314,测试机构2-243
+    # 鉴权模式: AUTH(开启权限),LOGIN(仅登录),NOT(无鉴权)
+    authModel: AUTH
+    # 本地ip:port（真实ip,综管中心要重定向回来）
+    localUrl: 127.0.0.1:${server.port}
+

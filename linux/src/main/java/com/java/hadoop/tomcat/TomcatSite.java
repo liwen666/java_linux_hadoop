@@ -11,7 +11,7 @@ public class TomcatSite {
 
 
 //        fileManager.getLinuxFileCategory("172.16.104.12","jrxany","20191022",22,"server.xml",filePath);
-        fileManager.getLinuxFileCategory("172.16.104.12","jrxany","20191022",22,"initialAdminPassword","/home/jrxany/.jenkins/secrets");
+        fileManager.getLinuxFileCategory("est_center", "172.16.104.12","jrxany","20191022",22,"initialAdminPassword","/home/jrxany/.jenkins/secrets");
 //        fileManager.getLinuxFileCategory("192.168.42.138","root","root",22,"catalina.sh","/develop/tomcat8_28085_dcpay_commission_local/bin");
 //        fileManager.getLinuxFileCategory("192.168.100.109","root","oracle",22,"catalina.sh","/tomcat/analysis_service/apache-tomcat-8.0.53/bin");
 //        fileManager.getLinuxFileCategory("192.168.100.109","root","oracle",22,"tomcat-users.xml",filePath);

@@ -1,7 +1,6 @@
 package com.java.hadoop.hadoop.site;
 
 import com.java.hadoop.filemanager.FileManager;
-import com.java.hadoop.linux.port.FireWallController;
 
 public class HadoopSite {
     public static void main(String[] args) throws Exception {
@@ -25,13 +24,13 @@ public class HadoopSite {
 //        fileManager.getLinuxFileCategory("192.168.42.210","root","root",22,"hosts","/etc/");
 
 
-        fileManager.upLinuxFileCategory("192.168.42.210","hadoop","hadoop",22,"core-site.xml");
-        fileManager.upLinuxFileCategory("192.168.42.210","hadoop","hadoop",22,"hadoop-env.sh");
-        fileManager.upLinuxFileCategory("192.168.42.210","hadoop","hadoop",22,"hdfs-site.xml");
-        fileManager.upLinuxFileCategory("192.168.42.210","hadoop","hadoop",22,"mapred-site.xml");
-        fileManager.upLinuxFileCategory("192.168.42.210","hadoop","hadoop",22,"slaves");
-        fileManager.upLinuxFileCategory("192.168.42.210","hadoop","hadoop",22,"yarn-env.sh");
-        fileManager.upLinuxFileCategory("192.168.42.210","hadoop","hadoop",22,"yarn-site.xml");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.210","hadoop","hadoop",22,"core-site.xml");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.210","hadoop","hadoop",22,"hadoop-env.sh");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.210","hadoop","hadoop",22,"hdfs-site.xml");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.210","hadoop","hadoop",22,"mapred-site.xml");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.210","hadoop","hadoop",22,"slaves");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.210","hadoop","hadoop",22,"yarn-env.sh");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.210","hadoop","hadoop",22,"yarn-site.xml");
 
 //        fileManager.upLinuxFileCategory("192.168.42.210","root","root",22,"hosts");
 //        fileManager.upLinuxFileCategory("192.168.42.210","root","root",22,"profile");

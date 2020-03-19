@@ -1,7 +1,6 @@
 package com.java.hadoop.kafa;
 
 import com.java.hadoop.filemanager.FileManager;
-import com.java.hadoop.linux.port.FireWallController;
 
 public class KafaSite {
     public static void main(String[] args) throws Exception {
@@ -24,7 +23,7 @@ public class KafaSite {
 
 
 //        fileManager.upLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"server.properties");
-        fileManager.upLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"zoo.cfg");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.220","hadoop","hadoop",22,"zoo.cfg");
 //        fileManager.upLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"kafkastart.sh");
 //        fileManager.upLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"kafkastop.sh");
 //

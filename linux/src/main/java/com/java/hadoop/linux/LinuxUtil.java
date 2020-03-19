@@ -233,12 +233,17 @@ public class LinuxUtil {
     }
 
 
-    public static void findFile(String ip, String userName, String filePath, String fileName, Session ftpsession) throws JSchException, SftpException, IOException {
+    public static void findFile(String dirPrefix, String ip, String userName, String filePath, String fileName, Session ftpsession) throws JSchException, SftpException, IOException {
         ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
         sftp.connect();
         sftp.cd(filePath);
         String basePath = System.getProperty("user.dir");
-        String packagePath = basePath + "/" + "linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\" + ip.replaceAll("\\.", "-") + "/" + userName;
+        String packagePath = null;
+        if (null==dirPrefix) {
+            packagePath = basePath + "/" + "linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\" + ip.replaceAll("\\.", "-") + "/" + userName;
+        }else {
+            packagePath = basePath + "/" + "linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\" + ip.replaceAll("\\.", "-") + "/" + userName+"/"+dirPrefix;
+        }
         File filePackage = new File(packagePath);
         filePackage.mkdirs();
         File file = new File(packagePath + "/" + fileName);

@@ -17,8 +17,8 @@ public class PgsqlSite {
 
 
 
-        fileManager.upLinuxFileCategory("192.168.42.136","root","root",22,"postgresql.conf");
-        fileManager.upLinuxFileCategory("192.168.42.136","root","root",22,"pg_hba.conf");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.136","root","root",22,"postgresql.conf");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.136","root","root",22,"pg_hba.conf");
 
         //配置端口
 //        FireWallController fwc = new FireWallController();

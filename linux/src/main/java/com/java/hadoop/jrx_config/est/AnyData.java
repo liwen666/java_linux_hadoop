@@ -29,7 +29,7 @@ public class AnyData {
 
 
 
-        fileManager.upLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"application-local_data.yml");
+        fileManager.upLinuxFileCategory("est_center_new", "10.0.2.15","jrxany","JRXwd01!",22,"application-local_data.yml");
 //        fileManager.upLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"application-local_l.yml");
 //
         //配置端口

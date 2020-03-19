@@ -7,11 +7,7 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import lombok.Cleanup;
-import lombok.NonNull;
-import org.apache.commons.lang.StringUtils;
-import org.junit.Test;
 import org.springframework.core.io.Resource;
 
 import java.io.File;
@@ -25,7 +21,7 @@ public class FileManager {
 
     private Session ftpsession;
     private Session execSession;
-    public void getLinuxFileCategory(String ip,String userName,String passwd,int port ,String fileName,String filePath) throws Exception {
+    public void getLinuxFileCategory(String dirPrefix, String ip, String userName, String passwd, int port, String fileName, String filePath) throws Exception {
         //对其他机器授权
         port =22;
         Login(userName, ip, port);
@@ -41,10 +37,10 @@ public class FileManager {
         ftpsession.connect(1000 * 10);
         String pwd = LinuxUtil.executeShell("pwd",execSession);
         System.out.println(pwd);
-        LinuxUtil.findFile(ip,userName,filePath,fileName,ftpsession);
+        LinuxUtil.findFile(dirPrefix,ip,userName,filePath,fileName,ftpsession);
         String fileCfg=System.getProperty("user.dir")+"\\linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\file_linux_cfg.json";
         @Cleanup  FileInputStream fis = new FileInputStream(fileCfg);
-        byte [] bytes = new byte[1024*1024];
+        byte [] bytes = new byte[4024*1024];
         int read = fis.read(bytes);
         String s = new String(bytes, 0, read);
         List<LinuxFileMnangerDomain> linuxFileMnangerDomains = JSONObject.parseArray(s,LinuxFileMnangerDomain.class);
@@ -65,6 +61,7 @@ public class FileManager {
         LinuxFileDomain lfd = new LinuxFileDomain();
         lfd.setFileName(fileName);
         lfd.setFilePath(filePath);
+        lfd.setDirPrefix(dirPrefix);
         Map<String, FileData> fileDataMap = lfmd.getFileDataMap();
          FileData fileData = fileDataMap.get(userName);
         if( fileData==null){
@@ -84,14 +81,14 @@ public class FileManager {
         @Cleanup FileOutputStream fileCfgStream= new FileOutputStream(fileCfg,false);
         fileCfgStream.write(string.getBytes());
         fileCfgStream.flush();
-        LinuxUtil.findFile(ip,userName,filePath,fileName,ftpsession);
+        LinuxUtil.findFile(dirPrefix, ip,userName,filePath,fileName,ftpsession);
 
         ftpsession.disconnect();
         execSession.disconnect();
 
 
     }
-    public void upLinuxFileCategory(String ip ,String userName,String passwd,int port,String fileName ) throws Exception {
+    public void upLinuxFileCategory(String dirPrefix, String ip, String userName, String passwd, int port, String fileName) throws Exception {
         //对其他机器授权
 //        String ip = "192.168.42.210";
         port =22;
@@ -114,7 +111,7 @@ public class FileManager {
         List<LinuxFileDomain> linuxFileDomains = fileData.getLinuxFileDomains();
         String filePath = null;
         for(LinuxFileDomain lfd :linuxFileDomains){
-            if(fileName.equals(lfd.getFileName())){
+            if(fileName.equals(lfd.getFileName())&&(lfd.getDirPrefix()==null||lfd.getDirPrefix().equals(dirPrefix))){
                 filePath=lfd.getFilePath();
             }
         }

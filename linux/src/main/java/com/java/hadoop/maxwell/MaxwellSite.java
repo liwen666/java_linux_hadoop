@@ -1,25 +1,26 @@
-package com.java.hadoop.zookeeper;
+package com.java.hadoop.maxwell;
 
 import com.java.hadoop.filemanager.FileManager;
 
-public class ZookeeperSite {
+public class MaxwellSite {
     public static void main(String[] args) throws Exception {
         ///home/hadoop/hadoop/hadoop-2.8.5/etc/hadoop
-        String filePath="/home/jrxany/batch_node/zookeeper/zookeeper-3.4.12/conf";
+        String filePath="/home/jrxany/maxwell/maxwell-1.24.0/bin/config";
         FileManager fileManager = new FileManager();
 
 
 
         //从服务器配置
-//        配置server.properties
-//        fileManager.getLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"zoo.cfg",filePath);
+//        fileManager.getLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"config.properties",filePath);
+//        fileManager.getLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"application-local_l.yml","/home/jrxany/sync_data/data-sych-server-1.0.0-SNAPSHOT/config");
 
 
 
 
 
 
-        fileManager.upLinuxFileCategory("est_center_new", "172.16.102.22","jrxany","20191022",22,"zoo.cfg");
+        fileManager.upLinuxFileCategory("est_center_new", "10.0.2.15","jrxany","JRXwd01!",22,"application-local_l.yml");
+//        fileManager.upLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"config.properties");
 //
         //配置端口
 //        FireWallController fwc = new FireWallController();

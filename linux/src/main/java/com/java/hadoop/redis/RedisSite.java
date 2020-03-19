@@ -1,7 +1,6 @@
 package com.java.hadoop.redis;
 
 import com.java.hadoop.filemanager.FileManager;
-import com.java.hadoop.linux.port.FireWallController;
 
 public class RedisSite {
     public static void main(String[] args) throws Exception {
@@ -18,7 +17,7 @@ public class RedisSite {
 
 
 
-        fileManager.upLinuxFileCategory("192.168.42.140","root","root",22,"redis.conf");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.140","root","root",22,"redis.conf");
 
         //配置端口
 //        FireWallController fwc = new FireWallController();

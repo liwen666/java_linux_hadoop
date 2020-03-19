@@ -30,7 +30,7 @@ public class BatchSchedule {
 
 //        mvn dependency:get  -DgroupId=jrx.batch.common -DartifactId=batch-common -Dversion=1.10.0-SNAPSHOT
 //        mvn dependency:get  -DgroupId=jrx.tutorial -DartifactId=b01-simple-job -Dversion=1.0.0
-        fileManager.upLinuxFileCategory("172.16.102.24","jrxany","20191022",22,"application.yaml");
+        fileManager.upLinuxFileCategory("est_center_new", "172.16.102.24","jrxany","20191022",22,"application.yaml");
 //
         //配置端口
 //        FireWallController fwc = new FireWallController();

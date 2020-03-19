@@ -27,7 +27,7 @@ anyest:
     #    greenplum-schema-name: zxtestschema
 
     jdbc-driver-name: org.postgresql.Driver
-    jdbc-data-address: jdbc:postgresql://172.16.101.93:5432/any_est_data?reWriteBatchedInserts=true
+    jdbc-data-address: jdbc:postgresql://172.16.101.19:5432/test_maxwell_data?reWriteBatchedInserts=true
     jdbc-data-username: gpadmin
     jdbc-data-password: gpadmin
     greenplum-schema-name: public

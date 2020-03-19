@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class LinuxFileDomain {
     private String fileName;
+    private String dirPrefix;
     private String filePath;
 }

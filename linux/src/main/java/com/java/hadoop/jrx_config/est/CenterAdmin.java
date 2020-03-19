@@ -31,8 +31,8 @@ public class CenterAdmin {
 
 
 
-        fileManager.upLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"application.yml");
-        fileManager.upLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"application-local_l2.yml");
+        fileManager.upLinuxFileCategory("est_center_new", "10.0.2.15","jrxany","JRXwd01!",22,"application.yml");
+        fileManager.upLinuxFileCategory("est_center_new", "10.0.2.15","jrxany","JRXwd01!",22,"application-local_l2.yml");
 //        fileManager.upLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"profiles.sh");
 //        fileManager.upLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"application-local_l2.yml");
 //        fileManager.upLinuxFileCategory("10.0.2.15","jrxany","JRXwd01!",22,"application-local_l.yml");

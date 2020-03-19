@@ -63,7 +63,7 @@ public class NodeSite {
 //        fileManager.upLinuxFileCategory("192.168.42.211","hadoop","hadoop",22,"slaves");
 //        fileManager.upLinuxFileCategory("192.168.42.211","hadoop","hadoop",22,"yarn-env.sh");
 //        fileManager.upLinuxFileCategory("192.168.42.211","hadoop","hadoop",22,"yarn-site.xml");
-        fileManager.upLinuxFileCategory("192.168.42.220","root","root",22,"profile");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.220","root","root",22,"profile");
 //        fileManager.upLinuxFileCategory("192.168.42.211","root","root",22,"hosts");
 
         //配置端口

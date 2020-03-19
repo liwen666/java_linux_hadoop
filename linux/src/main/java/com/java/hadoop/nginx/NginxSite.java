@@ -22,7 +22,7 @@ public class NginxSite {
 
 
 
-        fileManager.upLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"server.properties");
+        fileManager.upLinuxFileCategory("est_center_new", "172.16.102.22","jrxany","20191022",22,"server.properties");
 //        fileManager.upLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"zoo.cfg");
 //        fileManager.upLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"kafkastart.sh");
 //        fileManager.upLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"kafkastop.sh");

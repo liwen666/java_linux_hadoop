@@ -16,7 +16,7 @@ public class ElasticSearchSite {
 //        fileManager.getLinuxFileCategory("192.168.42.220","elasticsearch","elasticsearch",22,"jvm.options",filePath);
 //        fileManager.getLinuxFileCategory("192.168.42.220","elasticsearch","elasticsearch",22,"elasticsearch.yml",filePath);
 //        fileManager.getLinuxFileCategory("192.168.42.220","elasticsearch","elasticsearch",22,"elasticsearch","/home/elasticsearch/elasticsearch-6.5.4/bin");
-        fileManager.getLinuxFileCategory("192.168.42.220","elasticsearch","elasticsearch",22,"elasticsearch.yml","/home/elasticsearch/elasticsearch-6.1.1/config");
+        fileManager.getLinuxFileCategory("est_center", "192.168.42.220","elasticsearch","elasticsearch",22,"elasticsearch.yml","/home/elasticsearch/elasticsearch-6.1.1/config");
 //        7.配置slaves 文件
 //         /设置内核参数
 //        fileManager.getLinuxFileCategory("192.168.42.220","root","root",22,"sysctl.conf","/etc/");

@@ -46,7 +46,7 @@ public  class FileManagerTest {
         ftpsession.connect(1000 * 10);
         String pwd = LinuxUtil.executeShell("pwd", execSession);
         System.out.println(pwd);
-        LinuxUtil.findFile(ip, userName, filePath, fileName, ftpsession);
+        LinuxUtil.findFile(null, ip, userName, filePath, fileName, ftpsession);
         String fileCfg = "E:\\github_program\\java_linux_hadoop\\linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\file_linux_cfg.json";
         @Cleanup FileInputStream fis = new FileInputStream(fileCfg);
         byte[] bytes = new byte[1024];

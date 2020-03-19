@@ -1,7 +1,6 @@
 package com.java.hadoop.spark;
 
 import com.java.hadoop.filemanager.FileManager;
-import com.java.hadoop.linux.port.FireWallController;
 
 public class SingleSparkSite {
     public static void main(String[] args) throws Exception {
@@ -32,7 +31,7 @@ public class SingleSparkSite {
 //        fileManager.getLinuxFileCategory("192.168.42.220","root","root",22,"hostname","/etc/");
 //        配置spark
 //        fileManager.getLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"spark-env.sh",filePath);
-        fileManager.getLinuxFileCategory("192.168.42.220","hadoop","hadoop",22,"slaves",filePath);
+        fileManager.getLinuxFileCategory("est_center", "192.168.42.220","hadoop","hadoop",22,"slaves",filePath);
 
 
 

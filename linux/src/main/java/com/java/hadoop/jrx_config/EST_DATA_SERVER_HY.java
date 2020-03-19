@@ -22,7 +22,7 @@ public class EST_DATA_SERVER_HY {
 
         //从服务器配置
 //        fileManager.getLinuxFileCategory("172.16.102.21","jrxany","20191022",22,"application-hcy.yml",filePath);
-        fileManager.getLinuxFileCategory("172.16.102.21","jrxany","20191022",22,"application-hcy.yml",filePath);
+        fileManager.getLinuxFileCategory("est_center", "172.16.102.21","jrxany","20191022",22,"application-hcy.yml",filePath);
 
 
 

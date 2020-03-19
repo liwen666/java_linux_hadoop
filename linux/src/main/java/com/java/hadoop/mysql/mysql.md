@@ -1,4 +1,5 @@
-mysql> GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
+mysql> 
+GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
  GRANT SELECT, REPLICATION CLIENT, REPLICATION SLAVE on *.* to 'maxwell'@'%';
  FLUSH PRIVILEGES;
  
@@ -9,6 +10,7 @@ mysql> GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
   FLUSH PRIVILEGES;
  
  mysql  软连接
+ create user 'mjj'@'192.118.1.%' identified by '123';
  
  ln /var/lib/mysql/mysql.sock   /tmp/mysql.sock
  

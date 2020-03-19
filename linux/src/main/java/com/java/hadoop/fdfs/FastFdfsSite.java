@@ -24,12 +24,12 @@ public class FastFdfsSite {
 
 
 
-        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"mod_fastdfs.conf");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.230","root","root",22,"mod_fastdfs.conf");
 //        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"nginx.conf");
 //        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"lwnginx.conf");
 //        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"config");
 //        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"storage.conf");
-        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"storagelw.conf");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.230","root","root",22,"storagelw.conf");
 //        fileManager.upLinuxFileCategory("192.168.42.230","root","root",22,"tracker.conf");
 //
         //配置端口

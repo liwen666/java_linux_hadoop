@@ -21,7 +21,7 @@ public class EST_DATA_SERVER {
 
 
         //从服务器配置
-        fileManager.getLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"application-local_l.yml",filePath);
+        fileManager.getLinuxFileCategory("est_center", "172.16.102.22","jrxany","20191022",22,"application-local_l.yml",filePath);
 //        fileManager.getLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"application.yml",filePath);
 
 

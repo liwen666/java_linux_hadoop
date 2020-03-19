@@ -21,8 +21,8 @@ public class ShellSitTest {
 
 
 
-        fileManager.upLinuxFileCategory("192.168.42.136","root","root",22,"test1.sh");
-        fileManager.upLinuxFileCategory("192.168.42.136","root","root",22,"test2.sh");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.136","root","root",22,"test1.sh");
+        fileManager.upLinuxFileCategory("est_center_new", "192.168.42.136","root","root",22,"test2.sh");
 
         //配置端口
 //        FireWallController fwc = new FireWallController();

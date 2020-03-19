@@ -1,25 +1,24 @@
-package com.java.hadoop.zookeeper;
+package com.java.hadoop.test_file_manager;
 
 import com.java.hadoop.filemanager.FileManager;
 
-public class ZookeeperSite {
+public class TestFileManager {
     public static void main(String[] args) throws Exception {
-        ///home/hadoop/hadoop/hadoop-2.8.5/etc/hadoop
-        String filePath="/home/jrxany/batch_node/zookeeper/zookeeper-3.4.12/conf";
+        String filePath="/etc";
         FileManager fileManager = new FileManager();
 
 
 
         //从服务器配置
-//        配置server.properties
-//        fileManager.getLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"zoo.cfg",filePath);
+//        fileManager.getLinuxFileCategory("est_center_new","10.0.2.15","jrxany","JRXwd01!",22,"application-local_l.yml","/home/jrxany/any_est/anyest-center-admin-3.3.1-SNAPSHOT/config");
+        fileManager.getLinuxFileCategory(null,"10.0.2.15","jrxany","JRXwd01!",22,"application-prd.yml","/home/jrxany/any_est_new/anyest-center-admin-3.3.1-SNAPSHOT/config");
 
 
 
 
 
 
-        fileManager.upLinuxFileCategory("est_center_new", "172.16.102.22","jrxany","20191022",22,"zoo.cfg");
+//        fileManager.upLinuxFileCategory(null,"10.0.2.15","jrxany","JRXwd01!",22,"application-prd.yml");
 //
         //配置端口
 //        FireWallController fwc = new FireWallController();
