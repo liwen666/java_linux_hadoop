@@ -1,6 +1,6 @@
 mysql> 
-GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
- GRANT SELECT, REPLICATION CLIENT, REPLICATION SLAVE on *.* to 'maxwell'@'%';
+ GRANT ALL on maxwell.* to 'query'@'%' identified by 'query';
+ GRANT SELECT, REPLICATION CLIENT, REPLICATION SLAVE on *.* to 'query'@'%';
  FLUSH PRIVILEGES;
  
  
@@ -9,9 +9,12 @@ GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
  
   FLUSH PRIVILEGES;
  
- mysql  软连接
- create user 'mjj'@'192.118.1.%' identified by '123';
+ #mysql创建用户
+ CREATE USER 'maxwelltest'@'10.0.8.13' IDENDIFIED BY '123.com';
  
+ 
+ create user 'mjj'@'192.118.1.%' identified by '123';
+  mysql  软连接
  ln /var/lib/mysql/mysql.sock   /tmp/mysql.sock
  
  service mysql restart  
@@ -65,3 +68,7 @@ GRANT ALL on maxwell.* to 'maxwell'@'%' identified by 'root';
   mysqlbinlog /var/lib/mysql/mysql-bin.000007 start-position start-position
   
   maxwell可以指定偏移量进行全量数据同步  
+  
+#设置mysql时间
+default-time_zone = '+8:00'
+SHOW VARIABLES LIKE "%time_zone%";

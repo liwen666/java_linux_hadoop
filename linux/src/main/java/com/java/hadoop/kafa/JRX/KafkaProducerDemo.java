@@ -16,7 +16,8 @@ public class KafkaProducerDemo {
     }
     private Producer<String,String> createKafkaProducer(){
         Properties props = new Properties();
-        props.put("bootstrap.servers", "172.16.102.22:9092");
+//        props.put("bootstrap.servers", "172.16.102.22:9092");
+        props.put("bootstrap.servers", "172.16.101.55:9092");
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);

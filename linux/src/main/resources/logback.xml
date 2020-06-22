@@ -97,7 +97,7 @@
         <appender-ref ref="FILE"/>
     </root>
     <!-- 日志输出级别 -->
-    <logger name="com.java.hadoop" level="info">
+    <logger name="com.java.hadoop" level="info"/>
     <logger name="org" level="error">
         <!--         <appender-ref ref="FILE" /> -->
         <!--<appender-ref ref="FILE_PERSONAL"/>-->

@@ -17,7 +17,8 @@ public class KafkaConsumerDemo {
 
     private KafkaConsumerDemo(){
         Properties props = new Properties();
-        props.put("bootstrap.servers", "172.16.102.22:9092");
+//        props.put("bootstrap.servers", "172.16.102.22:9092");
+        props.put("bootstrap.servers", "172.16.101.55:9092");
         props.put("group.id", "test-hello-group");
 //        props.put("group.id", "jrx_test");
         props.put("client.id", "test_partion");

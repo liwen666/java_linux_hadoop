@@ -12,7 +12,8 @@ public class UserAddControl {
         UserAddControl userAddControl = new UserAddControl();
         String userName ="root";
         String password = "root";
-        String host = "192.168.42.140";
+//        String host = "192.168.42.140";
+        String host = "192.168.42.200";
         int port = 22;
 
         userAddControl.upLoadShell(userName,password,host,port);

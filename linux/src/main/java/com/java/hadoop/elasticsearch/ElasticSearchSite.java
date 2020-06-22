@@ -4,7 +4,7 @@ import com.java.hadoop.filemanager.FileManager;
 
 /**
  * chmod 770 elasticsearch/
- *1
+ *
  * 修改文件夹的组权限，访问java和node
  */
 public class ElasticSearchSite {
