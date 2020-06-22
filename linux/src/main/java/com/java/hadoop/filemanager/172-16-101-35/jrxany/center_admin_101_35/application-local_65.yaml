@@ -1,0 +1,122 @@
+###############  spring配置 ###############
+spring:
+  # jpa配置
+  jpa:
+    # 非初始化库请注释
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database: mysql
+    # 非初始化库请注释
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  # 数据源配置 (mysql/oracle)
+  datasource:
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      maximum-pool-size: 50
+      max-lifetime: 1200000
+      validation-timeout: 5000
+      idle-timeout: 600000
+      username: any
+      #使用 JasyptTest.testEcypt 生成的加密内容,填入括号内；若不使用加密密码 不使用ENC
+      #      password: ENC(kXcqygxee+1Gb9wpQglZvQ==)
+      password: any1234
+#      jdbc-url: jdbc:mysql://192.168.42.136:3306/anyest_local_test?serverTimezone=Hongkong&useUnicode=true&useSSL=false&characterEncoding=utf8
+      jdbc-url: jdbc:mysql://10.0.2.15:3306/est_imp_exp_test?serverTimezone=Hongkong&useUnicode=true&useSSL=false&characterEncoding=utf8
+      driver-class-name: com.mysql.jdbc.Driver
+#      password: 123.com
+#      jdbc-url: jdbc:mysql://172.16.101.19:3306/any_est_lw?useSSL=false&characterEncoding=utf8
+#      driver-class-name: com.mysql.jdbc.Driver
+#      password: 123.com
+#      jdbc-url: jdbc:mysql://172.16.101.19:3306/anyest3_1125?useSSL=false&characterEncoding=utf8
+#      driver-class-name: com.mysql.jdbc.Driver
+
+
+
+###############  swagger配置 ###############
+swagger:
+  enable: true
+
+###############  anyMarket配置 ###############
+jrx:
+  market:
+    file-path: data/file/
+
+###############  any Client配置 ###############
+anyest:
+  admin:
+    # 报表配置
+    invoke-type: REMOTE
+  client:
+    enable: true
+    able-api: true
+    ReadTimeout: 500000
+    ConnectTimeout: 50000
+
+###############  权限配置 ###############
+web:
+  security:
+    # 权限总开关
+    enable: false
+#    enable: true
+
+# 综管配置
+auth:
+  setting:
+    # token超时时间 单位：分钟
+    tokenExpTimeMinute: 60
+
+
+
+## 拦截器配置
+#filter:
+#  setting:
+#    # 设置默认人员,格式：userName-userId-nikeName
+#    user: developer-242-开发人员
+#    # 设置默认机构(可设置多个),格式：projectName-projectId,projectName2-projectId2
+#    project: 测试机构-220314,测试机构2-243
+#    # 鉴权模式: AUTH(开启权限),LOGIN(仅登录),NOT(无鉴权)
+#    authModel: AUTH
+#    # 本地ip:port（真实ip,综管中心要重定向回来）
+#    localUrl: 127.0.0.1:${server.port}
+#    indexUrl:  http://${filter.setting.localUrl}
+
+# 拦截器配置
+filter:
+  setting:
+    # 是否开启鉴权0-不开启，1-待开发模式，非0/1-开启
+    # 综管地址前缀，可跳转访问
+    authAddress: http://172.16.102.24:9600
+    # 本地ip:port（真实ip,综管中心要重定向回来）
+    localUrl: 172.16.101.35:9800
+    indexUrl:  http://${filter.setting.localUrl}
+    # 服务key(综管获取)
+    serviceId: GqbouMNUgQyJPgqoHq
+
+    # 设置默认人员,格式：userName-userId-nikeName
+    user: developer-242-开发人员
+    # 设置默认机构(可设置多个),格式：projectName-projectId,projectName2-projectId2
+    project: 测试机构-220314,测试机构2-243
+    # 鉴权模式: AUTH(开启权限),LOGIN(仅登录),NOT(无鉴权)
+    authModel: AUTH
+
+
+###############  eureka配置 ###############
+eureka:
+  instance:
+    ip-address: 172.16.101.35
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+
+  client:
+    registryFetchIntervalSeconds: 10
+    # 禁止自己作为服务注册
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://${eureka.instance.instance-id}}/eureka/
+
+logging:
+  level:
+    jrx.anyest.base: info

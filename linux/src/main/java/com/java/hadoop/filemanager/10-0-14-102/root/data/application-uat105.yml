@@ -1,0 +1,112 @@
+
+anyest:
+  ################anyest-Engine-Client配置####################
+  client:
+    enable: true
+    ReadTimeout: 500000
+    ConnectTimeout: 50000
+    route-by-userid: false
+  data:
+    es-cluster-name: elasticsearch
+    es-data-address-list:
+      - 10.0.13.99:9200
+    jdbc-driver-name: org.postgresql.Driver
+    jdbc-data-address: jdbc:postgresql://172.16.103.105:5432/postgres?reWriteBatchedInserts=true
+    jdbc-data-username: gpadmin
+    jdbc-data-password: gpadmin
+    greenplum-schema-name: public
+
+    # ignite存储的方式
+    ignite-store-type: primitive
+    igniteProperties:
+      dataDirectory: /home/datasych/data/igniteStore #持久化/日志记录路径
+      walDirectory: /home/datasych/data/igniteStore/wal # wal预写日志路径
+      metricsLogFrequency: 60000 # ignite日志记录频率
+      memoryInitialSizeMB: 2048 # 初始内存 MB ,集群中的主节点才需要设置
+      memoryMaxSizeMB: 2048 # 最大内存 MB ,集群中的主节点才需要设置
+      enabled-persistence: true #是否开启ignite自带持久化存储
+      ## 本机单节点请设置成true和127.0.0.1
+      tcpDiscoveryEnable: true #是否启用手动组播发现
+      clusterAddrList: # 集群发现地址
+        #- 10.0.14.102
+        - 127.0.0.1
+
+    # 是否开启缓存
+    cache:
+      enabled: true
+
+    # 是否开启日志记录
+    record:
+      enabled: false #即使为false，还是会根据数据集的saveRecord(Boolean)而进行记录
+
+    # 是否启用事件
+    event:
+      enabled: true
+      store-mode: elasticsearch
+      queue-thread-size: 20
+      batch-size: 8000
+
+    # 是否启用统计服务
+    stat:
+      enabled: true
+      store-mode: ignite_gp
+      queue-thread-size: 5 #处理导入缓存线程数
+      batch-size: 30 #导入缓存批次量
+      queue-capacity: 20000 # 队列中的数据的总量
+
+    # 外部服务地址
+    proxy-address-list:
+      - http://10.0.14.102:9230
+
+    # 是否启用数据api服务
+    enable-data-api: true
+    #数据集导出路径，包含数据
+    data-object-export-path: /home/datasych/data/igniteData
+
+    enable-third-save: false
+
+    # 是否开启转存策略开关 所有的表
+    enable-strategy-save-all: true
+
+    #是否开启存储策略指标开关 2个表
+    enable-strategy-save-event: true
+
+    # 是否开启存储策略结果开关 1个表
+    enable-strategy-save-indi: true
+
+    time-out: 60000
+  #  console:
+  #    props:
+  #      content-code: null  # 设为null即关闭
+  batch-import:
+    batchSize: 2000
+    threadNumber: 5
+  data-export:
+    exportPath: /home/datasych/data/igniteData #ignite数据导出磁盘路径
+spring.jackson.parser:
+  allow_unquoted_field_names: true
+
+
+logging:
+  level:
+    org.apache.ignite.internal.IgniteKernal: error
+    org.apache.ignite.internal.processors.failure.FailureProcessor: error
+
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    ip-address: 172.16.103.105
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    registryFetchIntervalSeconds: 5
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://10.0.14.102:9800/eureka
+

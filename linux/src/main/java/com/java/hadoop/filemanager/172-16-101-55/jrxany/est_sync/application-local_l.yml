@@ -1,0 +1,90 @@
+anyest:
+  datasych:
+    queue:
+      auto-start: true
+      queueType: kafka
+      batch-size: 8000
+      #并发线程数，若是kafka队列，需与kafka topic 的partition数量保持一致
+      queue-thread-size: 5
+      kafkaprop:
+        #zk url
+        #        zk-address: 172.16.102.22:2181
+        zk-address: 172.16.101.55:2181
+        #topic 需要 手动创建好，分区数量 和消费线程数保持一致
+        #        dml-topic: testcsm
+        dml-topic: test_dml
+        ddl-topic: test_ddl_topic
+        # 分组id
+        group-id: 1
+        #broke list
+        bootstrap-servers: 172.16.101.55:9092
+    store:
+      storeType: greenplum
+      store-schema: public
+      datsource-code: yanshi_data
+      dw-table-prefix-map: {anycfs_ops: ods_ops,anycfs_txn: ods_txn,public: public,test_data_sync: test_db}
+      #      jdbc-driver-name: com.pivotal.jdbc.GreenplumDriver
+      #      jdbc-data-address: jdbc:pivotal:greenplum://172.16.103.103:5432;DatabaseName=postgres
+      #      jdbc-data-username: gpadmin
+      #      jdbc-data-password: gpadmin
+
+      #      jdbc-driver-name: org.postgresql.Driver
+      #      jdbc-data-address: jdbc:postgresql://172.16.103.103:5432/postgres?reWriteBatchedInserts=true
+      #      jdbc-data-username: gpadmin
+      #      jdbc-data-password: gpadmin
+
+
+      #      jdbc-driver-name: org.postgresql.Driver
+      #      jdbc-data-address: jdbc:postgresql://172.16.103.103:5432/postgres?reWriteBatchedInserts=true
+      #      jdbc-data-username: gpadmin
+      #      jdbc-data-password: gpadmin
+
+
+      #      jdbc-driver-name: org.postgresql.Driver
+      #      jdbc-data-address: jdbc:postgresql://192.168.42.136:5432/postgres?reWriteBatchedInserts=true
+      #      jdbc-data-username: postgres
+      #      jdbc-data-password: postgres
+
+      jdbc-driver-name: org.postgresql.Driver
+      jdbc-data-address: jdbc:postgresql://172.16.101.37:5432/yanshi_data?reWriteBatchedInserts=true
+      jdbc-data-username: gpadmin
+      jdbc-data-password: gpadmin
+
+
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      maximum-pool-size: 150
+      minimum-idle: 20
+      max-lifetime: 1500000
+      validation-timeout: 3000
+      idle-timeout: 60000
+
+      #hbase zk list
+      hbase-zk-list: 172.16.101.55:2181
+      databaseMergeOpen: true
+
+
+#jdbc test
+#      jdbc-driver-name: com.mysql.jdbc.Driver
+#      jdbc-data-address: jdbc:mysql://localhost:3306/collector_test?useSSL=false&characterEncoding=utf8
+#      jdbc-data-username: root
+#      jdbc-data-password: 6970355
+
+
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    ip-address: 172.16.101.42
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    registryFetchIntervalSeconds: 5
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://172.16.101.42:9800/eureka

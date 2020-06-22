@@ -1,0 +1,115 @@
+#############服务配置#################################
+server:
+  port: 9281 # 更改此端口，也要更改check.sh里面的PORT
+
+    # 下面是配置undertow作为服务器的参数
+    #    undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    #      io-threads: 48
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    #      worker-threads: 200
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    #      buffer-size: 1024
+  # 是否分配的直接内存
+#      direct-buffers: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: testlocal
+  application:
+    name: anyest-datawarehouse-server
+  jackson:
+    #    date-format: yyyy-MM-dd HH:mm:ss.SSS
+    time-zone: GMT+8
+
+
+###########################feign客户端配置#######################
+
+anyest:
+  client:
+    enable: true
+    ReadTimeout: 500000
+    ConnectTimeout: 50000
+    able-api: true
+  data:
+    enable-data-api: true
+  console:
+    props:
+      content-code: null  # 设为null即关闭
+
+  ######################模型/策略转发开关###########################
+  collector:
+    transmit:
+      topicDataOpen: true
+      strategyEventOpen: true
+
+
+
+
+
+# 日志配置  为空为项目跟目录下的logs  或者指定已经存在的目录
+#log:
+#  path:
+
+logging:
+  pattern:
+    console: '%clr(%gray(%d{yyyy-MM-dd HH:mm:ss.SSS}) - %boldRed(%5p) %blue([%5.20t]) %magenta(%-20.50logger{50}) %yellow(%2M) %green(%2L) : %msg%n)'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} - %5p [%5.20t] %-20.50logger{50} %2M %2L : %msg%n'
+  file: logs/${spring.application.name}.log
+  level:
+    jrx.anyest.datasych: debug
+    org.springframework.web: info
+    com.zaxxer.hikari: error
+    org.apache.kafka.clients: off
+
+
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  #  server:
+  #    port: 8102 # 如果不指定，则使用和server相同的端口 http://127.0.0.1:9370/actuator/health
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: FULL
+#  compression:
+#    request:
+#      enabled: true
+#      mime-types: text/xml,application/xml,application/json
+#    response:
+#      enabled: true
+
+  httpclient:
+    connection-timeout: 500000
+    max-connections: 500
+    max-connections-per-route: 50
+    enabled: true
+
+
+
+ribbon:
+  restclient:
+    enabled: true
+  eureka:
+    enabled: true
+  OkToRetryOnAllOperations: false
+  ReadTimeout: 120000
+  ConnectTimeout: 120000
+  MaxAutoRetries: 2
+  MaxAutoRetriesNextServer: 1
+
+
+
+

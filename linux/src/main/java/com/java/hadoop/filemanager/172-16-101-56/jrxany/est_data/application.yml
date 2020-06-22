@@ -1,0 +1,121 @@
+
+spring:
+# 禁止添加profiles.active！！！ 本地启动添加-Dspring.profiles.active=local启动参数。
+  application:
+    name: anyest-data-service
+  jackson:
+    #    date-format: yyyy-MM-dd HH:mm:ss.SSS
+    time-zone: GMT+8
+  main:
+    allow-bean-definition-overriding: true
+server:
+#  compression:
+#    enabled: true
+#    mime-types: text/html,text/css,application/javascript,application/json
+  port: 9370 # 更改此端口，也要更改check.sh里面的PORT
+  # 下面是配置undertow作为服务器的参数
+  undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    io-threads: 8
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    worker-threads: 50
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+    servlet:
+      multipart:
+        max-file-size: 1024MB
+        max-request-size: 1024MB
+# 日志配置  为空为项目跟目录下的logs  或者指定已经存在的目录
+#log:
+#  path:
+
+logging:
+  pattern:
+    console: '%clr(%gray(%d{yyyy-MM-dd HH:mm:ss.SSS}) - %boldRed(%5p) %blue([%5.20t]) %magenta(%-20.50logger{50}) %yellow(%2M) %green(%2L) : %msg%n)'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} - %5p [%5.20t] %-20.50logger{50} %2M %2L : %msg%n'
+  file:
+    max-history: 60
+  level:
+    jrx.anyest.data: debug
+    org.springframework.web: info
+    org.apache.ignite.internal.IgniteKernal: error
+    com.zaxxer.hikari: info
+
+
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  #  server:
+  #    port: 8102 # 如果不指定，则使用和server相同的端口 http://127.0.0.1:9370/actuator/health
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+ribbon:
+  restclient:
+    enabled: true
+  eureka:
+    enabled: true
+  OkToRetryOnAllOperations: false
+  ReadTimeout: 500000
+  ConnectTimeout: 50000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+
+
+
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        loggerLevel: FULL
+  httpclient:
+    connection-timeout: 500000
+    max-connections: 500
+    max-connections-per-route: 50
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+      max-request-size: 2097152000
+    response:
+      enabled: true
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    ip-address: ${spring.cloud.client.ip-address}
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+  client:
+    registryFetchIntervalSeconds: 5
+    register-with-eureka: true
+    fetch-registry: true
+
+################# actuator info 中信息 #######################
+info:
+  name: ${spring.application.name}
+  description: 资信数据服务
+  java-version: 1.8.0_161
+  spring-boot-version: 2.1.4.RELEASE
+  spring-cloud-version: Greenwich.SR3
