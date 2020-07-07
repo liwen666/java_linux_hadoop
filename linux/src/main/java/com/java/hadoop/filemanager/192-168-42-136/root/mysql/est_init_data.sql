@@ -3,13 +3,14 @@
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `est_data_init`$$
-CREATE  PROCEDURE `est_data_init`(IN content_code INTEGER)
+-- CREATE  PROCEDURE `est_data_init`(IN content_code INTEGER)
+ CREATE  PROCEDURE `est_data_init`( IN content_code INTEGER, IN gp_url TEXT )
 BEGIN
     DECLARE num INTEGER ;
-   
+
     SELECT COUNT(1) INTO num  FROM meta_dictionary_field;
     IF num=0 THEN
-    INSERT  INTO `meta_dictionary_field`(`dict_id`,`dict_name`,`dict_type`,`dict_value`,`field_id`) VALUES 
+    INSERT  INTO `meta_dictionary_field`(`dict_id`,`dict_name`,`dict_type`,`dict_value`,`field_id`) VALUES
 
 (6,'通过',NULL,'0000',5),
 
@@ -72,6 +73,7 @@ insert  into `table_entity_conversion_rule`(`id`,`content_code`,`create_person`,
 (25,NULL,NULL,NULL,NULL,NULL,'FIELD_INDEX','deriveContent.referFieldBids',NULL,'meta_object_field','字段表'),
 
 (26,NULL,NULL,NULL,NULL,NULL,'FIELD_INDEX','deriveContent.params.value',NULL,'meta_object_field','字段表'),
+(85,NULL,NULL,NULL,NULL,NULL,'CATEGORY','resourceObjectCategoryId',NULL,'meta_object_field','字段表'),
 
 (27,NULL,NULL,NULL,NULL,NULL,'ORG','contentCode',NULL,'meta_model_object_info','模型表'),
 
@@ -115,32 +117,12 @@ insert  into `table_entity_conversion_rule`(`id`,`content_code`,`create_person`,
 
 (47,NULL,NULL,NULL,NULL,NULL,'ORG','contentCode',NULL,'meta_topic_object','模型表'),
 
+
 (48,NULL,NULL,NULL,NULL,NULL,'OBJECT','resourceId',NULL,'meta_topic_object','模型表'),
 
 (49,NULL,NULL,NULL,NULL,NULL,'FIELD','deriveIds',NULL,'meta_topic_object','模型表'),
 
 (50,NULL,NULL,NULL,NULL,NULL,'ORG','15029','金融云','org_rule','机构编码字典'),
-
-(51,NULL,NULL,NULL,NULL,NULL,'ORG','0','系统机构','org_rule','机构编码字典'),
-
-(52,NULL,NULL,NULL,NULL,NULL,'ORG','132','租户1','org_rule','机构编码字典'),
-
-(53,NULL,NULL,NULL,NULL,NULL,'ORG','149','租户2','org_rule','机构编码字典'),
-
-(54,NULL,NULL,NULL,NULL,NULL,'ORG','2401550','租户3','org_rule','机构编码字典'),
-
-(55,NULL,NULL,NULL,NULL,NULL,'ORG','2754918','租户4','org_rule','机构编码字典'),
-
-(56,NULL,NULL,NULL,NULL,NULL,'ORG','28260','租户5','org_rule','机构编码字典'),
-
-(57,NULL,NULL,NULL,NULL,NULL,'ORG','635','租户6','org_rule','机构编码字典'),
-
-(58,NULL,NULL,NULL,NULL,NULL,'ORG','851479','租户7','org_rule','机构编码字典'),
-
-(59,NULL,NULL,NULL,NULL,NULL,'ORG','2942275','租户8','org_rule','机构编码字典'),
-
-(60,NULL,NULL,NULL,NULL,NULL,'ORG','2820972','租户9','org_rule','机构编码字典'),
-
 (61,NULL,NULL,NULL,NULL,NULL,'ORG','contentCode',NULL,'res_resource_project','项目表'),
 
 (62,NULL,NULL,NULL,NULL,NULL,'ORG','contentCode',NULL,'meta_function_info','函數表'),
@@ -223,6 +205,10 @@ insert  into `meta_object_field`(`object_field_id`,`content_code`,`create_person
 (10,'0',NULL,'2020-06-12 20:49:20','system','2020-06-12 20:49:20','anyTaskCode','NONE',NULL,NULL,NULL,NULL,'anyTaskCode',NULL,NULL,'anyTask订单标识（用于异步决策）','ACTIVE','SYS_FIELD',NULL,'\0',NULL,NULL,'SYSTEM',NULL,NULL,NULL,1,2,NULL,NULL,NULL,NULL,'STRING');
 
 
+END IF;
+SELECT COUNT(1) INTO num  FROM meta_data_source_info  ;
+    IF num=0 THEN
+INSERT INTO `meta_data_source_info` VALUES (100,content_code , NULL, '2020-06-30 11:35:05', 'xuehuiping01', '2020-06-30 11:47:58', 76, gp_url, 'GREENPLUM', '初始化Gp链接信息', NULL, 'System_GP_DataSource', '系统初始化数据源', 'KV', b'1');
 END IF;
 
 END$$

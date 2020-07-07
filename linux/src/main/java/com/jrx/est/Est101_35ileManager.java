@@ -15,6 +15,8 @@ public class Est101_35ileManager {
          */
 //        fileManager.getLinuxFileCategory("center_admin_101_35","172.16.101.35","jrxany","20191022",22,"application-local_65.yaml","/home/jrxany/est/anyest-center-admin-fc_1.0.0-SNAPSHOT/config");
 //        fileManager.getLinuxFileCategory("center_admin_101_35","172.16.101.35","jrxany","20191022",22,"application-local_lw.yaml","/home/jrxany/est/anyest-center-admin-fc_1.0.0-SNAPSHOT/config");
+//        fileManager.getLinuxFileCategory("center_admin_101_35","172.16.101.35","jrxany","20191022",22,"JAVA_ENV.sh","/home/jrxany/test/anyest-center-admin-fc_1.1.0-SNAPSHOT/sbin");
+//        fileManager.getLinuxFileCategory("center_admin_101_35","172.16.101.35","jrxany","20191022",22,"profiles.sh","/home/jrxany/test/anyest-center-admin-fc_1.1.0-SNAPSHOT/sbin");
 
         /**
          * 资信平台配置
@@ -26,7 +28,8 @@ public class Est101_35ileManager {
          * 管理平台上传配置
 //         */
 //        fileManager.upLinuxFileCategory("center_admin_101_35","172.16.101.35","jrxany","20191022",22,"application-local_65.yaml");
-        fileManager.upLinuxFileCategory("center_admin_101_35","172.16.101.35","jrxany","20191022",22,"application-local_lw.yaml");
+        fileManager.upLinuxFileCategory("center_admin_101_35","172.16.101.35","jrxany","20191022",22,"JAVA_ENV.sh");
+        fileManager.upLinuxFileCategory("center_admin_101_35","172.16.101.35","jrxany","20191022",22,"profiles.sh");
 //        fileManager.upLinuxFileCategory("data","172.16.101.35","jrxany","20191022",22,"application-local_l.yml");
 
         //配置端口
