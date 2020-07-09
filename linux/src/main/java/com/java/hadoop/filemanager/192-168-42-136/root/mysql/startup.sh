@@ -7,7 +7,7 @@ USERNAME="root"
 PASSWORD=$2
 GP_URL="{\"auth_user\":\"gpadmin\",\"auth_pass\":\"gpadmin\",\"jdbc_url\":\"jdbc:postgresql://172.16.103.105:5432/anyest3_financial_cloud_$1?reWriteBatchedInserts=true\"}"
 echo ----------------开始$GP_URL------------------------------
-TENANT-NO=$1
+TENANT_NO=$1
 if [ x"$1" = x ]; then
     echo "please set tenant-no  请指定租户id"
     exit 1

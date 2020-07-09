@@ -208,7 +208,7 @@ insert  into `meta_object_field`(`object_field_id`,`content_code`,`create_person
 END IF;
 SELECT COUNT(1) INTO num  FROM meta_data_source_info  ;
     IF num=0 THEN
-INSERT INTO `meta_data_source_info` VALUES (100,content_code , NULL, '2020-06-30 11:35:05', 'xuehuiping01', '2020-06-30 11:47:58', 76, gp_url, 'GREENPLUM', '初始化Gp链接信息', NULL, 'System_GP_DataSource', '系统初始化数据源', 'KV', b'1');
+INSERT INTO `meta_data_source_info` VALUES (100,content_code , NULL, '2020-06-30 11:35:05', 'system', '2020-06-30 11:47:58', 76, gp_url, 'GREENPLUM', '初始化Gp链接信息', NULL, 'System_GP_DataSource', '系统初始化数据源', 'KV', b'1');
 END IF;
 
 END$$
