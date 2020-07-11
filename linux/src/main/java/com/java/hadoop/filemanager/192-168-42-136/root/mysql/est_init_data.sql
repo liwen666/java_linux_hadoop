@@ -73,7 +73,7 @@ insert  into `table_entity_conversion_rule`(`id`,`content_code`,`create_person`,
 (25,NULL,NULL,NULL,NULL,NULL,'FIELD_INDEX','deriveContent.referFieldBids',NULL,'meta_object_field','字段表'),
 
 (26,NULL,NULL,NULL,NULL,NULL,'FIELD_INDEX','deriveContent.params.value',NULL,'meta_object_field','字段表'),
-(85,NULL,NULL,NULL,NULL,NULL,'CATEGORY','resourceObjectCategoryId',NULL,'meta_object_field','字段表'),
+(-1,NULL,NULL,NULL,NULL,NULL,'CATEGORY','resourceObjectCategoryId',NULL,'meta_object_field','字段表'),
 
 (27,NULL,NULL,NULL,NULL,NULL,'ORG','contentCode',NULL,'meta_model_object_info','模型表'),
 
