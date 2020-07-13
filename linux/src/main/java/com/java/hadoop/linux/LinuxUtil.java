@@ -26,7 +26,6 @@ public class LinuxUtil {
      * @throws Exception
      */
     public static String executeShell(String command, Session execSession) throws Exception {
-
         byte[] tmp = new byte[1024];
         StringBuffer resultBuffer = new StringBuffer(); // 命令返回的结果
 

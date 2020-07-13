@@ -8,6 +8,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import lombok.Cleanup;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.Resource;
 
@@ -17,7 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
+@Getter
 public class FileManager {
 
     private Session ftpsession;
@@ -178,5 +179,23 @@ public class FileManager {
 //        File f = new File("E:\\github_program\\java_linux_hadoop\\linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\192-168-42-210\\hadoop\\11.txt");
         File f = new File("E:\\github_program\\java_linux_hadoop\\src\\main\\java\\com\\java\\hadoop\\filemanager\\192-168-42-210\\hadoop\\core.txt");
         f.createNewFile();
+    }
+
+
+    public void executeShell(String command, String host, String  username, String passwd, int poot) throws Exception {
+        Login(username,host,poot);
+        execSession.setPassword(passwd);
+        ftpsession.setPassword(passwd);
+        // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
+        execSession.setConfig("StrictHostKeyChecking", "no");
+        ftpsession.setConfig("StrictHostKeyChecking", "no");
+        execSession.setConfig("userauth.gssapi-with-mic", "no");
+        ftpsession.setConfig("userauth.gssapi-with-mic", "no");
+        // 连接超时
+        execSession.connect(1000 * 15);
+        ftpsession.connect(1000 * 15);
+        String pwd = LinuxUtil.executeShell(command, execSession);
+        System.out.println(pwd);
+
     }
 }

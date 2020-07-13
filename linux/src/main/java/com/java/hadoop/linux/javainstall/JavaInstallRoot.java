@@ -1,14 +1,12 @@
 package com.java.hadoop.linux.javainstall;
 
 import com.java.hadoop.linux.LinuxConfig;
-import com.java.hadoop.linux.filecontroller.UpLoadFileToLinux;
 import com.jcraft.jsch.*;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Vector;
 
 /**
@@ -17,7 +15,7 @@ import java.util.Vector;
  * @author wanghonggang
  * 2018-10-30
  */
-public class JavaInstall {
+public class JavaInstallRoot {
 
     private Session ftpsession;
     private Session execSession;
@@ -28,9 +26,9 @@ public class JavaInstall {
     public void installJava() {
         try {
 //			登录hadoop 的shell和ftp
-            Login("hadoop", "192.168.42.220", 22);
-            execSession.setPassword("hadoop");
-            ftpsession.setPassword("hadoop");
+            Login("root", "192.168.42.220", 22);
+            execSession.setPassword("root");
+            ftpsession.setPassword("root");
             // 设置第一次登陆的时候提示，可选值:(ask | yes | no)
             execSession.setConfig("StrictHostKeyChecking", "no");
             ftpsession.setConfig("StrictHostKeyChecking", "no");
@@ -47,12 +45,12 @@ public class JavaInstall {
             ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
             //必须得连接，否则无法操作
             sftp.connect();
-            sftp.cd("/home/hadoop");
+            sftp.cd("/home/liwen");
             /**
              * 将u盘的java上传到linux*******************************************************88
              */
             boolean mark = false;
-            Vector ls = sftp.ls("/home/hadoop");
+            Vector ls = sftp.ls("/home/liwen");
             for (Object str : ls) {
                 ChannelSftp.LsEntry cl = (ChannelSftp.LsEntry) str;
                 if(cl.getLongname().endsWith("jdk-8u191-linux-x64.tar.gz")){
@@ -75,7 +73,7 @@ public class JavaInstall {
             if(!mark){
                 String s1 = executeShell("mkdir -vp java");
                 System.out.println(s1+"创建目录");
-                String s2 = executeShell("tar zxvf jdk-8u191-linux-x64.tar.gz  -C /home/hadoop/java");
+                String s2 = executeShell("tar zxvf jdk-8u191-linux-x64.tar.gz  -C /home/liwen/java");
                 System.out.println("解压java_____________________"+s2);
             }
            /****************************解压java文件***********************/
@@ -127,16 +125,16 @@ public class JavaInstall {
             ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
             //必须得连接，否则无法操作
             sftp.connect();
-            sftp.cd("/home/hadoop");
+            sftp.cd("/home/liwen");
             /**
              * 将u盘的java上传到linux*******************************************************88
              */
             boolean mark = false;
             try {
-                sftp.mkdir("/home/hadoop/java/");
+                sftp.mkdir("/home/liwen/java/");
             } catch (SftpException e) {
             }
-            Vector ls = sftp.ls("/home/hadoop/java/");
+            Vector ls = sftp.ls("/home/liwen/java/");
             for (Object str : ls) {
                 ChannelSftp.LsEntry cl = (ChannelSftp.LsEntry) str;
                 if(cl.getLongname().endsWith("jdk1.8.0_191")){
@@ -156,9 +154,9 @@ public class JavaInstall {
              */
             /****************************解压java文件***********************/
             if(!mark){
-                String s1 = executeShell("mkdir -vp java");
+                String s1 = executeShell("mkdir -vp /home/liwen/java");
                 System.out.println(s1+"创建目录");
-                String s2 = executeShell("tar zxvf jdk-8u191-linux-x64.tar.gz  -C /home/hadoop/java");
+                String s2 = executeShell("tar zxvf jdk-8u191-linux-x64.tar.gz  -C /home/liwen/java");
                 System.out.println("解压java_____________________"+s2);
             }
             /****************************解压java文件***********************/
