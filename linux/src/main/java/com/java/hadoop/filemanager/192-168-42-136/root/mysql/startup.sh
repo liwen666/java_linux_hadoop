@@ -21,7 +21,11 @@ echo ------------租户号是$1-------------
 DBNAME="anyest3_financial_cloud_"$1  #数据库名称
 
 #创建数据库
-create_db_sql="create database IF NOT EXISTS ${DBNAME}"
+#create_db_sql="create database IF NOT EXISTS ${DBNAME}"
+#CREATE DATABASE IF NOT EXISTS dbname DEFAULT CHARSET utf8;
+
+
+create_db_sql="create database IF NOT EXISTS ${DBNAME} DEFAULT CHARSET utf8"
 init_est_data="call est_data_init($1,'$GP_URL')"
 echo init_est_data
 

@@ -21,7 +21,11 @@ kafka  每个分组记录消息小消费便宜量    只有偏移量有变化，
 
 ./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 #查看topic
+
+sh kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 5 --topic test_kafka_partion
 ./kafka-topics.sh --list --zookeeper localhost:2181
+
+sh kafka-topics.sh --describe --zookeeper localhost:2181 --topic test_kafka_partion
 
 #生产消息
 ./kafka-console-producer.sh --broker-list localhost:9092 --topic test

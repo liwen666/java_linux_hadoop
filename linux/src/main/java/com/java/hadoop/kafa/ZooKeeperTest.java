@@ -13,7 +13,7 @@ public class ZooKeeperTest {
     public static Logger logger = LoggerFactory.getLogger(ZooKeeperTest.class);
 
     public static void main(String[] args) throws Exception {
-        ZooKeeper zk = new ZooKeeper("192.168.42.220:2181", 3000, new Watcher() {
+        ZooKeeper zk = new ZooKeeper("192.168.60.220:2181", 3000, new Watcher() {
             public void process(WatchedEvent event) {
                 // TODO Auto-generated method stub
                 logger.debug(" receive event : " + event.getType().name());

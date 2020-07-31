@@ -2,6 +2,8 @@ package com.java.hadoop.shell_sit;
 
 import com.java.hadoop.filemanager.FileManager;
 
+import java.io.File;
+
 /**
  * 测试环境
  */
@@ -28,8 +30,8 @@ public class LinuxShellTest {
 
 //        fileManager.executeShell(" vi +':w ++ff=unix' +':q' /etc/profile","192.168.42.220","root","root",22);
 //        fileManager.executeShell("source /etc/profile","192.168.42.220","root","root",22);
-        File file = new
-        fileManager.putshell("/home/liwen/shelltest","192.168.42.220","root","root",22);
+//        File file = new
+//        fileManager.putshell("/home/liwen/shelltest","192.168.42.220","root","root",22);
 
 //
         //配置端口

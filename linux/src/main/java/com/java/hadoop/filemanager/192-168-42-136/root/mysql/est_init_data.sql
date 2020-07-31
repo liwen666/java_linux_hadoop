@@ -74,6 +74,8 @@ insert  into `table_entity_conversion_rule`(`id`,`content_code`,`create_person`,
 
 (26,NULL,NULL,NULL,NULL,NULL,'FIELD_INDEX','deriveContent.params.value',NULL,'meta_object_field','字段表'),
 (-1,NULL,NULL,NULL,NULL,NULL,'CATEGORY','resourceObjectCategoryId',NULL,'meta_object_field','字段表'),
+(-2,NULL,NULL,NULL,NULL,NULL,'OBJECT','deriveContent.tableId',NULL,'meta_object_field','字段表'),
+(-3,NULL,NULL,NULL,NULL,NULL,'OBJECT_VERSION','deriveContent.tableVersionId',NULL,'meta_object_field','字段表'),
 
 (27,NULL,NULL,NULL,NULL,NULL,'ORG','contentCode',NULL,'meta_model_object_info','模型表'),
 
@@ -213,5 +215,26 @@ END IF;
 
 END$$
 
-DELIMITER ;
+
+-- 添加表字段的存取过程
+DROP PROCEDURE
+IF EXISTS `table_add_column` $$
+CREATE PROCEDURE `table_add_column` ( IN tableName TEXT, IN columnName TEXT ) BEGIN
+	DECLARE v_sql VARCHAR ( 500 );-- DECLARE num INTEGER ;
+	DECLARE num INTEGER ;
+ SELECT count(1) INTO num  FROM information_schema.columns WHERE table_name=tableName AND COLUMN_NAME=columnName;
+    IF num=0 THEN
+		SET @psql = concat( 'ALTER TABLE ', tableName, ' ADD ', columnName, ' varchar (32)' );
+	  PREPARE stmt2 FROM @psql;
+	  EXECUTE stmt2;
+			select "创建字段" into v_sql FROM dual;
+			select v_sql;
+		ELSE
+		select "字段已存在" into v_sql FROM dual;
+		select v_sql;
+    END IF;
+END $$
+DELIMITER;
+--  CALL table_add_column ( 'table_mark_init', 'mark_id2' )
+
 
