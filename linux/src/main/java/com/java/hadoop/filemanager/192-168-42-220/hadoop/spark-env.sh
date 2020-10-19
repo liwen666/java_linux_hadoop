@@ -3,7 +3,7 @@
 export JAVA_HOME=/home/hadoop/java/jdk1.8.0_191  #这里是你
 
 export SPARK_HOME=/home/hadoop/hadoop/spark-2.4.0-bin-hadoop2.7
-export SPARK_MASTER_IP=192.168.42.220
+export SPARK_MASTER_IP=192.168.60.220
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
