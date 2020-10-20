@@ -10,6 +10,8 @@ tar -zxvf tar   zvfc   xx.tar.gz
 
 cd /root/flink/zeppelin-0.9.0-preview2-bin-all/conf
 cp zeppelin-env.sh.template zeppelin-env.sh
+cp zeppelin-site.xml.template zeppelin-site.xml
+
 vi zeppelin-env.sh
 
 
@@ -20,7 +22,14 @@ HADOOP_CONF_DIR是你的Hadoop的配置文件目录
 export JAVA_HOME=/home/hadoop/java/jdk1.8.0_191/bin/java
 export HADOOP_CONF_DIR=/home/hadoop/hadoop/hadoop-2.8.5/bin/hadoop
 
+#启动zeppeline
+Log dir doesn't exist, create /root/flink/zeppelin-0.9.0-preview2-bin-all/logs
 
+/root/flink/zeppelin-0.9.0-preview2-bin-all/bin/zeppelin-daemon.sh start
+
+iptables -I INPUT -p tcp --dport 10000 -j ACCEPT
+
+http://192.168.60.220:10000/#/
 
 #安装hive
 tar -zxvf apache-hive-2.3.7-bin.tar.gz -C /usr/local/
