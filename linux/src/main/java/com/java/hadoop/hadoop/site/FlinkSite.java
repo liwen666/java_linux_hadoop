@@ -2,24 +2,21 @@ package com.java.hadoop.hadoop.site;
 
 import com.java.hadoop.filemanager.FileManager;
 
-public class ZeppelineSite {
+public class FlinkSite {
     public static void main(String[] args) throws Exception {
         ///home/hadoop/hadoop/hadoop-2.8.5/etc/hadoop
-        String filePath="/root/flink/zeppelin-0.9.0-preview2-bin-all/conf";
+        String filePath="/root/flink/flink-1.11.2/conf";
         FileManager fileManager = new FileManager();
         /**
          * 下载
          */
-//        fileManager.getLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-site.xml",filePath);
-        fileManager.getLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-env.sh",filePath);
-
+//        fileManager.getLinuxFileCategory("flink", "192.168.60.220","root","root",22,"flink-conf.yaml",filePath);
+//  mkdir -vp /root/flink/flink-1.11.2/tmp
 
         /**
          * 上传
          */
-//        fileManager.upLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-site.xml");
-//        fileManager.upLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-env.sh");
-
+        fileManager.upLinuxFileCategory("flink", "192.168.60.220","root","root",22,"flink-conf.yaml");
 
 //        fileManager.upLinuxFileCategory("192.168.42.210","root","root",22,"hosts");
 //        fileManager.upLinuxFileCategory("192.168.42.210","root","root",22,"profile");

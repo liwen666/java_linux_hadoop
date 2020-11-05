@@ -80,7 +80,8 @@ unset -f pathmunge
 export HADOOP_HOME=/home/hadoop/hadoop/hadoop-2.8.5
 export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-#Java Env export JAVA_HOME=/home/hadoop/java/jdk1.8.0_191
+#Java Env
+  export JAVA_HOME=/home/hadoop/java/jdk1.8.0_191
   export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
   export PATH=$PATH:$JAVA_HOME/bin
 #spark Env

@@ -116,5 +116,8 @@
 
 
 
-export JAVA_HOME=/home/hadoop/java/jdk1.8.0_191/bin/java
-export HADOOP_CONF_DIR=/home/hadoop/hadoop/hadoop-2.8.5/bin/hadoop
+#export JAVA_HOME=/home/hadoop/java/jdk1.8.0_191/bin/java
+#export HADOOP_CONF_DIR=/home/hadoop/hadoop/hadoop-2.8.5/bin/hadoop
+
+export ZEPPELIN_INTP_MEM="-Xms128m -Xmx256m -XX:MaxPermSize=56m"
+export ZEPPELIN_MEM="-Xms128m -Xmx256m -XX:MaxPermSize=56m"
