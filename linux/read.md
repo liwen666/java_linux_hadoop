@@ -62,3 +62,8 @@ jps -l | grep linux_node.jar
  
  curl localhost:3000/api/basic -X POST -d 'hello=world&xxx=yyy&a[]=ooo&a[]=mmm'
  
+ 
+ #linux 访问window  防火墙设置
+ 
+ 可以在高级设置里面添加远程ip入站自定义配置
+ 

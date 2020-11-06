@@ -1,3 +1,82 @@
+#mysql 安装
+1 解压
+groupadd mysql 
+useradd mysql -g mysql
+3 
+ mv mysql-5.7.24-linux-glibc2.12-x86_64 /usr/local/mysql
+ 
+ chown -R mysql:mysql /usr/local/mysql
+
+chmod -R 755 /usr/local/mysql
+
+cd /usr/local/mysql/bin
+
+./mysqld --initialize --user=mysql --datadir=/home/mysql/data --basedir=/usr/local/mysql
+
+
+ll /etc/init.d/ | grep mysql
+
+find / -name mysql.server
+
+cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+
+service mysql start
+
+ mysql -h 192.168.137.111 -u root
+ 
+ 
+ update user set host='%' where user = 'root';
+ 
+update user set authentication_string=password('root') where user='root';
+ flush privileges;
+
+
+ 
+ 到这里安装成功
+/------------------------------------------------------------------------------------
+[mysqld]
+#server-id=10
+#log-bin=master（这一步开启binlog）
+#binlog_format=row
+
+server-id=20
+binlog-format=row
+log-bin =/home/mysql/mysql-bin
+
+datadir=/home/mysql/data
+basedir=/usr/local/mysql
+socket=/tmp/mysql.sock
+user=mysql
+port=3306
+character-set-server=utf8
+# 取消密码验证
+skip-grant-tables
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+# skip-grant-tables
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+/------------------------------------------------------------------------------------
+
+
+#启动
+
+service mysql start
+##一下是特殊情况
+ yum -y install wget
+ wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm 
+ rpm -ivh mysql-community-release-el7-5.noarch.rpm
+ ls -1 /etc/yum.repos.d/mysql-community*
+  yum install mysql-server
+  
+  
+
+
+
+
+
 
 #解压tar结尾的包
 tar -xvf file.tar        //解压 tar包
