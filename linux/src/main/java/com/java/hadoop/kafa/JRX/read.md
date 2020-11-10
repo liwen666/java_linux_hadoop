@@ -6,6 +6,10 @@ bin/kafka-server-start.sh -daemon  config/server.properties
 server的下面配置很重要
 advertised.listeners=PLAINTEXT://172.16.102.22:9092
 
+
+sudo iptables -I INPUT -p tcp --dport 2181 -j ACCEPT
+sudo iptables -I INPUT -p tcp --dport 9092 -j ACCEPT
+
 #创建topic
 
 kafka  每个分组记录消息小消费便宜量    只有偏移量有变化，后面的客户就不会再消费了。
