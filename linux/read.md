@@ -67,3 +67,8 @@ jps -l | grep linux_node.jar
  
  可以在高级设置里面添加远程ip入站自定义配置
  
+ 
+#打包
+# tar -zcvf renwolesshel.tar.gz /renwolesshel
+
+ 

@@ -1,0 +1,1 @@
+sudo iptables -I INPUT -p tcp --dport 9370 -j ACCEPT
