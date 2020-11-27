@@ -10,13 +10,19 @@ public class ZeppelineSite {
         /**
          * 下载
          */
+//        fileManager.getLinuxFileCategory("zeppeline", "192.168.137.111","root","liwen",22,"shiro.ini","/home/liwen/application/flink/zeppelin/conf");
+//        fileManager.getLinuxFileCategory("zeppeline", "192.168.137.111","root","liwen",22,"zeppelin-site.xml","/home/liwen/application/flink/zeppelin/conf");
+//        fileManager.getLinuxFileCategory("zeppeline", "192.168.137.111","root","liwen",22,"zeppelin-env.sh","/home/liwen/application/flink/zeppelin/conf");
 //        fileManager.getLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-site.xml",filePath);
-        fileManager.getLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-env.sh",filePath);
+//        fileManager.getLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-env.sh",filePath);
 
 
         /**
          * 上传
          */
+        fileManager.upLinuxFileCategory("zeppeline", "192.168.137.111","root","liwen",22,"shiro.ini");
+//        fileManager.upLinuxFileCategory("zeppeline", "192.168.137.111","root","liwen",22,"zeppelin-site.xml");
+//        fileManager.upLinuxFileCategory("zeppeline", "192.168.137.111","root","liwen",22,"zeppelin-env.sh");
 //        fileManager.upLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-site.xml");
 //        fileManager.upLinuxFileCategory("zeppeline", "192.168.60.220","root","root",22,"zeppelin-env.sh");
 

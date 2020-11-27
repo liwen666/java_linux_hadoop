@@ -170,7 +170,6 @@ iptables -I INPUT -p tcp --dport 10000 -j ACCEPT
 /root/flink/zeppelin-0.9.0-preview2-bin-all/bin/zeppelin-daemon.sh start
 ##nacos
 iptables -I INPUT -p tcp --dport 8848 -j ACCEPT
-/root/flink/zeppelin-0.9.0-preview2-bin-all/bin/zeppelin-daemon.sh start
 
 #修改zeppeline的启动jvm参数
  

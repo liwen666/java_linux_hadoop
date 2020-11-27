@@ -10,13 +10,15 @@ public class FlinkSite {
         /**
          * 下载
          */
+//        fileManager.getLinuxFileCategory("flink", "192.168.137.111","root","liwen",22,"flink-conf.yaml","/home/liwen/application/flink/flink-server/conf");
 //        fileManager.getLinuxFileCategory("flink", "192.168.60.220","root","root",22,"flink-conf.yaml",filePath);
 //  mkdir -vp /root/flink/flink-1.11.2/tmp
 
         /**
          * 上传
          */
-        fileManager.upLinuxFileCategory("flink", "192.168.60.220","root","root",22,"flink-conf.yaml");
+        fileManager.upLinuxFileCategory("flink", "192.168.137.111","root","liwen",22,"flink-conf.yaml");
+//        fileManager.upLinuxFileCategory("flink", "192.168.60.220","root","root",22,"flink-conf.yaml");
 
 //        fileManager.upLinuxFileCategory("192.168.42.210","root","root",22,"hosts");
 //        fileManager.upLinuxFileCategory("192.168.42.210","root","root",22,"profile");
