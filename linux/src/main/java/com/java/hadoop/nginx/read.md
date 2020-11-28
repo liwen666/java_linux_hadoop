@@ -109,3 +109,8 @@ server {
         root   /usr/share/nginx/html;
     }
 }
+
+
+#any-data-hub
+
+/opt/nginx/sbin/nginx -s reload 

@@ -23,6 +23,9 @@
 
 ##碰到ssh无法连接的问题
     scp ~/.ssh/id_rsa.pub hadoop@Slaver:/home/hadoop/.ssh
+    远程复制
+  	scp -r dist jrxany@10.0.8.13:/home/jrxany/any-data-hub
+
     
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
   

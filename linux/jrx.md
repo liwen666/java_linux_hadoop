@@ -26,3 +26,6 @@ iptables -I INPUT -p tcp --dport 8081 -j ACCEPT;
 #EAST
 #启动资信
 
+#数据管理平台
+iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
+
