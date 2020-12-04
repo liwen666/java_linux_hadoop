@@ -207,4 +207,53 @@ public class ES_TEST {
         }
 
     }
+
+
+    /**
+     * 反欺诈还款事件
+     *
+     */
+    @Test
+    public void name() {
+        String index = "3_ev10187";
+        String type = null;
+        int from = 0;
+        int size = 20;
+        List<RangeItem> rangeItems = Lists.newArrayList();
+        List<QueryItem> queryItems = Lists.newArrayList();
+        List<SortItem> sortItems = Lists.newArrayList();
+//        queryItems.add(new QueryItem("version", Operator.EQ, 1));
+//        queryItems.add(new QueryItem("publishModel", Operator.EQ, "ONLINE"));
+        queryItems.add(new QueryItem("eventId", Operator.EQ, "160698573410660852971"));
+//        queryItems.add(new QueryItem("publishModel", Operator.EQ, "ONLINE"));
+//        sortItems.add(new SortItem("startTime", SortItem.SortOrder.DESC));
+        List<String> fields = new ArrayList<>();
+        SearchRequest sr = ESUtil.getSearchRequest(index, type, from, size, rangeItems, queryItems, sortItems, fields);
+        if (log.isDebugEnabled()) {
+            log.debug(JSON.toJSONString(sr.source().toString()));
+        }
+        SearchResponse response = null;
+        try {
+            response = client.search(sr, RequestOptions.DEFAULT);
+            // 取值
+            List<Map<String, Object>> mapList = Lists.newArrayList();
+            SearchHits hits = response.getHits();
+            Iterator<SearchHit> iterator = hits.iterator();
+            while (iterator.hasNext()) {
+                SearchHit hit = iterator.next();
+                Map<String, Object> fieldMap = hit.getSourceAsMap();
+                fieldMap.put("index", hit.getIndex());
+                //这个是es默认_type，跟type字段不一样
+                fieldMap.put("_type", hit.getType());
+                fieldMap.put("_id", hit.getId());
+//                mapList.add(CollectionUtils.isNotEmpty(fields) ? matchKeyMap(fields, fieldMap) : fieldMap);
+                System.out.println("-----------------------------------------------------------------------");
+                System.out.println("查询es数据结果"+JSON.toJSONString(fieldMap));
+                System.out.println("-----------------------------------------------------------------------");
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
