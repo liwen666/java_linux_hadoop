@@ -6,9 +6,7 @@ import jrx.anyest.engine.base.enums.common.Operator;
 import jrx.anyest.engine.base.model.QueryItem;
 import jrx.anyest.engine.base.model.RangeItem;
 import jrx.anyest.engine.base.model.SortItem;
-import jrx.anyest.engine.bridge.utils.ESUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHost;
@@ -42,7 +40,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 
 import static jrx.anyest.engine.base.utils.Constants.*;
-import static jrx.anyest.engine.base.utils.Constants.ES_ID;
 
 /**
  * <p>

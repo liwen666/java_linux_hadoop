@@ -77,6 +77,22 @@ http://ip地址
 
 
 vi /etc/nginx/nginx.conf
+        负载均衡配置
+         # 注意，这里的server名字即org.tonny.balance不能带下划线
+
+         upstream org.tonny.balance {
+
+                   server 127.0.0.1:8081 weight=1;
+
+                   server 127.0.0.1:8082 weight=1;
+
+         }
+         server 里面的配置需要
+                 proxy_pass http://org.tonny.balance;    # 接口地址(自行修改)
+
+
+
+
 
 server {
     listen       8888;# 访问端口(自行修改)
