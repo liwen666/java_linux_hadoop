@@ -110,6 +110,7 @@ server {
         proxy_set_header x_real_ipP $remote_addr;
         proxy_set_header remote_addr $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
         proxy_http_version 1.1;
         proxy_connect_timeout 4s;
         proxy_read_timeout 30s;
@@ -130,3 +131,10 @@ server {
 #any-data-hub
 
 /opt/nginx/sbin/nginx -s reload 
+
+
+/usr/local/nginx/sbin/nginx -c conf/nginx.conf
+
+
+iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
+
