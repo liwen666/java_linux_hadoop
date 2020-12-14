@@ -133,8 +133,15 @@ server {
 /opt/nginx/sbin/nginx -s reload 
 
 
+修改文件归属用户和组
+chown -R liwen /home/liwen/application/any-data-hub/data-hub-page/dist/any-data-hub
+chgrp -R jack /tmp/test
+
 /usr/local/nginx/sbin/nginx -c conf/nginx.conf
 
 
 iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
+
+scp  -r * liwen@11.11.1.79:/home/liwen/application/any-data-hub/data-hub-page/dist  密码 liwen
+
 
