@@ -1,5 +1,5 @@
 #!/bin/bash
-user=(hadoop mysql gpadmin kafka liwen redis)
+user=(zhuhai)
 #数组下标从0开始  只有六个用户   -gt（大于）  -lt（小于）  -eq（等于）-le（         小于等于）  -ge（大于等于）
 i=0
 num=6

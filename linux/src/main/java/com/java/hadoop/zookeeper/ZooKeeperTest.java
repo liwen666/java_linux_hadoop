@@ -17,6 +17,7 @@ public class ZooKeeperTest {
     public static void main(String[] args) throws Exception {
 //        ZooKeeper zk = new ZooKeeper("172.16.102.22:2181", 3000, new Watcher() {
         ZooKeeper zk = new ZooKeeper("172.16.102.23:2181", 3000, new Watcher() {
+//        ZooKeeper zk = new ZooKeeper("172.16.101.12:2181", 3000, new Watcher() {
 //        ZooKeeper zk = new ZooKeeper("192.168.137.111:2181", 3000, new Watcher() {
             public void process(WatchedEvent event) {
                 // TODO Auto-generated method stub

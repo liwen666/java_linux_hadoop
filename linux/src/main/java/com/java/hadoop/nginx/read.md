@@ -137,11 +137,20 @@ server {
 chown -R liwen /home/liwen/application/any-data-hub/data-hub-page/dist/any-data-hub
 chgrp -R jack /tmp/test
 
-/usr/local/nginx/sbin/nginx -c conf/nginx.conf
+/usr/local/nginx/sbin/nginx -c conf/nginx.conf -s reload
 
 
 iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
 
 scp  -r * liwen@11.11.1.79:/home/liwen/application/any-data-hub/data-hub-page/dist  密码 liwen
+
+iptables -I INPUT -p tcp --dport 6666 -j ACCEPT;
+iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
+
+
+/usr/local/nginx/sbin/nginx -c conf/nginx.conf -s reload
+
+iptables -I INPUT -p tcp --dport 9618 -j ACCEPT;
+
 
 

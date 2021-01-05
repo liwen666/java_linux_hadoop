@@ -1,7 +1,7 @@
 #一定要使用自带的zookeeper
-bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties
+bin/zookeeper-server-start.sh  -daemon config/zookeeper.properties;
 
-bin/kafka-server-start.sh -daemon  config/server.properties
+bin/kafka-server-start.sh -daemon  config/server.properties;
 
 server的下面配置很重要
 advertised.listeners=PLAINTEXT://172.16.102.22:9092
