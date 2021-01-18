@@ -44,4 +44,10 @@
         <name>dfs.permissions</name>
         <value>false</value>
     </property>
+
+    <!--以下配置不加，集群主节点和datanode无法关联-->
+    <property>
+        <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
+        <value>false</value>
+    </property>
 </configuration>

@@ -11,10 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * java 登录linux系统，并读取执行shell命令结果
@@ -28,15 +25,25 @@ public class HadoopInstall {
     private Session execSession;
 
 
+    @Test
+    public void name() {
+        String yamlCfg = "hadoop.yaml";
+        boolean getFile = false;
+        ArrayList<String> cfgList = new ArrayList<String>() {{
+            add(yamlCfg);
+            add("hadoop_slaver.yaml");
+        }};
+        cfgList.forEach(e -> {
+            installHadoop(e, getFile);
+        });
+    }
 
     /**
      * 登录linux系统
      */
-    @Test
-    public void installHadoop() {
+    public void installHadoop(String yamlCfg, boolean getFile) {
         try {
-            Map<?, ?> map = YamlUtil.loadYaml("hadoop.yaml");
-//            Map<?, ?> map = YamlUtil.loadYaml("hadoop_slaver.yaml");
+            Map<?, ?> map = YamlUtil.loadYaml(yamlCfg);
             String baseDir = (String) YamlUtil.getProperty(map, "baseDir");
             String filePath = (String) YamlUtil.getProperty(map, "file_linux_cfg");
             String upLoadFile = (String) YamlUtil.getProperty(map, "upLoadFile");
@@ -52,7 +59,7 @@ public class HadoopInstall {
             List<String> property = (List<String>) YamlUtil.getProperty(map, "hadoop.sit.conf");
             String prefix = (String) YamlUtil.getProperty(map, "hadoop.sit.prefix");
             String configPath = (String) YamlUtil.getProperty(map, "hadoop.sit.config-path");
-            boolean getFile = (boolean) YamlUtil.getProperty(map, "hadoop.sit.get-file");
+//            boolean getFile = (boolean) YamlUtil.getProperty(map, "hadoop.sit.get-file");
             PropertiesThreadLocalHolder.addProperties("file_linux_cfg", filePath);
             PropertiesThreadLocalHolder.addProperties("upLoadFile", upLoadFile);
             PropertiesThreadLocalHolder.addProperties("upLoadFilePackage", upLoadFilePackage);

@@ -19,6 +19,7 @@ hadoop:
       - mapred-site.xml
       - yarn-site.xml
       - yarn-env.sh
+      - slaves
     prefix: hadoop_cluster1
     config-path: /home/hadoop/hadoop/hadoop/etc/hadoop
     #上传文件还是下载  true表示下载  false表示上传

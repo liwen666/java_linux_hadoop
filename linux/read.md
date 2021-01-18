@@ -71,4 +71,8 @@ jps -l | grep linux_node.jar
 #打包
 # tar -zcvf renwolesshel.tar.gz /renwolesshel
 
+
+
+tar -zcvf flink-1.11.2.tar.gz flink-1.11.2
+
  
