@@ -19,7 +19,7 @@ public class Est10_102FileManager {
  /**
          * 资信平台配置
          */
-        fileManager.getLinuxFileCategory("data","10.0.14.102","root","jrx2019102",22,"application-uat105.yml","/data/anyest3/jenkins_publish/anydata-server/config");
+        fileManager.getLinuxFileCategory("data","10.0.14.102","root","jrx2019102",22,"application-uat105.yml","/data/anyest3/jenkins_publish/anydata-server/config",null);
 
 
         /**

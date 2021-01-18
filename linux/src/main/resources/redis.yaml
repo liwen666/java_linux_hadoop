@@ -1,0 +1,23 @@
+
+baseDir: D:/workspace/java_linux_hadoop/linux/app/
+file_linux_cfg: D:/workspace/java_linux_hadoop/linux/src/main/resources/file-path.json
+upLoadFile: D:\workspace\java_linux_hadoop\linux\src\main\java\com\filemanager\
+upLoadFilePackage: com.filemanager
+app:
+  sit:
+    linux:
+      user: root
+      password: liwen
+#      ip: 192.168.60.100
+      ip: 11.11.1.79
+      port: 22
+      app-home: /home/liwen/redis/
+      app-package: redis-5.0.2.tar.gz
+    conf:
+      - redis.conf
+#      - rc.local
+
+    prefix: redis
+    config-path: /usr/local/redis
+    #上传文件还是下载  true表示下载  false表示上传
+    get-file: false

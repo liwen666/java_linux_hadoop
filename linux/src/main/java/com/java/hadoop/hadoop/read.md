@@ -64,7 +64,7 @@
    先start-dfs.sh,再start-yarn.sh
 
 #页面浏览
-http://192.168.42.210:50070/dfshealth.html#tab-overview
+http://192.168.60.220:50070/dfshealth.html#tab-overview
     测试集群
     hadoop   jar   /home/hadoop/hadoop/hadoop-2.8.5/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.8.5.jar  pi 10 10
     

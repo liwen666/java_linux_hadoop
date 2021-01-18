@@ -7,6 +7,7 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import com.linux.temp.utils.PropertiesThreadLocalHolder;
 import lombok.Cleanup;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
@@ -18,13 +19,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 @Getter
 public class FileManager {
 
     private Session ftpsession;
     private Session execSession;
 
-    public void getLinuxFileCategory(String dirPrefix, String ip, String userName, String passwd, int port, String fileName, String filePath) throws Exception {
+    public void getLinuxFileCategory(String dirPrefix, String ip, String userName, String passwd, int port, String fileName, String filePath, Map param) throws Exception {
         //对其他机器授权
         port = 22;
         Login(userName, ip, port);
@@ -42,6 +44,9 @@ public class FileManager {
         System.out.println(pwd);
         LinuxUtil.findFile(dirPrefix, ip, userName, filePath, fileName, ftpsession);
         String fileCfg = System.getProperty("user.dir") + "\\linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\file_linux_cfg.json";
+        if (null != param.get("file_linux_cfg")) {
+            fileCfg = (String) param.get("file_linux_cfg");
+        }
         @Cleanup FileInputStream fis = new FileInputStream(fileCfg);
         byte[] bytes = new byte[4024 * 1024];
         int read = fis.read(bytes);
@@ -93,6 +98,7 @@ public class FileManager {
     }
 
     public void upLinuxFileCategory(String dirPrefix, String ip, String userName, String passwd, int port, String fileName) throws Exception {
+
         //对其他机器授权
 //        String ip = "192.168.42.210";
         port = 22;
@@ -121,9 +127,12 @@ public class FileManager {
         }
         if (null != filePath) {
             String packageBase = "com.java.hadoop.filemanager";
+            if (null != PropertiesThreadLocalHolder.getProperties("upLoadFilePackage")) {
+                packageBase = PropertiesThreadLocalHolder.getProperties("upLoadFilePackage");
+            }
             String srcPackage = packageBase + "." + ip.replaceAll("\\.", "-") + "." + userName;
-            if(StringUtils.isNoneEmpty(dirPrefix)){
-                srcPackage=srcPackage+"."+dirPrefix;
+            if (StringUtils.isNoneEmpty(dirPrefix)) {
+                srcPackage = srcPackage + "." + dirPrefix;
             }
             Resource resource = LinuxUtil.findResource(srcPackage, fileName);
             System.out.println(resource);
@@ -157,7 +166,7 @@ public class FileManager {
         ChannelSftp sftp = (ChannelSftp) ftpsession.openChannel("sftp");
         sftp.connect();
         sftp.cd(filePath);
-        File file = new File( fileName);
+        File file = new File(fileName);
         sftp.put(new FileInputStream(file), fileName);
         sftp.disconnect();
         ftpsession.disconnect();
@@ -182,8 +191,8 @@ public class FileManager {
     }
 
 
-    public void executeShell(String command, String host, String  username, String passwd, int poot) throws Exception {
-        Login(username,host,poot);
+    public void executeShell(String command, String host, String username, String passwd, int poot) throws Exception {
+        Login(username, host, poot);
         execSession.setPassword(passwd);
         ftpsession.setPassword(passwd);
         // 设置第一次登陆的时候提示，可选值:(ask | yes | no)

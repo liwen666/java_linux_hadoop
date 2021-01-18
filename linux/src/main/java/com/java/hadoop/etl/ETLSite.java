@@ -7,7 +7,7 @@ public class ETLSite {
         FileManager fileManager = new FileManager();
 
 
-        fileManager.getLinuxFileCategory("etl_test", "172.16.101.37","jrxany","20191022",22,"deploy_etl_all.sql","/home/jrxany/etl/dw-etl-onebank/deploy");
+        fileManager.getLinuxFileCategory("etl_test", "172.16.101.37","jrxany","20191022",22,"deploy_etl_all.sql","/home/jrxany/etl/dw-etl-onebank/deploy",null);
 
 
 

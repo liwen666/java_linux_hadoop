@@ -75,3 +75,20 @@ $ sudo systemctl start docker
 #Verify that Docker Engine is installed correctly by running the hello-world image.
 
 $ sudo docker run hello-world
+
+
+
+docker search mysql 
+docker pull [mysqlversion]
+docker run -di --name=mysql57 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123456 centos/mysql-57-centos7
+
+docker ps -a
+docker exec -it mysql57 /bin/bash
+
+vim /usr/lib/systemd/system/docker.service
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 
+
+systemctl daemon-reload // 1，加载docker守护线程
+systemctl restart docker // 2，重启docker
+#查看docker的ip地址
+[root@localhost ~]#  docker inspect mysql57

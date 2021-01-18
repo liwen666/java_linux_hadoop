@@ -14,7 +14,7 @@ public class DcPay_Commission_Site {
 //        配置server.properties
 //        fileManager.getLinuxFileCategory("192.168.1.124","root","1qaz#EDC2019",22,"jdbc.properties",filePath+"/WEB-INF/classes");
 //        fileManager.getLinuxFileCategory("192.168.1.124","root","1qaz#EDC2019",22,"application.properties",filePath+"/WEB-INF/classes");
-        fileManager.getLinuxFileCategory("est_center", "192.168.1.124","root","1qaz#EDC2019",22,"catalina.sh",filePath);
+        fileManager.getLinuxFileCategory("est_center", "192.168.1.124","root","1qaz#EDC2019",22,"catalina.sh",filePath,null);
 
 
 

@@ -6,8 +6,14 @@ import com.java.hadoop.filemanager.LinuxFileMnangerDomain;
 import com.java.hadoop.linux.filecontroller.FtpJSch;
 import com.java.hadoop.linux.filecontroller.download.LinuxFileDomain;
 import com.jcraft.jsch.*;
+import com.linux.temp.utils.FileRecursionScan;
+import com.linux.temp.utils.PropertiesThreadLocalHolder;
 import lombok.Cleanup;
+import org.apache.commons.io.FileUtils;
+import org.codehaus.groovy.ant.FileScanner;
 import org.junit.Test;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.FileUrlResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -238,15 +244,19 @@ public class LinuxUtil {
         sftp.cd(filePath);
         String basePath = System.getProperty("user.dir");
         String packagePath = null;
-        if (null==dirPrefix) {
+        if (null == dirPrefix) {
             packagePath = basePath + "/" + "linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\" + ip.replaceAll("\\.", "-") + "/" + userName;
-        }else {
-            packagePath = basePath + "/" + "linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\" + ip.replaceAll("\\.", "-") + "/" + userName+"/"+dirPrefix;
+        } else {
+            packagePath = basePath + "/" + "linux\\src\\main\\java\\com\\java\\hadoop\\filemanager\\" + ip.replaceAll("\\.", "-") + "/" + userName + "/" + dirPrefix;
+        }
+        String upLoadFile = PropertiesThreadLocalHolder.getProperties("upLoadFile");
+        if (null != upLoadFile) {
+            packagePath = upLoadFile + ip.replaceAll("\\.", "-") + "/" + userName + "/" + dirPrefix;
         }
         File filePackage = new File(packagePath);
         filePackage.mkdirs();
         File file = new File(packagePath + "/" + fileName);
-        if(!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
         }
         FileOutputStream fileOutputStream = new FileOutputStream(file);
@@ -256,9 +266,14 @@ public class LinuxUtil {
     }
 
     public static FileData findLinuxFileDomain(String ip, String userName) throws IOException {
+
         Resource resource = LinuxUtil.findResource("com.java.hadoop.filemanager", "file_linux_cfg.json");
+        String file_linux_cfg = PropertiesThreadLocalHolder.getProperties("file_linux_cfg");
+        if (file_linux_cfg != null) {
+            resource = new FileSystemResource(new File(file_linux_cfg));
+        }
         @Cleanup InputStream inputStream = resource.getInputStream();
-        byte[] cache = new byte[1024*1000];
+        byte[] cache = new byte[1024 * 1000];
         int read = inputStream.read(cache);
         String s = new String(cache);
         List<LinuxFileMnangerDomain> linuxFileMnangerDomains = JSONObject.parseArray(s, LinuxFileMnangerDomain.class);
@@ -269,12 +284,13 @@ public class LinuxUtil {
             }
 
         }
-            return null;
+        return null;
     }
-    public static FileData findLinuxFileAppDomain(String ip, String userName,String appName) throws IOException {
-        Resource resource = LinuxUtil.findResource("com.java.hadoop.filemanager", appName+".json");
+
+    public static FileData findLinuxFileAppDomain(String ip, String userName, String appName) throws IOException {
+        Resource resource = LinuxUtil.findResource("com.java.hadoop.filemanager", appName + ".json");
         @Cleanup InputStream inputStream = resource.getInputStream();
-        byte[] cache = new byte[1024*100];
+        byte[] cache = new byte[1024 * 100];
         int read = inputStream.read(cache);
         String s = new String(cache);
         List<LinuxFileMnangerDomain> linuxFileMnangerDomains = JSONObject.parseArray(s, LinuxFileMnangerDomain.class);

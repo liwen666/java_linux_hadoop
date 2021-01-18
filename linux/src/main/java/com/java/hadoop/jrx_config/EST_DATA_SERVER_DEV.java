@@ -21,9 +21,9 @@ public class EST_DATA_SERVER_DEV {
 
 
         //从服务器配置
-        fileManager.getLinuxFileCategory("est_center", "10.0.14.102","root","jrx2019102",22,"application.yml",filePath);
-        fileManager.getLinuxFileCategory("est_center", "10.0.14.102","root","jrx2019102",22,"application-sit.yml",filePath);
-        fileManager.getLinuxFileCategory("est_center", "10.0.14.102","root","jrx2019102",22,"env.sh",filePath2);
+        fileManager.getLinuxFileCategory("est_center", "10.0.14.102","root","jrx2019102",22,"application.yml",filePath,null);
+        fileManager.getLinuxFileCategory("est_center", "10.0.14.102","root","jrx2019102",22,"application-sit.yml",filePath,null);
+        fileManager.getLinuxFileCategory("est_center", "10.0.14.102","root","jrx2019102",22,"env.sh",filePath2,null);
 
 
 

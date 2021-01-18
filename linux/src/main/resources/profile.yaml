@@ -1,0 +1,7 @@
+profile:
+  sit:
+    linux:
+      user: root
+      password: root
+      ip: 192.168.60.110
+      port: 22

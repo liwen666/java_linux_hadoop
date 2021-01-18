@@ -13,7 +13,7 @@ public class Est101_10fileManager {
         /**
          * 管理平台配置
          */
-        fileManager.getLinuxFileCategory("center_admin","10.0.8.10","root","jrx1129010",22,"bootstrap.yaml","/root/anyeast/20200702_multi/anyest-center-admin-fc_1.1.0-SNAPSHOT/config");
+        fileManager.getLinuxFileCategory("center_admin","10.0.8.10","root","jrx1129010",22,"bootstrap.yaml","/root/anyeast/20200702_multi/anyest-center-admin-fc_1.1.0-SNAPSHOT/config",null);
 //        fileManager.getLinuxFileCategory("center_admin","10.0.8.10","root","jrx1129010",22,"profiles.sh","/root/anyeast/20200702_multi/anyest-center-admin-fc_1.1.0-SNAPSHOT/sbin");
 
         /**

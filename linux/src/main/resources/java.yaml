@@ -1,0 +1,15 @@
+
+baseDir: D:/workspace/java_linux_hadoop/linux/app/
+file_linux_cfg: D:/workspace/java_linux_hadoop/linux/src/main/resources/file-path.json
+upLoadFile: D:\workspace\java_linux_hadoop\linux\src\main\java\com\filemanager\
+upLoadFilePackage: com.filemanager
+java:
+  sit:
+    linux:
+      user: root
+      password: root
+      ip: 192.168.60.110
+      port: 22
+      app-home: /opt/java/
+      app-package: jdk-8u191-linux-x64.tar.gz
+    prefix: java_hadoop

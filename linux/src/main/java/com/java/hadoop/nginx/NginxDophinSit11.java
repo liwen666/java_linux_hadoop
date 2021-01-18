@@ -18,6 +18,7 @@ public class NginxDophinSit11 {
          */
 //        fileManager.getLinuxFileCategory("nginx","172.16.102.21","jrxany","JRXwd01!",22,"nginx.conf","/data/apps/est/dophinscheduler/nginx-1.14.2/conf");
 //        fileManager.getLinuxFileCategory("nginx_auto","11.11.1.79","root","liwen",22,"nginx.conf","/usr/local/nginx/conf");
+//        fileManager.getLinuxFileCategory("nginx_auto","11.11.1.79","root","liwen",22,"my.conf","/usr/local/nginx/conf/vhost");
 //        fileManager.getLinuxFileCategory("sudo","192.168.137.111","root","liwen",22,"sudoers","/etc");
 
         /*---------------------------------------------------------------------------------/
@@ -25,6 +26,7 @@ public class NginxDophinSit11 {
         /---------------------------------------------------------------------------------*/
 //        fileManager.upLinuxFileCategory("nginx","172.16.102.21","jrxany","JRXwd01!",22,"nginx.conf");
         fileManager.upLinuxFileCategory("nginx_auto","11.11.1.79","root","liwen",22,"nginx.conf");
+        fileManager.upLinuxFileCategory("nginx_auto","11.11.1.79","root","liwen",22,"my.conf");
 //        fileManager.upLinuxFileCategory("nginx_auto","192.168.137.111","root","liwen",22,"nginx.conf");
 
         //配置端口

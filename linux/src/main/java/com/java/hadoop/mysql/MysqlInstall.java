@@ -14,7 +14,7 @@ public class MysqlInstall {
 //        配置server.properties
 //        fileManager.getLinuxFileCategory("192.168.42.136","root","root",22,"my.cnf",filePath);
 //        fileManager.getLinuxFileCategory("192.168.42.136","root","root",22,"maxwell-bootstrap","/home/liwen/maxwell-1.24.0/bin");
-        fileManager.getLinuxFileCategory("est_center", "192.168.42.136","root","root",22,"mysql-bin.000002","/var/lib/mysql");
+        fileManager.getLinuxFileCategory("est_center", "192.168.42.136","root","root",22,"mysql-bin.000002","/var/lib/mysql",null);
 
 
 

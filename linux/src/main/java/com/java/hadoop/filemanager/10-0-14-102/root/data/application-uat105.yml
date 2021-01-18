@@ -13,7 +13,8 @@ anyest:
     jdbc-driver-name: org.postgresql.Driver
     jdbc-data-address: jdbc:postgresql://172.16.103.105:5432/postgres?reWriteBatchedInserts=true
     jdbc-data-username: gpadmin
-    jdbc-data-password: gpadmin
+    #使用 JasyptTest.testEcypt 生成的加密内容,填入括号内；若不使用加密密码 不使用ENC
+    jdbc-data-password: ENC(NPebL6qaQVFV+fWN8iPLeA==)
     greenplum-schema-name: public
 
     # ignite存储的方式

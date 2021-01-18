@@ -11,9 +11,9 @@ public class Est_8_13_flink_Manager {
 
 
 
-        fileManager.getLinuxFileCategory("flink","10.0.8.13","root","jrx1129013",22,"flink-conf.yaml","/data/apps/flink-1.11.2/conf");
-        fileManager.getLinuxFileCategory("flink","10.0.8.13","root","jrx1129013",22,"masters","/data/apps/flink-1.11.2/conf");
-        fileManager.getLinuxFileCategory("flink","10.0.8.13","root","jrx1129013",22,"workers","/data/apps/flink-1.11.2/conf");
+        fileManager.getLinuxFileCategory("flink","10.0.8.13","root","jrx1129013",22,"flink-conf.yaml","/data/apps/flink-1.11.2/conf",null);
+        fileManager.getLinuxFileCategory("flink","10.0.8.13","root","jrx1129013",22,"masters","/data/apps/flink-1.11.2/conf",null);
+        fileManager.getLinuxFileCategory("flink","10.0.8.13","root","jrx1129013",22,"workers","/data/apps/flink-1.11.2/conf",null);
 
 
 

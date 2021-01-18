@@ -16,7 +16,7 @@ public class Est102_21FileManager {
          * 管理平台配置
          */
 //        fileManager.getLinuxFileCategory("center_admin","172.16.102.21","jrxany","20191022",22,"application.yml","/home/jrxany/20200305_version/anyest-center-admin/config");
-        fileManager.getLinuxFileCategory("center_admin","172.16.102.21","jrxany","20191022",22,"application-uat21.yml","/home/jrxany/20200305_version/anyest-center-admin/config");
+        fileManager.getLinuxFileCategory("center_admin","172.16.102.21","jrxany","20191022",22,"application-uat21.yml","/home/jrxany/20200305_version/anyest-center-admin/config",null);
 //        fileManager.getLinuxFileCategory("center_admin/lw","172.16.102.21","jrxany","20191022",22,"application.yml","/home/jrxany/any-est/anyest-center-admin-3.3.1-SNAPSHOT/config");
 //        fileManager.getLinuxFileCategory("center_admin/lw","172.16.102.21","jrxany","20191022",22,"application-local_l.yml","/home/jrxany/any-est/anyest-center-admin-3.3.1-SNAPSHOT/config");
 //        fileManager.getLinuxFileCategory("center_admin/lw","172.16.102.21","jrxany","20191022",22,"profiles.sh","/home/jrxany/any-est/anyest-center-admin-3.3.1-SNAPSHOT/sbin");

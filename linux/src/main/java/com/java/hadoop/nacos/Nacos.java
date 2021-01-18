@@ -20,8 +20,8 @@ public class Nacos {
 
 
         //从服务器配置
-        fileManager.getLinuxFileCategory("nacos", "192.168.42.220","root","root",22,"schema.sql",filePath);
-        fileManager.getLinuxFileCategory("nacos", "192.168.42.220","root","root",22,"nacos-mysql.sql",filePath);
+        fileManager.getLinuxFileCategory("nacos", "192.168.42.220","root","root",22,"schema.sql",filePath,null);
+        fileManager.getLinuxFileCategory("nacos", "192.168.42.220","root","root",22,"nacos-mysql.sql",filePath,null);
 //        fileManager.getLinuxFileCategory("172.16.102.22","jrxany","20191022",22,"application.yml",filePath);
 
 

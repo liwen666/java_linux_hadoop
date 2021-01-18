@@ -19,6 +19,13 @@ tar -xvf nginx-1.13.7.tar.g
 cd /usr/local/nginx
 //执行命令
 ./configure
+
+#参数选项
+        1  ./configure     --prefix=/usr/local/nginx --with-http_stub_status_module
+
+        2 ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module
+
+
 //执行make命令
 make
 //执行make install命令
@@ -154,3 +161,8 @@ iptables -I INPUT -p tcp --dport 9618 -j ACCEPT;
 
 
 
+
+
+#修改NG
+cd 
+./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module

@@ -17,8 +17,8 @@ public class AnsibleManagerSit {
          * 管理平台配置
          */
 //        fileManager.getLinuxFileCategory("ansible","10.0.20.102","root","123.com",22,"anytxn_ansible.tar","/data");
-        fileManager.getLinuxFileCategory("ansible","10.0.20.102","root","123.com",22,"anyest_pkg_tar.conf","/data/anytxn_ansible/conf/anyest");
-        fileManager.getLinuxFileCategory("ansible","10.0.20.102","root","123.com",22,"anyest_pkg_jar.conf","/data/anytxn_ansible/conf/anyest");
+        fileManager.getLinuxFileCategory("ansible","10.0.20.102","root","123.com",22,"anyest_pkg_tar.conf","/data/anytxn_ansible/conf/anyest",null);
+        fileManager.getLinuxFileCategory("ansible","10.0.20.102","root","123.com",22,"anyest_pkg_jar.conf","/data/anytxn_ansible/conf/anyest",null);
 
         /*---------------------------------------------------------------------------------/
             上传
