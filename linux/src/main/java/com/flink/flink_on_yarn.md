@@ -45,9 +45,12 @@
 
 /home/hadoop/hadoop/hadoop/sbin/start-dfs.sh    
 /home/hadoop/hadoop/hadoop/sbin/start-yarn.sh
+/home/hadoop/hadoop/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver
 
 /home/hadoop/hadoop/hadoop/sbin/stop-dfs.sh    
 /home/hadoop/hadoop/hadoop/sbin/stop-yarn.sh
+/home/hadoop/hadoop/hadoop/sbin/mr-jobhistory-daemon.sh stop historyserver
+
 
 
 #方法2
@@ -78,5 +81,14 @@ hadoop jar /home/hadoop/hadoop/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-ex
 hadoop fs -ls /wordCountOutput
 
  hadoop fs -cat  /wordCountOutput/part-r-00000
+ 
+ 
+ 
+ 
+##每个任务一个集群
+./bin/flink run   -m yarn-cluster  -c org.apache.flink.examples.java.wordcount.WordCount  /home/liwen/flink12/flink12/examples/batch/WordCount.jar --port 9000
+
+ 
+ 
    
 

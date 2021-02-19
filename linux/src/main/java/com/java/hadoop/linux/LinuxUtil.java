@@ -268,7 +268,12 @@ public class LinuxUtil {
     public static FileData findLinuxFileDomain(String ip, String userName) throws IOException {
 
         Resource resource = LinuxUtil.findResource("com.java.hadoop.filemanager", "file_linux_cfg.json");
-        String file_linux_cfg = PropertiesThreadLocalHolder.getProperties("file_linux_cfg");
+        String file_linux_cfg = null;
+        try {
+            file_linux_cfg = PropertiesThreadLocalHolder.getProperties("file_linux_cfg");
+        } catch (Exception e) {
+            file_linux_cfg=null;
+        }
         if (file_linux_cfg != null) {
             resource = new FileSystemResource(new File(file_linux_cfg));
         }

@@ -99,3 +99,5 @@ mkdir -vp /usr/local/redis/cluster/{10110,10111,10112,10113,10114,10115}
 /usr/local/redis/bin/redis-cli --cluster create 11.11.1.79:10110 11.11.1.79:10111 11.11.1.79:10112 11.11.1.79:10113 11.11.1.79:10114 11.11.1.79:10115 --cluster-replicas 1
 /usr/local/redis/bin/redis-cli --cluster check 11.11.1.79:10110 
 
+
+/usr/local/redis/bin/redis-cli --cluster check 11.11.1.79:10110 

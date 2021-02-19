@@ -75,4 +75,12 @@ jps -l | grep linux_node.jar
 
 tar -zcvf flink-1.11.2.tar.gz flink-1.11.2
 
+
+#git 免密登录
+cd ~
+cd .ssh
+ssh-keygen -t rsa -C 1438131288@qq.com
+ (你的github邮箱地址)
+
+
  

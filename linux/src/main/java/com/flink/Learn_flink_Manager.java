@@ -38,7 +38,7 @@ public class Learn_flink_Manager {
 //        fileManager.upLinuxFileCategory("flink","192.168.60.110","root","root",22,"masters");
 //        fileManager.upLinuxFileCategory("flink","192.168.60.110","root","root",22,"workers");
 
-        fileManager.upLinuxFileCategory("flink_test","11.11.1.79","root","liwen",22,"flink-conf.yaml");
+//        fileManager.upLinuxFileCategory("flink_test","11.11.1.79","root","liwen",22,"flink-conf.yaml");
 //        fileManager.upLinuxFileCategory("flink_test","192.168.60.110","root","root",22,"masters");
 //        fileManager.upLinuxFileCategory("flink_test","192.168.60.110","root","root",22,"workers");
 

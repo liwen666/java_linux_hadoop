@@ -95,4 +95,24 @@ systemctl restart docker // 2，重启docker
 
 #idea使用docker
 
-idea 
+idea由于window没有docker-compose所以无法执行相应的命令
+
+
+curl -L https://github.com/docker/compose/releases/download/1.25.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose;
+chmod +x /usr/local/bin/docker-compose;
+
+                    Linux系统备选
+                    因为许多操作系统具有与docker-compose依赖项冲突的python系统软件包，建议您使用 virtualenv。
+                    
+                    （请自行安装依赖环境）
+                    
+                    pip install docker-compose
+                    如果没有处于virtualenv环境，请执行
+
+                    sudo pip install docker-compose
+docker pull dgraph/dgraph:latest
+docker-compose up -d
+
+11.11.1.79:8000
+
+

@@ -1,3 +1,7 @@
+
+#图数据库
+neo4j    dgraph
+
  #启动zooleeper
   ./start-zookeeper-quorum.sh ../conf/zoo.cfg 
   

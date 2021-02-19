@@ -16,16 +16,23 @@ public class PropertiesThreadLocalHolder {
     private final static ThreadLocal<Map<String, String>> localProperties = new ThreadLocal<>();
 
     public static void addProperties(String key, String value) {
-        if(null==localProperties.get()){
+        if (null == localProperties.get()) {
             localProperties.set(new HashMap<>());
         }
         localProperties.get().put(key, value);
     }
+
     public static Map<String, String> get() {
         return localProperties.get();
     }
+
     public static String getProperties(String key) {
-        return localProperties.get().get(key);
+        try {
+            return localProperties.get().get(key);
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     public static void remove() {
@@ -43,7 +50,7 @@ class TestLocal {
             es.submit(new Runnable() {
                 @Override
                 public void run() {
-                    PropertiesThreadLocalHolder.addProperties("parentId" ,finalI+"");
+                    PropertiesThreadLocalHolder.addProperties("parentId", finalI + "");
                     System.out.println(PropertiesThreadLocalHolder.getProperties("parentId"));
                     PropertiesThreadLocalHolder.remove();
                     Map<String, String> stringStringMap = PropertiesThreadLocalHolder.get();

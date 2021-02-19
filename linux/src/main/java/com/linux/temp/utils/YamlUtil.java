@@ -2,6 +2,8 @@ package com.linux.temp.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -21,8 +23,8 @@ import java.util.Set;
  * @author lw
  * @since  2019/12/5 14:55
  */
-@Slf4j
 public class YamlUtil {
+    public static Logger log = LoggerFactory.getLogger(YamlUtil.class);
     public static Map<?, ?> loadYaml(String fileName) throws FileNotFoundException {
         InputStream in = YamlUtil.class.getClassLoader().getResourceAsStream(fileName);
         return StringUtils.isNotEmpty(fileName) ? (LinkedHashMap<?, ?>) new Yaml().load(in) : null;

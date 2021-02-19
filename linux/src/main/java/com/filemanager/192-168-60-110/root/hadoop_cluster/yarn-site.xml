@@ -22,6 +22,7 @@
         <name>yarn.resourcemanager.scheduler.address</name>
         <value>master:18030</value>
     </property>
+    <!--yarn拉起容器的ip地址-->
     <property>
         <name>yarn.resourcemanager.webapp.address</name>
         <value>master:18088</value>

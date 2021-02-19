@@ -220,7 +220,7 @@ public class ESUtil {
             });
             // 取值
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+//            log.error(e.getMessage(), e);
         }
         return mapList;
     }
@@ -273,7 +273,7 @@ public class ESUtil {
             try {
                 sortItems = JSONArray.parseArray(data, SortItem.class);
             } catch (DataException e) {
-                log.error("SortItem类型转换错误", e);
+//                log.error("SortItem类型转换错误", e);
                 throw e;
             }
             params.remove(DataSearchConstants.SORTS);
@@ -296,7 +296,7 @@ public class ESUtil {
             try {
                 queryItems = JSONArray.parseArray(data, QueryItem.class);
             } catch (DataException e) {
-                log.error("QueryItem类型转换错误", e);
+//                log.error("QueryItem类型转换错误", e);
                 throw e;
             }
             params.remove(DataSearchConstants.PARAMS);
@@ -318,7 +318,7 @@ public class ESUtil {
             try {
                 rangeItems = JSONArray.parseArray(data, RangeItem.class);
             } catch (DataException e) {
-                log.error("RangeItem类型转换错误", e);
+//                log.error("RangeItem类型转换错误", e);
                 throw e;
             }
             params.remove(DataSearchConstants.RANGES);

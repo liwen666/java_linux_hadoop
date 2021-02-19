@@ -91,7 +91,7 @@ public class ES_TEST {
                 )
                 .setMaxRetryTimeoutMillis(180000)
                 .setNodeSelector(NodeSelector.ANY));
-        log.info("创建ES连接:{}", Arrays.toString(clusterUrl));
+//        log.info("创建ES连接:{}", Arrays.toString(clusterUrl));
 
     }
 
