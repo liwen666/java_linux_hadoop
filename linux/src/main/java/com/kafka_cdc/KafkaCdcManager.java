@@ -2,6 +2,8 @@ package com.kafka_cdc;
 
 import com.java.hadoop.filemanager.FileManager;
 
+import java.util.HashMap;
+
 /**
  * 测试环境
  */
@@ -16,8 +18,9 @@ public class KafkaCdcManager {
 //        fileManager.getLinuxFileCategory("cdc","192.168.60.110","root","root",22,"schema-registry.properties","/home/liwen/confluent-5.0.0/etc/schema-registry");
 //        fileManager.getLinuxFileCategory("cdc","192.168.60.110","root","root",22,"connect-avro-distributed.properties","/home/liwen/confluent-5.0.0/etc/schema-registry");
 //        fileManager.getLinuxFileCategory("cdc","11.11.1.79","root","liwen",22,"connect-standalone.properties","/home/liwen/application/kafka_2.12-2.1.1/config");
-//        fileManager.getLinuxFileCategory("cdc","11.11.1.79","root","liwen",22,"connect-distributed.properties","/home/liwen/application/kafka_2.12-2.1.1/config");
-//        fileManager.getLinuxFileCategory("cdc","11.11.1.108","root","yong",22,"connect-distributed.properties","/opt/kafka_2.12-2.1.1/config/");
+//        fileManager.getLinuxFileCategory("cdc","11.11.1.79","root","liwen",22,"connect-distributed.properties","/home/liwen/application/kafka_2.12-2.1.1/config",new HashMap());
+        fileManager.getLinuxFileCategory("cdc","11.11.1.79","root","liwen",22,"connect-distributed.sh","/home/liwen/application/kafka_2.12-2.1.1/bin",new HashMap());
+//        fileManager.getLinuxFileCategory("cdc","11.11.1.108","root","yong",22,"connect-distributed.properties","/opt/kafka_2.12-2.1.1/config/",null);
 
         /**
          * 资信平台配置
@@ -30,7 +33,7 @@ public class KafkaCdcManager {
 //        fileManager.upLinuxFileCategory("cdc","192.168.60.110","root","root",22,"connect-avro-distributed.properties");
 //        fileManager.upLinuxFileCategory("cdc","192.168.60.110","root","root",22,"schema-registry.properties");
 //        fileManager.upLinuxFileCategory("cdc","11.11.1.79","root","liwen",22,"connect-standalone.properties");
-        fileManager.upLinuxFileCategory("cdc","11.11.1.79","root","liwen",22,"connect-distributed.properties");
+//        fileManager.upLinuxFileCategory("cdc","11.11.1.79","root","liwen",22,"connect-distributed.properties");
 
 
         //配置端口

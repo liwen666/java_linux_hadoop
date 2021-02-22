@@ -1,6 +1,8 @@
 
 
 
+iptables -I INPUT -p tcp --dport 8083 -j ACCEPT;
+
 
 11.11.1.79:8083/connectors
 

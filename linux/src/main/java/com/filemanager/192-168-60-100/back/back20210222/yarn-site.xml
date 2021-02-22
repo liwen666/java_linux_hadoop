@@ -1,0 +1,118 @@
+<configuration>
+    　　<property>
+    　　　　<name>yarn.resourcemanager.hostname</name>
+    　　　　<value>master</value>
+    　　</property>
+    　　<property>
+    　　　　<name>yarn.nodemanager.aux-services</name>
+    　　　　<value>mapreduce_shuffle</value>
+    　　</property>
+    　　<property>
+    　　　　<name>yarn.log-aggregation-enable</name>
+    　　　　<value>true</value>
+    　　</property>
+        <property>
+            <description>The remote log dir will be created at
+                {yarn.nodemanager.remote-app-log-dir}/${user}/{thisParam}
+            </description>
+            <name>yarn.nodemanager.remote-app-log-dir-suffix</name>
+            <value>logs</value>
+        </property>
+        <property>
+            <description>Where to aggregate logs to.</description>
+            <name>yarn.nodemanager.remote-app-log-dir</name>
+            <value>/tmp/logs</value>
+        </property>
+    　　<property>
+    　　　　<name>yarn.log-aggregation.retain-seconds</name>
+    <!-- -1表示不删除-->
+    　　　　<value>-1</value>
+
+    <!--　　　　<value>604800</value>-->
+    　　</property>
+
+<!--聚合日志上传等待时间  -1 表示应用结束上传-->
+    <!--<property>-->
+        <!--<name>yarn.nodemanager.log-aggregation.roll-monitoring-interval-seconds</name>-->
+        <!--<value>-1</value>-->
+    <!--</property>-->
+<!--开启几个线程删除日志-->
+    <!--<property>-->
+        <!--<description>-->
+            <!--Number of threads to use in NM log cleanup.  Used when log aggregation-->
+            <!--is disabled.-->
+        <!--</description>-->
+        <!--<name>yarn.nodemanager.log.deletion-threads-count</name>-->
+        <!--<value>4</value>-->
+    <!--</property>-->
+<!--删除日志需要等待时间-->
+    <!--<property>-->
+        <!--<description>-->
+            <!--Number of seconds after an application finishes before the nodemanager's-->
+            <!--DeletionService will delete the application's localized file directory-->
+            <!--and log directory.-->
+
+            <!--To diagnose Yarn application problems, set this property's value large-->
+            <!--enough (for example, to 600 = 10 minutes) to permit examination of these-->
+            <!--directories. After changing the property's value, you must restart the-->
+            <!--nodemanager in order for it to have an effect.-->
+
+            <!--The roots of Yarn applications' work directories is configurable with-->
+            <!--the yarn.nodemanager.local-dirs property (see below), and the roots-->
+            <!--of the Yarn applications' log directories is configurable with the-->
+            <!--yarn.nodemanager.log-dirs property (see also below).-->
+        <!--</description>-->
+        <!--<name>yarn.nodemanager.delete.debug-delay-sec</name>-->
+        <!--<value>0</value>-->
+    <!--</property>-->
+
+        <property>
+            <name>yarn.nodemanager.vmem-check-enabled</name>
+            <value>false</value>
+        </property>
+
+
+        <property>
+            <name>yarn.log.server.url</name>
+            <value>http://master:19888/jobhistory/logs</value>
+        </property>
+
+        <property>
+            <name>yarn.resourcemanager.am.max-attempts</name>
+            <value>4</value>
+            <description>The maximum number of application master execution attempts</description>
+        </property>
+
+
+    <property>
+        <name>yarn.resourcemanager.address</name>
+        <value>master:18040</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.scheduler.address</name>
+        <value>master:18030</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.webapp.address</name>
+        <value>master:18088</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>
+        <value>master:18025</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.admin.address</name>
+        <value>master:18141</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+    </property>
+
+
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>3000</value>
+    </property>
+
+</configuration>

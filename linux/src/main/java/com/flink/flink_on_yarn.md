@@ -86,9 +86,12 @@ hadoop fs -ls /wordCountOutput
  
  
 ##每个任务一个集群
-./bin/flink run   -m yarn-cluster  -c org.apache.flink.examples.java.wordcount.WordCount  /home/liwen/flink12/flink12/examples/batch/WordCount.jar --port 9000
+./bin/flink run   -m yarn-cluster   -c org.apache.flink.examples.java.wordcount.WordCount  /home/liwen/flink12/flink12/examples/batch/WordCount.jar --port 9000
 
  
+ 172.16.101.12
+ /data/apps/flink-1.12.0/bin/flink run   -m yarn-cluster   -c org.apache.flink.examples.java.wordcount.WordCount  /data/apps/flink-1.12.0/examples/batch/WordCount.jar 
+
  
    
 

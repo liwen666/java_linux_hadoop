@@ -1,1 +1,307 @@
-[{"fileDataMap":{"root":{"linuxFileDomains":[{"fileName":"core-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"hadoop-env.sh","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"hdfs-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"mapred-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"yarn-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"yarn-env.sh","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"core-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"hadoop-env.sh","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"hdfs-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"mapred-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"yarn-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"yarn-env.sh","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"redis.conf","filePath":"/home/liwen/redis/redis","dirPrefix":"redis"},{"fileName":"redis.conf","filePath":"/usr/local/redis","dirPrefix":"redis"},{"fileName":"rc.local","filePath":"/usr/local/redis","dirPrefix":"redis"},{"fileName":"flink-conf.yaml","filePath":"/home/liwen/flink/conf","dirPrefix":"flink"},{"fileName":"masters","filePath":"/home/liwen/flink/conf","dirPrefix":"flink"},{"fileName":"workers","filePath":"/home/liwen/flink/conf","dirPrefix":"flink"},{"fileName":"zoo.cfg","filePath":"/home/liwen/flink/conf","dirPrefix":"flink"},{"fileName":"flink-conf.yaml","filePath":"/home/liwen/flink12/flink12/conf","dirPrefix":"flink12"},{"fileName":"masters","filePath":"/home/liwen/flink12/flink12/conf","dirPrefix":"flink12"},{"fileName":"workers","filePath":"/home/liwen/flink12/flink12/conf","dirPrefix":"flink12"},{"fileName":"zoo.cfg","filePath":"/home/liwen/flink12/flink12/conf","dirPrefix":"flink12"}],"userName":"root"},"hadoop":{"linuxFileDomains":[{"fileName":"core-site.xml","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"hadoop-env.sh","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"hdfs-site.xml","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"mapred-site.xml","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"yarn-site.xml","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"yarn-env.sh","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"},{"fileName":"slaves","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster1"}],"userName":"hadoop"}},"ip":"192.168.60.100"},{"fileDataMap":{"root":{"linuxFileDomains":[{"fileName":"core-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"hadoop-env.sh","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"hdfs-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"mapred-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"yarn-site.xml","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"yarn-env.sh","filePath":"/home/liwen/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"flink-conf.yaml","filePath":"/home/liwen/flink/conf","dirPrefix":"flink"},{"fileName":"masters","filePath":"/home/liwen/flink/conf","dirPrefix":"flink"},{"fileName":"workers","filePath":"/home/liwen/flink/conf","dirPrefix":"flink"}],"userName":"root"},"hadoop":{"linuxFileDomains":[{"fileName":"core-site.xml","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"hadoop-env.sh","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"hdfs-site.xml","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"mapred-site.xml","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"yarn-site.xml","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"yarn-env.sh","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"},{"fileName":"slaves","filePath":"/home/hadoop/hadoop/hadoop/etc/hadoop","dirPrefix":"hadoop_cluster"}],"userName":"hadoop"}},"ip":"192.168.60.110"},{"fileDataMap":{"root":{"linuxFileDomains":[{"fileName":"redis.conf","filePath":"/usr/local/redis","dirPrefix":"redis"},{"fileName":"10110-redis.conf","filePath":"/usr/local/redis/cluster","dirPrefix":"redis_cluster"},{"fileName":"10111-redis.conf","filePath":"/usr/local/redis/cluster","dirPrefix":"redis_cluster"},{"fileName":"10112-redis.conf","filePath":"/usr/local/redis/cluster","dirPrefix":"redis_cluster"},{"fileName":"10113-redis.conf","filePath":"/usr/local/redis/cluster","dirPrefix":"redis_cluster"},{"fileName":"10114-redis.conf","filePath":"/usr/local/redis/cluster","dirPrefix":"redis_cluster"},{"fileName":"10115-redis.conf","filePath":"/usr/local/redis/cluster","dirPrefix":"redis_cluster"}],"userName":"root"}},"ip":"11.11.1.79"}]
+[
+  {
+    "fileDataMap": {
+      "root": {
+        "linuxFileDomains": [
+          {
+            "fileName": "core-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "hadoop-env.sh",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "hdfs-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "mapred-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "yarn-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "yarn-env.sh",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "core-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "hadoop-env.sh",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "hdfs-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "mapred-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "yarn-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "yarn-env.sh",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "redis.conf",
+            "filePath": "/home/liwen/redis/redis",
+            "dirPrefix": "redis"
+          },
+          {
+            "fileName": "redis.conf",
+            "filePath": "/usr/local/redis",
+            "dirPrefix": "redis"
+          },
+          {
+            "fileName": "rc.local",
+            "filePath": "/usr/local/redis",
+            "dirPrefix": "redis"
+          },
+          {
+            "fileName": "flink-conf.yaml",
+            "filePath": "/home/liwen/flink/conf",
+            "dirPrefix": "flink"
+          },
+          {
+            "fileName": "masters",
+            "filePath": "/home/liwen/flink/conf",
+            "dirPrefix": "flink"
+          },
+          {
+            "fileName": "workers",
+            "filePath": "/home/liwen/flink/conf",
+            "dirPrefix": "flink"
+          },
+          {
+            "fileName": "zoo.cfg",
+            "filePath": "/home/liwen/flink/conf",
+            "dirPrefix": "flink"
+          },
+          {
+            "fileName": "flink-conf.yaml",
+            "filePath": "/home/liwen/flink12/flink12/conf",
+            "dirPrefix": "flink12"
+          },
+          {
+            "fileName": "masters",
+            "filePath": "/home/liwen/flink12/flink12/conf",
+            "dirPrefix": "flink12"
+          },
+          {
+            "fileName": "workers",
+            "filePath": "/home/liwen/flink12/flink12/conf",
+            "dirPrefix": "flink12"
+          },
+          {
+            "fileName": "zoo.cfg",
+            "filePath": "/home/liwen/flink12/flink12/conf",
+            "dirPrefix": "flink12"
+          }
+        ],
+        "userName": "root"
+      },
+      "hadoop": {
+        "linuxFileDomains": [
+          {
+            "fileName": "core-site.xml",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "hadoop-env.sh",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "hdfs-site.xml",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "mapred-site.xml",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "yarn-site.xml",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "yarn-env.sh",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          },
+          {
+            "fileName": "slaves",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster1"
+          }
+        ],
+        "userName": "hadoop"
+      }
+    },
+    "ip": "192.168.60.100"
+  },
+  {
+    "fileDataMap": {
+      "root": {
+        "linuxFileDomains": [
+          {
+            "fileName": "core-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "hadoop-env.sh",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "hdfs-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "mapred-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "yarn-site.xml",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "yarn-env.sh",
+            "filePath": "/home/liwen/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "flink-conf.yaml",
+            "filePath": "/home/liwen/flink/conf",
+            "dirPrefix": "flink"
+          },
+          {
+            "fileName": "masters",
+            "filePath": "/home/liwen/flink/conf",
+            "dirPrefix": "flink"
+          },
+          {
+            "fileName": "workers",
+            "filePath": "/home/liwen/flink/conf",
+            "dirPrefix": "flink"
+          }
+        ],
+        "userName": "root"
+      },
+      "hadoop": {
+        "linuxFileDomains": [
+          {
+            "fileName": "core-site.xml",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "hadoop-env.sh",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "hdfs-site.xml",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "mapred-site.xml",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "yarn-site.xml",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "yarn-env.sh",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          },
+          {
+            "fileName": "slaves",
+            "filePath": "/home/hadoop/hadoop/hadoop/etc/hadoop",
+            "dirPrefix": "hadoop_cluster"
+          }
+        ],
+        "userName": "hadoop"
+      }
+    },
+    "ip": "192.168.60.110"
+  },
+  {
+    "fileDataMap": {
+      "root": {
+        "linuxFileDomains": [
+          {
+            "fileName": "redis.conf",
+            "filePath": "/usr/local/redis",
+            "dirPrefix": "redis"
+          },
+          {
+            "fileName": "10110-redis.conf",
+            "filePath": "/usr/local/redis/cluster",
+            "dirPrefix": "redis_cluster"
+          },
+          {
+            "fileName": "10111-redis.conf",
+            "filePath": "/usr/local/redis/cluster",
+            "dirPrefix": "redis_cluster"
+          },
+          {
+            "fileName": "10112-redis.conf",
+            "filePath": "/usr/local/redis/cluster",
+            "dirPrefix": "redis_cluster"
+          },
+          {
+            "fileName": "10113-redis.conf",
+            "filePath": "/usr/local/redis/cluster",
+            "dirPrefix": "redis_cluster"
+          },
+          {
+            "fileName": "10114-redis.conf",
+            "filePath": "/usr/local/redis/cluster",
+            "dirPrefix": "redis_cluster"
+          },
+          {
+            "fileName": "10115-redis.conf",
+            "filePath": "/usr/local/redis/cluster",
+            "dirPrefix": "redis_cluster"
+          }
+        ],
+        "userName": "root"
+      }
+    },
+    "ip": "11.11.1.79"
+  }
+]

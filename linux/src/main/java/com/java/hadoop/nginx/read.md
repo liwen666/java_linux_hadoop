@@ -160,6 +160,8 @@ iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
 iptables -I INPUT -p tcp --dport 9618 -j ACCEPT;
 
 iptables -I INPUT -p tcp --dport 9060 -j ACCEPT;
+iptables -I INPUT -p tcp --dport 9020 -j ACCEPT;
+
 
 
 
