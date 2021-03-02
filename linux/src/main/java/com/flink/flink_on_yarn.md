@@ -52,6 +52,16 @@
 /home/hadoop/hadoop/hadoop/sbin/mr-jobhistory-daemon.sh stop historyserver
 
 
+/data/hadoop-3.2.0/sbin/start-dfs.sh    
+/data/hadoop-3.2.0/sbin/start-yarn.sh
+/data/hadoop-3.2.0/sbin/mr-jobhistory-daemon.sh start historyserver
+
+/data/hadoop-3.2.0/sbin/stop-dfs.sh    
+/data/hadoop-3.2.0/sbin/stop-yarn.sh
+/data/hadoop-3.2.0/sbin/mr-jobhistory-daemon.sh stop historyserver
+
+
+
 
 #方法2
 start-all.sh
@@ -92,6 +102,9 @@ hadoop fs -ls /wordCountOutput
  172.16.101.12
  /data/apps/flink-1.12.0/bin/flink run   -m yarn-cluster   -c org.apache.flink.examples.java.wordcount.WordCount  /data/apps/flink-1.12.0/examples/batch/WordCount.jar 
 
- 
+ ./bin/flink run     -d -m yarn-cluster -ynm test1   -yjm 2048 -ytm 1400 -ys 1  -yD containerized.heap-cutoff-ratio=0.1 -yD taskmanager.memory.off-heap=true -yD taskmanager.memory.size=100m -yD heartbeat.timeout=18000000    -c org.apache.flink.examples.java.wordcount.WordCount  /data/apps/flink-1.12.0/examples/batch/WordCount.jar
+
    
+
+ ./bin/flink run     -d -m yarn-cluster -ynm test1   -yjm 2048 -ytm 1400 -ys 1  -yD containerized.heap-cutoff-ratio=0.1 -yD taskmanager.memory.off-heap=true -yD taskmanager.memory.size=100m -yD heartbeat.timeout=18000000    -c org.apache.flink.examples.java.wordcount.WordCount  /data/apps/flink-1.12.0/examples/batch/WordCount.jar
 

@@ -73,6 +73,7 @@
 
 　　　　　　　　　　systemctl restart firewalld（重启防火墙以使配置即时生效）
 
+systemctl stop firewalld
 　　　　　查看系统所有开放的端口：firewall-cmd --zone=public --list-ports
 
 启动redis

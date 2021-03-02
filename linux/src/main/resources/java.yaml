@@ -8,7 +8,8 @@ java:
     linux:
       user: root
       password: root
-      ip: 192.168.60.110
+#      ip: 192.168.60.110
+      ip: 192.168.60.160
       port: 22
       app-home: /opt/java/
       app-package: jdk-8u191-linux-x64.tar.gz

@@ -149,7 +149,8 @@ chgrp -R jack /tmp/test
 
 iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
 
-scp  -r * liwen@11.11.1.79:/home/liwen/application/any-data-hub/data-hub-page/dist  密码 liwen
+scp  -r * liwen@11.11.1.79:/home/liwen/application/any-data-hub/data-hub-page/dist  
+密码 liwen
 
 iptables -I INPUT -p tcp --dport 6666 -j ACCEPT;
 iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
