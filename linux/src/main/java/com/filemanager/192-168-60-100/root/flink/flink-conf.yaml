@@ -30,7 +30,7 @@
 # automatically configure the host name based on the hostname of the node where the
 # JobManager runs.
 
-jobmanager.rpc.address: 11.11.1.79
+jobmanager.rpc.address: master
 
 # The RPC port where the JobManager is reachable.
 
@@ -57,7 +57,7 @@ taskmanager.memory.process.size: 1728m
 
 # The number of task slots that each TaskManager offers. Each slot runs one parallel pipeline.
 
-taskmanager.numberOfTaskSlots: 40
+taskmanager.numberOfTaskSlots: 4
 
 # The parallelism used for programs that did not specify and other parallelism.
 
@@ -160,6 +160,7 @@ rest.port: 8081
 
 #web.submit.enable: false
 
+
 #==============================================================================
 # Advanced
 #==============================================================================
@@ -245,7 +246,6 @@ taskmanager.memory.network.max: 1gb
 # Directory to upload completed jobs to. Add this directory to the list of
 # monitored directories of the HistoryServer as well (see below).
 #jobmanager.archive.fs.dir: hdfs:///completed-jobs/
-jobmanager.archive.fs.dir: file:///home/liwen/application/flink/flink-server/history
 
 # The address under which the web-based HistoryServer listens.
 #historyserver.web.address: 0.0.0.0
@@ -255,7 +255,6 @@ jobmanager.archive.fs.dir: file:///home/liwen/application/flink/flink-server/his
 
 # Comma separated list of directories to monitor for completed jobs.
 #historyserver.archive.fs.dir: hdfs:///completed-jobs/
-historyserver.archive.fs.dir: file:///home/liwen/application/flink/flink-server/history
 
 # Interval in milliseconds for refreshing the monitored directories.
 #historyserver.archive.fs.refresh-interval: 10000
@@ -263,3 +262,30 @@ historyserver.archive.fs.dir: file:///home/liwen/application/flink/flink-server/
 
 jobmanager.web.tmpdir: /home/liwen/application/flink-tempdir
 jobmanager.web.upload.dir: /home/liwen/application/flink-tempdir
+
+
+
+
+#开启HA，使用文件系统作为快照存储
+
+#state.backend: filesystem
+state.backend: rocksdb
+
+#启用检查点，可以将快照保存到HDFS
+
+#state.backend.fs.checkpointdir: hdfs://node-1:9000/flink-checkpoints
+state.backend.fs.checkpointdir: hdfs://master:9000/flink-checkpoints
+state.savepoints.dir:  hdfs://master:9000/flink-savepoints
+#state.checkpoints.dir: file:///data/Anyestnfs/flink/checkpoints
+#state.savepoints.dir: file:///data/Anyestnfs/flink/checkpoints
+
+#使用zookeeper搭建高可用
+
+high-availability: zookeeper
+
+# 存储JobManager的元数据到HDFS
+
+high-availability.storageDir: hdfs://master:9000/flink/ha/
+#high-availability.storageDir: file:///data/Anyestnfs/flink/ha/
+
+high-availability.zookeeper.quorum: 192.168.60.100:2181

@@ -3,7 +3,7 @@
 groupadd mysql 
 useradd mysql -g mysql
 3 
- mv mysql-5.7.24-linux-glibc2.12-x86_64 /usr/local/mysql
+ mv mysql-5.7.17-linux-glibc2.5-x86_64 /usr/local/mysql
  
  chown -R mysql:mysql /usr/local/mysql
 
@@ -14,17 +14,24 @@ cd /usr/local/mysql/bin
 ./mysqld --initialize --user=mysql --datadir=/home/mysql/data --basedir=/usr/local/mysql
 
 
+./mysqld --initialize --user=mysql --datadir=/usr/local/mysql/data --basedir=/usr/local/mysql
+
 ll /etc/init.d/ | grep mysql
 
 find / -name mysql.server
 
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
 
+
 service mysql start
 
- mysql -h 192.168.137.111 -u root
- 
- 
+    ./mysql -h 192.168.60.200 -u root
+    
+      ./mysql -h 192.168.60.201 -u root
+
+
+
+ use mysql;
  update user set host='%' where user = 'root';
  
 update user set authentication_string=password('root') where user='root';
@@ -96,12 +103,24 @@ unzip -oq common.war -d common       //解压war包并制定存储目录
 在主库创建一个用户(rep：用户名)：create user repl;
 
 grant replication slave on *.* to 'repl'@'192.168.42.200' identified by 'repl';
+grant replication slave on *.* to 'repl'@'192.168.60.201' identified by 'repl';
+grant replication slave on *.* to 'repl'@'10.0.8.10' identified by 'repl';
+
 flush privileges;
 
 show grant for  'repl'@'192.168.42.200'
+show grant for  'repl'@'192.168.60.201'
+show grant for  'repl'@'10.0.8.10'
 
-#挂载到主库
+
+
+#挂载到主库  在从库执行
+
+show binary logs;
+
 change master to master_host='192.168.42.136',master_port=3306,master_user='repl',master_password='repl',master_log_file='mysql-bin.000014',master_log_pos=0;
+
+change master to master_host='11.11.1.79',master_port=3306,master_user='repl',master_password='repl',master_log_file='mysql-bin.000018',master_log_pos=0;
 
 
 change master to master_host='192.168.42.136',master_port=3306,master_user='root',master_password='root',master_log_file='mysql-bin.000016',master_log_pos=0;
@@ -114,3 +133,28 @@ START SLAVE;
 
 
 select user,host,password from mysql.user
+
+
+[mysqld]
+#server-id=10
+#log-bin=master（这一步开启binlog）
+#binlog_format=row
+
+server-id=20
+binlog-format=row
+log-bin =/home/mysql/mysql-bin
+
+datadir=/home/mysql/data
+basedir=/usr/local/mysql
+socket=/tmp/mysql.sock
+user=mysql
+port=3306
+character-set-server=utf8
+# 取消密码验证
+skip-grant-tables
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+# skip-grant-tables
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid

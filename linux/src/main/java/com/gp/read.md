@@ -9,7 +9,7 @@ sdw1 192.168.60.161 (segment节点，包含两个primary segment,两个mirror se
 sdw2 192.168.60.162 (segment节点，包含两个primary segment,两个mirror segment）
 
 
-GP版本： greenplum-db-6.0.0-rhel7-x86_64.rpm
+GP版本： open-source-greenplum-db-6.14.1-rhel7-x86_64.rpm
 
 安装包下载（官网）：https://network.pivotal.io/products/pivotal-gpdb/
 
@@ -85,7 +85,6 @@ hard nproc 131072
 groupadd -g 530 gpadmin
 useradd -g 530 -u530 -m -d /home/gpadmin -s /bin/bash gpadmin
 chown -R gpadmin:gpadmin /home/gpadmin/
-passwd gpadmin
 
 echo gpadmin|passwd --stdin gpadmin
 
@@ -98,7 +97,7 @@ chown -R gpadmin:gpadmin /opt/greenplum/
 
         gpmaster 免密登录从服务器
    1、生成公钥和私钥
-           
+
            在主节点中，执行：
            cd ~
            
@@ -109,7 +108,7 @@ chown -R gpadmin:gpadmin /opt/greenplum/
            cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
            
            chmod 600 ~/.ssh/authorized_keys
-           
+
            2、将公钥复制到其他从机
              scp ~/.ssh/authorized_keys gpadmin@sdw1:~/.ssh/
              scp ~/.ssh/authorized_keys gpadmin@sdw2:~/.ssh/
@@ -132,16 +131,16 @@ open-source-greenplum-db-6.14.1-rhel7-x86_64.rpm
 
 (2)安装
 
-yum install apr
-yum install apr-util
-yum install bzip2
-yum install  krb5-devel
-yum install  libyaml
-yum install  perl
-yum install  rsync
-yum install  zip
-yum install  net-tools
-yum install  libevent
+yum install -y apr
+yum install -y apr-util
+yum install -y bzip2
+yum install -y krb5-devel
+yum install -y libyaml
+yum install -y perl
+yum install -y rsync
+yum install -y zip
+yum install -y net-tools
+yum install -y libevent
 
 
 vim /etc/sudoers
@@ -205,6 +204,7 @@ source /usr/local/greenplum-db/greenplum_path.sh
 
 
 (6)批量解压文件
+
  tar -xf  gp6.14.1.tar.gz
   #建立软链接
 ln -s /opt/greenplum/greenplum-db-6.14.1 /opt/greenplum/greenplum-db
@@ -267,6 +267,8 @@ MIRROR
  
  (10)初始化数据库
  
+  source /opt/greenplum/greenplum-db/greenplum_path.sh
+
  gpinitsystem -c /opt/greenplum/greenplum-db/docs/cli_help/gpconfigs/gpinit_config -s sdw2
  
  选择 y

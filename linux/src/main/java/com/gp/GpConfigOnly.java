@@ -51,11 +51,23 @@ public class GpConfigOnly {
                 }});
 
 
+
+            fileManager.getLinuxFileCategory("gp", "10.0.22.87", "gpadmin", "gpadmin", 22, "gpinit_config", "/opt/greenplum/greenplum-db/docs/cli_help/gpconfigs", new HashMap() {{
+                put("file_linux_cfg", filePath);
+            }});
+            fileManager.getLinuxFileCategory("gp", "10.0.22.87", "gpadmin", "gpadmin", 22, "pg_hba.conf", "/home/gpadmin/gpdata/gpmaster/gpseg-1", new HashMap() {{
+                put("file_linux_cfg", filePath);
+            }});
+
+
+
         } else {
             fileManager.upLinuxFileCategory("gp", "192.168.60.160", "gpadmin", "gpadmin", 22, "gpinit_config");
             fileManager.upLinuxFileCategory("gp", "192.168.60.161", "gpadmin", "gpadmin", 22, "gpinit_config");
             fileManager.upLinuxFileCategory("gp", "192.168.60.162", "gpadmin", "gpadmin", 22, "gpinit_config");
             fileManager.upLinuxFileCategory("gp", "192.168.60.160", "gpadmin", "gpadmin", 22, "pg_hba.conf");
+            fileManager.upLinuxFileCategory("gp", "10.0.22.87", "gpadmin", "gpadmin", 22, "pg_hba.conf");
+            fileManager.upLinuxFileCategory("gp", "10.0.22.87", "gpadmin", "gpadmin", 22, "gpinit_config");
 
         }
 

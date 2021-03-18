@@ -25,6 +25,8 @@ nohup ./bin/yarn-session.sh -n 12 -st -tm 1000 -s 5 -nm flink-1 > yarn.log & tai
 - c 表示入口类
 - p 表示并行度
 
+/home/liwen/application/flink12/bin/flink run -m 11.11.1.79:8088  -c org.apache.flink.examples.java.wordcount.WordCount  /home/liwen/application/flink12/examples/batch/WordCount.jar --port 9000
+
 
 yarn 查看app的运行情况
 yarn application -list

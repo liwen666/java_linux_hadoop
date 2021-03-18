@@ -1,0 +1,19 @@
+jobmanager.rpc.address: master
+jobmanager.rpc.port: 6123
+jobmanager.memory.process.size: 1600m
+taskmanager.memory.process.size: 1728m
+
+taskmanager.numberOfTaskSlots: 1
+parallelism.default: 1
+jobmanager.execution.failover-strategy: region
+
+state.checkpoints.num-retained: 20
+#
+#high-availability: zookeeper                             #指定高可用模式（必须）
+#high-availability.zookeeper.quorum: master:2181  #ZooKeeper仲裁是ZooKeeper服务器的复制组，它提供分布式协调服务（必须）
+#high-availability.storageDir: hdfs:///flink/ha/       #JobManager元数据保存在文件系统storageDir中，只有指向此状态的指针存储在ZooKeeper中（必须）
+#high-availability.zookeeper.path.root: /flink         #根ZooKeeper节点，在该节点下放置所有集群节点（推荐）
+#high-availability.cluster-id: /flinkCluster               #自定义集群（推荐）
+state.backend: filesystem
+state.checkpoints.dir: hdfs:///flink/checkpoints
+state.savepoints.dir: hdfs:///flink/savepoints
