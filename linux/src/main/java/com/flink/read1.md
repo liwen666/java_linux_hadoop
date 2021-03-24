@@ -38,6 +38,8 @@ yarn application -kill application_1539058959130_0001
 
 
 
+
+
 Usage:
    Required
      -n,--container <arg>   为YARN分配容器的数量 (=Number of Task Managers)

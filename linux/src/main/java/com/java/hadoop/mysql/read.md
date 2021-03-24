@@ -3,6 +3,8 @@
 groupadd mysql 
 useradd mysql -g mysql
 3 
+
+tar -zxvf  mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz
  mv mysql-5.7.17-linux-glibc2.5-x86_64 /usr/local/mysql
  
  chown -R mysql:mysql /usr/local/mysql
@@ -14,7 +16,6 @@ cd /usr/local/mysql/bin
 ./mysqld --initialize --user=mysql --datadir=/home/mysql/data --basedir=/usr/local/mysql
 
 
-./mysqld --initialize --user=mysql --datadir=/usr/local/mysql/data --basedir=/usr/local/mysql
 
 ll /etc/init.d/ | grep mysql
 
@@ -23,11 +24,16 @@ find / -name mysql.server
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
 
 
+修改my.cnf
+
 service mysql start
 
     ./mysql -h 192.168.60.200 -u root
     
       ./mysql -h 192.168.60.201 -u root
+
+
+    ./mysql -h 127.0.0.1 -u root
 
 
 
@@ -158,3 +164,5 @@ symbolic-links=0
 [mysqld_safe]
 log-error=/var/log/mysqld.log
 pid-file=/var/run/mysqld/mysqld.pid
+
+

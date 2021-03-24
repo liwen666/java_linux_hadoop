@@ -11,6 +11,8 @@ sdw2 192.168.60.162 (segment节点，包含两个primary segment,两个mirror se
 
 GP版本： open-source-greenplum-db-6.14.1-rhel7-x86_64.rpm
 
+open-source-greenplum-db-6.15.0-rhel7-x86_64.rpm
+
 安装包下载（官网）：https://network.pivotal.io/products/pivotal-gpdb/
 
 # 二、安装前服务器准备
@@ -41,7 +43,7 @@ vi /etc/hostname
 
 (3)修改内核
 
-/etc/sysctl.conf 中追加
+vi /etc/sysctl.conf 中追加
 
 复制代码
 kernel.shmmax = 500000000
@@ -113,6 +115,9 @@ chown -R gpadmin:gpadmin /opt/greenplum/
              scp ~/.ssh/authorized_keys gpadmin@sdw1:~/.ssh/
              scp ~/.ssh/authorized_keys gpadmin@sdw2:~/.ssh/
              
+                          scp ~/.ssh/authorized_keys gpadmin@mysql-gp-master:~/.ssh/
+
+             
           2、将公钥复制到其他从机
                       scp ~/.ssh/authorized_keys gpadmin@gpmaster:~/.ssh/
                       scp ~/.ssh/authorized_keys gpadmin@sdw2:~/.ssh/
@@ -127,6 +132,9 @@ chown -R gpadmin:gpadmin /opt/greenplum/
 (1) 上传安装文件到主节点
 
 open-source-greenplum-db-6.14.1-rhel7-x86_64.rpm
+
+open-source-greenplum-db-6.15.0-rhel7-x86_64.rpm
+
  上传到/home/gpadmin
 
 (2)安装
@@ -208,6 +216,7 @@ source /usr/local/greenplum-db/greenplum_path.sh
  tar -xf  gp6.14.1.tar.gz
   #建立软链接
 ln -s /opt/greenplum/greenplum-db-6.14.1 /opt/greenplum/greenplum-db
+ln -s /opt/greenplum/greenplum-db-6.15.0 /opt/greenplum/greenplum-db
 
 (7)创建数据库数据目录
 
@@ -247,6 +256,7 @@ MIRROR
  
  可以根据模板修改，我的gpinit_config如下：
  
+vi  /opt/greenplum/greenplum-db/docs/cli_help/gpconfigs/gpinit_config
  复制代码
  ARRAY_NAME="Greenplum"
  SEG_PREFIX=gpseg

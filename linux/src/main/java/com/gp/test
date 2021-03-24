@@ -1,0 +1,1 @@
+ gpinitsystem -c /opt/greenplum/greenplum-db/docs/cli_help/gpconfigs/gpinit_config -s mysql-gp-master
