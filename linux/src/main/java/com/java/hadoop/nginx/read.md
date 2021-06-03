@@ -139,6 +139,8 @@ server {
 
 /opt/nginx/sbin/nginx -s reload 
 
+/opt/nginx/conf
+
 
 修改文件归属用户和组
 chown -R liwen /home/liwen/application/any-data-hub/data-hub-page/dist/any-data-hub
@@ -158,11 +160,14 @@ iptables -I INPUT -p tcp --dport 9018 -j ACCEPT;
 
 /usr/local/nginx/sbin/nginx -c conf/nginx.conf -s reload
 
+nginx -c ../conf/nginx.conf -s reload
+
 iptables -I INPUT -p tcp --dport 9618 -j ACCEPT;
 
 iptables -I INPUT -p tcp --dport 9060 -j ACCEPT;
 iptables -I INPUT -p tcp --dport 9020 -j ACCEPT;
 
+iptables -I INPUT -p tcp --dport 11086 -j ACCEPT;
 
 
 

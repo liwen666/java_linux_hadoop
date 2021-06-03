@@ -156,6 +156,8 @@ socket=/tmp/mysql.sock
 user=mysql
 port=3306
 character-set-server=utf8
+#忽略表名称大小写
+lower_case_table_names=1
 # 取消密码验证
 skip-grant-tables
 # Disabling symbolic-links is recommended to prevent assorted security risks
@@ -164,5 +166,3 @@ symbolic-links=0
 [mysqld_safe]
 log-error=/var/log/mysqld.log
 pid-file=/var/run/mysqld/mysqld.pid
-
-

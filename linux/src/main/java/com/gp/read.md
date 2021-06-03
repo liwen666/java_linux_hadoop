@@ -73,6 +73,8 @@ vm.dirty_ratio=0
 vm.dirty_background_bytes = 1610612736
 vm.dirty_bytes = 4294967296
 
+
+
 (4)修改文件打开限制
 
 vi /etc/security/limits.conf
@@ -195,6 +197,9 @@ chown -R gpadmin:gpadmin /usr/gp6.14.1.tar
 
  #压缩
 tar -cf gp6.14.1.tar greenplum-db-6.14.1/
+
+tar -zcf flink-1.11.2.tar flink-server/
+
 chown  gpadmin:gpadmin gp6.14.1.tar 
 
 #分发
@@ -310,3 +315,42 @@ postgres=#
 命令: gpstop 
 
 (13) 配置远程连接
+
+
+
+#最大连接数的修改
+
+##默认配置
+[gpadmin@gpmaster bin]$  gpconfig -s max_connections
+Values on all segments are consistent
+GUC          : max_connections
+Master  value: 250
+Segment value: 750
+
+四、最大连接数的修改
+官方要求修改max_connections的同时，同步修改max_prepared_transactions，为此 ：
+
+（1）修改命令为：
+
+gpconfig -c max_connections -v 1500 -m 500
+gpconfig -c max_prepared_transactions -v 500
+（2）修改完参数后记得重启数据库生效
+
+gpstop -M fast
+gpstart
+或者：
+
+gpstop -u
+（3）最后谨慎的检测下参数是否成功修改：
+
+[gpadmin@mdw ~]$ gpconfig -s max_connections
+Values on all segments are consistent
+GUC          : max_connections
+Master  value: 500
+Segment value: 1500
+[gpadmin@mdw ~]$ gpconfig -s max_prepared_transactions
+Values on all segments are consistent
+GUC          : max_prepared_transactions
+Master  value: 500
+Segment value: 500
+[gpadmin@mdw ~]$ 

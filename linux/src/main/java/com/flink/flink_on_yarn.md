@@ -37,6 +37,7 @@
 ##安装hadoop
 
 #配置环境变量
+
 ##启动hadoop
   hadoop namenode -format 
   start-all.sh    
@@ -72,6 +73,7 @@ start-all.sh
  
  
 #重构集群
+
 rm -rf /home/hadoop/hadoop/hdfs/data/*
 rm -rf /home/hadoop/hadoop/hdfs/name/*
 rm -rf /home/hadoop/hadoop/hdfs/tmp/*
@@ -80,6 +82,8 @@ rm -rf /home/hadoop/hadoop/hdfs/tmp/*
 #hadoop测试
 Web浏览器输入127.0.0.1:50070，查看管理界面
 http://192.168.60.100:50070/dfshealth.html#tab-overview
+http://192.168.60.181:50070/dfshealth.html#tab-overview
+
 查看节点的存活状态
 cd /home/hadoop/test
 echo "My name is Xie PengCheng. This is a example program called WordCount, run by Xie PengCheng " >> testWordCount

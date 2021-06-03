@@ -2,6 +2,10 @@
 jobmanager.rpc.address: 10.0.22.87
 # The RPC port where the JobManager is reachable.
 jobmanager.rpc.port: 6123
+#日志端口配置，防止网络策略不通
+taskmanager.rpc.port: 50100-50200
+taskmanager.data.port: 30000
+
 # The total process memory size for the JobManager.
 jobmanager.memory.process.size: 1600m
 # The total process memory size for the TaskManager.
@@ -14,16 +18,20 @@ taskmanager.numberOfTaskSlots: 10
 # The parallelism used for programs that did not specify and other parallelism.
 parallelism.default: 1
 #fs.default-scheme: file:///data/Anyestnfs/flink/
-fs.default-scheme: hdfs://172.16.101.12:9082/flink
+#fs.default-scheme: hdfs://172.16.101.12:9082/flink
+fs.default-scheme: file:///data/Anyestnfs/flink/flink
 high-availability: zookeeper
-high-availability.storageDir: hdfs://172.16.101.12:9082/flink/ha
+#high-availability.storageDir: hdfs://172.16.101.12:9082/flink/ha
+high-availability.storageDir: file:///data/Anyestnfs/flink/flink/ha
 high-availability.zookeeper.quorum: 10.0.22.87:2181
 high-availability.zookeeper.client.acl: open
 
 state.backend: filesystem
-state.checkpoints.dir: hdfs://172.16.101.12:9082/flink-checkpoints
+#state.checkpoints.dir: hdfs://172.16.101.12:9082/flink-checkpoints
+state.checkpoints.dir: file:///data/Anyestnfs/flink/flink-checkpoints
 
-state.savepoints.dir: hdfs://172.16.101.12:9082/flink-savepoints
+#state.savepoints.dir: hdfs://172.16.101.12:9082/flink-savepoints
+state.savepoints.dir: file:///data/Anyestnfs/flink/flink-savepoints
 state.backend.incremental: true
 jobmanager.execution.failover-strategy: region
 
@@ -117,7 +125,8 @@ web.submit.enable: true
 
 # Directory to upload completed jobs to. Add this directory to the list of
 # monitored directories of the HistoryServer as well (see below).
-jobmanager.archive.fs.dir: hdfs://172.16.101.12:9082/completed-jobs/
+jobmanager.archive.fs.dir: file:///data/Anyestnfs/flink/completed-jobs/
+#jobmanager.archive.fs.dir: hdfs://172.16.101.12:9082/completed-jobs/
 
 # The address under which the web-based HistoryServer listens.
 #historyserver.web.address: 0.0.0.0
@@ -126,7 +135,8 @@ jobmanager.archive.fs.dir: hdfs://172.16.101.12:9082/completed-jobs/
 historyserver.web.port: 8082
 
 # Comma separated list of directories to monitor for completed jobs.
-historyserver.archive.fs.dir: hdfs://172.16.101.12:9082/history/completed-jobs/
+#historyserver.archive.fs.dir: hdfs://172.16.101.12:9082/history/completed-jobs/
+historyserver.archive.fs.dir: file:///data/Anyestnfs/flink/history/completed-jobs/
 
 # Interval in milliseconds for refreshing the monitored directories.
 historyserver.archive.fs.refresh-interval: 10000

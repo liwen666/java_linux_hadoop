@@ -45,9 +45,17 @@ public class FlinkConfig878889Only {
             fileManager.getLinuxFileCategory("flink", "10.0.22.87", "root", "123.com", 22, "zoo.cfg", "/opt/flink-1.12.2/conf", new HashMap() {{
                 put("file_linux_cfg", filePath);
             }});
+            fileManager.getLinuxFileCategory("flink", "10.0.22.88", "root", "123.com", 22, "flink-conf.yaml", "/opt/flink-1.12.2/conf", new HashMap() {{
+                put("file_linux_cfg", filePath);
+            }});
+            fileManager.getLinuxFileCategory("flink", "10.0.22.89", "root", "123.com", 22, "flink-conf.yaml", "/opt/flink-1.12.2/conf", new HashMap() {{
+                put("file_linux_cfg", filePath);
+            }});
 
         } else {
             fileManager.upLinuxFileCategory("flink", "10.0.22.87", "root", "123.com", 22, "flink-conf.yaml");
+            fileManager.upLinuxFileCategory("flink", "10.0.22.88", "root", "123.com", 22, "flink-conf.yaml");
+            fileManager.upLinuxFileCategory("flink", "10.0.22.89", "root", "123.com", 22, "flink-conf.yaml");
             fileManager.upLinuxFileCategory("flink", "10.0.22.87", "root", "123.com", 22, "masters");
             fileManager.upLinuxFileCategory("flink", "10.0.22.87", "root", "123.com", 22, "workers");
 

@@ -31,6 +31,9 @@ nohup ./bin/yarn-session.sh -n 12 -st -tm 1000 -s 5 -nm flink-1 > yarn.log & tai
 yarn 查看app的运行情况
 yarn application -list
 yarn application -kill application_1539058959130_0001
+yarn application -kill application_1614079085526_0002
+
+
 
 
 
@@ -61,3 +64,17 @@ Usage:
      -tm,--taskManagerMemory <arg>   每个TaskManager的内存大小，executor-memory  [in MB]
      -yd,--yarndetached              如果存在，则以分离模式运行作业 (deprecated; use non-YARN specific option instead)
      -z,--zookeeperNamespace <arg>   为高可用性模式创建Zookeeper子路径的命名空间
+     
+     
+ ##savepoint test
+ 
+ 指定检查点来取消和断点重启job
+/opt/flink-1.12.2/bin/flink list 
+  /opt/flink-1.12.2/bin/flink list -a
+  /opt/flink-1.12.2/bin/flink cancel -s /data/Anyestnfs/flink/flink-savepoints/ec35764f003e48ce39b1c58132fa4b41/   ec35764f003e48ce39b1c58132fa4b41
+  
+ /opt/flink-1.12.2/bin/flink run -m 10.0.22.87:8081 -s /data/Anyestnfs/flink/flink-savepoints/ec35764f003e48ce39b1c58132fa4b41/savepoint-ec3576-a447dbb9626d  -c com.riveretech.est.runtime.JobApp /data/Anyestnfs/jobhome/test_gp/1d1c77a9bdd047f4b17dc2eb185a2086/job-runtime-1.0.0-SNAPSHOT.jar --dependency_external /data/Anyestnfs/jarlib
+
+ 
+ec35764f003e48ce39b1c58132fa4b41  
+  

@@ -1,0 +1,26 @@
+
+baseDir: D:/workspace/java_linux_hadoop/linux/app/
+file_linux_cfg: D:/workspace/java_linux_hadoop/linux/src/main/resources/file-path.json
+upLoadFile: D:\workspace\java_linux_hadoop\linux\src\main\java\com\filemanager\
+upLoadFilePackage: com.filemanager
+hadoop:
+  sit:
+    linux:
+      user: hadoop
+      password: hadoop
+      ip: 192.168.60.182
+      port: 22
+      app-home: /home/hadoop/hadoop/
+      app-package: hadoop-3.2.2.tar.gz
+    conf:
+      - core-site.xml
+      - hadoop-env.sh
+      - hdfs-site.xml
+      - mapred-site.xml
+      - yarn-site.xml
+      - yarn-env.sh
+      - workers
+      - capacity-scheduler.xml
+    prefix: hadoop_cluster1
+    config-path: /home/hadoop/hadoop/hadoop/etc/hadoop
+    #上传文件还是下载  true表示下载  false表示上传
