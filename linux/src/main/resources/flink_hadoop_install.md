@@ -89,7 +89,7 @@ systemctl disable firewalld
 
 
 关闭安全认证
-##hdfs dfsadmin -safemode leave
+##7 hdfs dfsadmin -safemode leave
 
 
 ##启动hadoop
@@ -135,7 +135,45 @@ http://192.168.60.181:8088/cluster
 在hadoop-flink1
  ./bin/yarn-session.sh -d -jm 2506m -tm 2060m -nm any-data-hub-flink -qu root.flink
  
-  ./bin/yarn-session.sh -d -jm 2506m -tm 2060m -nm any-data-hub-flink -qu root.pro
+  ./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink -qu pro
+  ./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink -qu dev
+  ./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink -qu default
+  ./bin/yarn-session.sh -d -jm 6048m -tm 6048m -nm any-data-hub-flink 
+  
+ #### -------./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink -qu root.test.dev
+
+  #公平资源分配策略
+./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink -qu root.data-hub.pro
+
+ ./bin/yarn-session.sh -d -jm 6048m -tm 6048m -nm any-data-hub-flink -qu pro
+ 
+ #提交flink任务
+ 批量
+ ./bin/flink list -t yarn-cluster 
+ 
+ ./bin/flink cancel -t yarn-per-job -Dyarn.application.id=application_XXXX_YY <jobId>
+
+
+ ./bin/flink run   -m yarn-cluster -ynm lw_test1  -c org.apache.flink.examples.java.wordcount.WordCount  ./examples/batch/WordCount.jar 
+ 
+ 实时
+  ./bin/flink run   -m yarn-cluster -ynm lw_test1  -c jrx.data.hub.flink.example.scoket.SocketWindowWordCount  ./examples/SocketWindowWordCount.jar 
+
+ #session
+ 
+  ./bin/flink run ./examples/batch/WordCount.jar
+  ./bin/flink run ./examples/SocketWindowWordCount.jar
+
+ ./bin/flink run -t yarn-session -Dyarn.application.id=application_1622743059541_0002   ./examples/SocketWindowWordCount.jar
+ 重新连接
+ ./bin/yarn-session.sh -id application_1622743059541_0002
+ 
+ 
+
+#停止运行
+yarn application -list
+yarn application -kill 
+
 
 -n,–container ：在yarn中启动container的个数，实质就是TaskManager的个数
 -s,–slots ：每个TaskManager管理的Slot个数
@@ -147,6 +185,14 @@ http://192.168.60.181:8088/cluster
 
 
 
+#问题解析
+Container exited with a non-zero exit code 127. Error file: prelaunch.err.
 
+异常原因是格式化配置文件时value里面存在空格
+  <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property>
+    
 
 

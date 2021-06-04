@@ -22,6 +22,7 @@ hadoop:
 #      - slaves
       - workers
       - capacity-scheduler.xml
+      - fair-scheduler.xml
     prefix: hadoop_cluster1
     config-path: /home/hadoop/hadoop/hadoop/etc/hadoop
     #上传文件还是下载  true表示下载  false表示上传

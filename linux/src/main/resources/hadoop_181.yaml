@@ -20,6 +20,7 @@ hadoop:
       - yarn-site.xml
       - yarn-env.sh
       - capacity-scheduler.xml
+      - fair-scheduler.xml
 #      - slaves
       - workers
     prefix: hadoop_cluster1

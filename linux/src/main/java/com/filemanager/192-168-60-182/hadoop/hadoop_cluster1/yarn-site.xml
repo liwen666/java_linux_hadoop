@@ -86,7 +86,8 @@
 
     <!-- 指定resourcemanager的状态信息存储在zookeeper集群 -->
     <property>
-        <name>yarn.resourcemanager.store.class</name>     <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore</value>
+        <name>yarn.resourcemanager.store.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore</value>
     </property>
     <!-- 环境变量的继承 -->
     <property>
@@ -118,7 +119,8 @@
     </property>
     <!-- 虚拟核数和物理核数乘数 -->
     <property>
-        <description>Multiplier to determine how to convert phyiscal cores to vcores. This value is used if yarn.nodemanager.resource.cpu-vcores  is set to -1(which implies auto-calculate vcores) and
+        <description>Multiplier to determine how to convert phyiscal cores to vcores. This value is used if
+            yarn.nodemanager.resource.cpu-vcores is set to -1(which implies auto-calculate vcores) and
             yarn.nodemanager.resource.detect-hardware-capabilities is set to true.
             The number of vcores will be calculated as number of CPUs * multiplier.
         </description>
@@ -128,7 +130,8 @@
     <!-- NodeManager 使用内存数，默认 8G，总内存约 24 G 设置为 10G 内存 -->
     <property>
         <description>Amount of physical memory, in MB, that can be allocated for containers. If set to -1 and
-            yarn.nodemanager.resource.detect-hardware-capabilities is true, it is automatically calculated(in case of Windows and Linux).In other cases, the default is 8192MB.
+            yarn.nodemanager.resource.detect-hardware-capabilities is true, it is automatically calculated(in case of
+            Windows and Linux).In other cases, the default is 8192MB.
         </description>
         <name>yarn.nodemanager.resource.memory-mb</name>
         <value>20240</value>
@@ -136,30 +139,39 @@
     <!-- nodemanager 的 CPU 核数，默认是 8 个，总数为 24 设置为 16 个 -->
     <property>
         <description>Number of vcores that can be allocated
-            for containers. This is used by the RM scheduler when allocating resources for containers. This is not used to limit the number of CPUs used by YARN containers. If it is set to -1 and yarn.nodemanager.resource.detect-hardware-capabilities is true, it is
-            automatically determined from the hardware in case of Windows and Linux. In other cases, number of vcores is 8 by default.</description>
+            for containers. This is used by the RM scheduler when allocating resources for containers. This is not used
+            to limit the number of CPUs used by YARN containers. If it is set to -1 and
+            yarn.nodemanager.resource.detect-hardware-capabilities is true, it is
+            automatically determined from the hardware in case of Windows and Linux. In other cases, number of vcores is
+            8 by default.
+        </description>
         <name>yarn.nodemanager.resource.cpu-vcores</name>
         <value>20</value>
     </property>
     <!-- 容器最小内存，默认 1G 设置为 512 MB-->
     <property>
-        <description>The minimum allocation for every container request at the RM in MBs. Memory requests lower than this will be set to the value of this property. Additionally, a node manager that is configured to have less memory than this value will be shut down by the resource manager.
+        <description>The minimum allocation for every container request at the RM in MBs. Memory requests lower than
+            this will be set to the value of this property. Additionally, a node manager that is configured to have less
+            memory than this value will be shut down by the resource manager.
         </description>
         <name>yarn.scheduler.minimum-allocation-mb</name>
-        <value>1024</value>
+        <value>128</value>
     </property>
 
     <!-- 容器最大内存，默认 8G，修改为 4G -->
     <property>
-        <description>The maximum allocation for every container request at the RM in MBs. Memory requests higher than this will throw an InvalidResourceRequestException.
+        <description>The maximum allocation for every container request at the RM in MBs. Memory requests higher than
+            this will throw an InvalidResourceRequestException.
         </description>
         <name>yarn.scheduler.maximum-allocation-mb</name>
-        <value>2048</value>
+        <value>8048</value>
     </property>
 
     <!-- 容器最小 CPU 核数，默认 1 个 -->
     <property>
-        <description>The minimum allocation for every container request at the RM in terms of virtual CPU cores. Requests lower than this will be set to the value of this property. Additionally, a node manager that is configured to have fewer virtual cores than this value will be shut down by the resource manager.
+        <description>The minimum allocation for every container request at the RM in terms of virtual CPU cores.
+            Requests lower than this will be set to the value of this property. Additionally, a node manager that is
+            configured to have fewer virtual cores than this value will be shut down by the resource manager.
         </description>
         <name>yarn.scheduler.minimum-allocation-vcores</name>
         <value>1</value>
@@ -167,18 +179,53 @@
 
     <!-- 容器最大 CPU 核数，默认 4 个，设置为 4 个 -->
     <property>
-        <description>The maximum allocation for every container request at the RM in terms of virtual CPU cores. Requests higher than this will throw an InvalidResourceRequestException.</description>
+        <description>The maximum allocation for every container request at the RM in terms of virtual CPU cores.
+            Requests higher than this will throw an InvalidResourceRequestException.
+        </description>
         <name>yarn.scheduler.maximum-allocation-vcores</name>
         <value>4</value>
     </property>
 
     <!-- 虚拟内存和物理内存设置比例,默认 2.1 -->
     <property>
-        <description>Ratio between virtual memory to physical memory when setting memory limits for containers. Container allocations are expressed in terms of physical memory, and virtual memory usage is
+        <description>Ratio between virtual memory to physical memory when setting memory limits for containers.
+            Container allocations are expressed in terms of physical memory, and virtual memory usage is
             allowed to exceed this allocation by this ratio.
         </description>
         <name>yarn.nodemanager.vmem-pmem-ratio</name>
         <value>2.1</value>
     </property>
 
+
+    <!--<property>-->
+    <!--<name>yarn.resourcemanager.scheduler.class</name>-->
+    <!--<value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler</value>-->
+    <!--</property>-->
+
+
+    <!--指定调度器的类型 -->
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</value>
+    </property>
+
+    <!--指定调度器所需的配置文件所在路径 -->
+    <property>
+        <name>yarn.scheduler.fair.allocation.file</name>
+        <value>/home/hadoop/hadoop/hadoop/etc/hadoop/fair-scheduler.xml</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.fair.preemption</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.fair.user-as-default-queue</name>
+        <value>true</value>
+        <description>default is True</description>
+    </property>
+    <property>
+        <name>yarn.scheduler.fair.allow-undeclared-pools</name>
+        <value>false</value>
+        <description>default is True</description>
+    </property>
 </configuration>
