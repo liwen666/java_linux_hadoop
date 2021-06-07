@@ -139,6 +139,16 @@ http://192.168.60.181:8088/cluster
   ./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink -qu dev
   ./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink -qu default
   ./bin/yarn-session.sh -d -jm 6048m -tm 6048m -nm any-data-hub-flink 
+    ./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink 
+    
+有时候提交不了任务，可能是-s  后面的slot太多了
+./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink  -s 10
+
+#设置jobmanager 大小6G  taskmanager 大小 6G 自动启动的taskmanager的slot数量10 
+./bin/yarn-session.sh -d -jm 6048m -tm 6048m -nm any-data-hub-flink  -s 10
+./bin/yarn-session.sh -d -jm 2048m -tm 6048m -nm any-data-hub-flink  -s 6
+
+
   
  #### -------./bin/yarn-session.sh -d -jm 2048m -tm 2048m -nm any-data-hub-flink -qu root.test.dev
 
@@ -147,14 +157,19 @@ http://192.168.60.181:8088/cluster
 
  ./bin/yarn-session.sh -d -jm 6048m -tm 6048m -nm any-data-hub-flink -qu pro
  
+ 
+  ./bin/yarn-session.sh -d -jm 6048m -tm 6048m -nm any-data-hub-flink -qu pro
+
+ 
  #提交flink任务
  批量
  ./bin/flink list -t yarn-cluster 
  
- ./bin/flink cancel -t yarn-per-job -Dyarn.application.id=application_XXXX_YY <jobId>
 
 
  ./bin/flink run   -m yarn-cluster -ynm lw_test1  -c org.apache.flink.examples.java.wordcount.WordCount  ./examples/batch/WordCount.jar 
+ 
+ 
  
  实时
   ./bin/flink run   -m yarn-cluster -ynm lw_test1  -c jrx.data.hub.flink.example.scoket.SocketWindowWordCount  ./examples/SocketWindowWordCount.jar 
@@ -164,9 +179,13 @@ http://192.168.60.181:8088/cluster
   ./bin/flink run ./examples/batch/WordCount.jar
   ./bin/flink run ./examples/SocketWindowWordCount.jar
 
- ./bin/flink run -t yarn-session -Dyarn.application.id=application_1622743059541_0002   ./examples/SocketWindowWordCount.jar
+ ./bin/flink run -t yarn-session -p 2 -Dyarn.application.id=application_1622765492225_0001   ./examples/SocketWindowWordCount.jar
+ ./bin/flink run -t yarn-session -p 2 -Dyarn.application.id=application_1622752782185_0010   ./examples/SocketWindowWordCount.jar
+ ./bin/flink run -t yarn-session -Dyarn.application.id=application_1622765492225_0001   ./examples/batch/WordCount.jar
+ 
+ ./bin/flink run -t yarn-session -Dyarn.application.id=application_1622775363840_0003   ./examples/batch/WordCount.jar
  重新连接
- ./bin/yarn-session.sh -id application_1622743059541_0002
+ ./bin/yarn-session.sh -id application_1622749901168_0003
  
  
 
@@ -175,7 +194,6 @@ yarn application -list
 yarn application -kill 
 
 
--n,–container ：在yarn中启动container的个数，实质就是TaskManager的个数
 -s,–slots ：每个TaskManager管理的Slot个数
 -nm,–name :给当前的yarn-session(Flink集群)起一个名字
 -d,–detached:后台独立模式启动，守护进程

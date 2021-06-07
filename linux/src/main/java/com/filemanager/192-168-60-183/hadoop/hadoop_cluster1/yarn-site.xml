@@ -146,7 +146,7 @@
             8 by default.
         </description>
         <name>yarn.nodemanager.resource.cpu-vcores</name>
-        <value>20</value>
+        <value>30</value>
     </property>
     <!-- 容器最小内存，默认 1G 设置为 512 MB-->
     <property>
@@ -183,7 +183,7 @@
             Requests higher than this will throw an InvalidResourceRequestException.
         </description>
         <name>yarn.scheduler.maximum-allocation-vcores</name>
-        <value>4</value>
+        <value>10</value>
     </property>
 
     <!-- 虚拟内存和物理内存设置比例,默认 2.1 -->
