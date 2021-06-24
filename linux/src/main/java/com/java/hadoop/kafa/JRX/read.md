@@ -62,3 +62,17 @@ nohup ./kafka-server-start.sh ../config/server.properties 1>/dev/null 2>&1 &
 
 ./kafka-server-start.sh -daemon ../config/server.properties
 kafka-console-consumer.sh --bootstrap-server 172.16.102.22:9092 --topic test --from-beginning
+
+
+#删除kafa数据
+
+三、kafka配置
+## 启用删除主题
+delete.topic.enable=true
+## 检查日志段文件的间隔时间，以确定是否文件属性是否到达删除要求。
+log.retention.check.interval.ms=1000
+ 
+
+注意：这2行配置必须存在，否则清除策略失效！
+
+log.retention.check.interval.ms 参数的单位是微秒，这里表示间隔1秒钟

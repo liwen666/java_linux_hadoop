@@ -25,7 +25,7 @@ public class NginxDophinSit11 {
             上传
         /---------------------------------------------------------------------------------*/
 //        fileManager.upLinuxFileCategory("nginx","172.16.102.21","jrxany","JRXwd01!",22,"nginx.conf");
-        fileManager.upLinuxFileCategory("nginx_auto","11.11.1.79","root","liwen",22,"nginx.conf");
+        fileManager.upLinuxFileCategory("nginx_auto","11.11.1.79","root","liwenroot",22,"nginx.conf");
 //        fileManager.upLinuxFileCategory("nginx_auto","11.11.1.79","root","liwen",22,"my.conf");
 //        fileManager.upLinuxFileCategory("nginx_auto","192.168.137.111","root","liwen",22,"nginx.conf");
 

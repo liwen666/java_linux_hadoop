@@ -125,3 +125,14 @@ echo ${str:0-4}
 # 其中的 0-6 表示右边算起第6个字符开始，10 表示字符的个数。
 # 结果是：html
 # 注：（左边的第一个字符是用 0 表示，右边的第一个字符用 0-1 表示）
+
+
+#系统启动失败解决版本
+Linux启动时出错failed to load SELinux policy.Freezing
+1.重启客户机，一直按E进入grup页面。
+
+2.找到并在LANG=zh_cn.UTF-8后面空格加selinux=0/enforcing=0.。
+
+3.Ctrl+x启动
+
+4.修改配置文件 vi /etc/selinux/config

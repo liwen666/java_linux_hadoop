@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+<configuration>
+
+<!-- Site specific YARN configuration properties -->
+
+<property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+
+    <!-- 启用resourcemanager ha -->
+    <property>
+        <name>yarn.resourcemanager.ha.enabled</name>
+        <value>true</value>
+    </property>
+
+    <!-- 声明两台resourcemanager的地址 -->
+    <property>
+        <name>yarn.resourcemanager.cluster-id</name>
+        <value>cluster-yarn1</value>
+    </property>
+    <!--指定resourcemanager的逻辑列表-->
+    <property>
+        <name>yarn.resourcemanager.ha.rm-ids</name>
+        <value>rm1,rm2</value>
+</property>
+<!-- ========== rm1的配置 ========== -->
+<!-- 指定rm1的主机名 -->
+    <property>
+        <name>yarn.resourcemanager.hostname.rm1</name>
+        <value>10.0.22.88</value>
+</property>
+<!-- 指定rm1的web端地址 -->
+<property>
+     <name>yarn.resourcemanager.webapp.address.rm1</name>
+     <value>10.0.22.88:8088</value>
+</property>
+<!-- 指定rm1的内部通信地址 -->
+<property>
+     <name>yarn.resourcemanager.address.rm1</name>
+     <value>10.0.22.88:8032</value>
+</property>
+<!-- 指定AM向rm1申请资源的地址 -->
+<property>
+     <name>yarn.resourcemanager.scheduler.address.rm1</name>
+     <value>10.0.22.88:8030</value>
+</property>
+<!-- 指定供NM连接的地址 -->
+<property>
+     <name>yarn.resourcemanager.resource-tracker.address.rm1</name>
+     <value>10.0.22.88:8031</value>
+</property>
+<!-- ========== rm2的配置 ========== -->
+    <!-- 指定rm2的主机名 -->
+    <property>
+        <name>yarn.resourcemanager.hostname.rm2</name>
+        <value>10.0.22.89</value>
+</property>
+<property>
+     <name>yarn.resourcemanager.webapp.address.rm2</name>
+     <value>10.0.22.89:8088</value>
+</property>
+<property>
+     <name>yarn.resourcemanager.address.rm2</name>
+     <value>10.0.22.89:8032</value>
+</property>
+<property>
+     <name>yarn.resourcemanager.scheduler.address.rm2</name>
+     <value>10.0.22.89:8030</value>
+</property>
+<property>
+     <name>yarn.resourcemanager.resource-tracker.address.rm2</name>
+     <value>10.0.22.89:8031</value>
+</property>
+
+    <!-- 指定zookeeper集群的地址 -->
+    <property>
+        <name>yarn.resourcemanager.zk-address</name>
+        <value>10.0.22.87:2181,10.0.22.89:2181,10.0.22.88:2181</value>
+            </property>
+
+    <!-- 启用自动恢复 -->
+<property>
+        <name>yarn.resourcemanager.recovery.enabled</name>
+        <value>true</value>
+    </property>
+
+    <!-- 指定resourcemanager的状态信息存储在zookeeper集群 -->
+    <property>
+        <name>yarn.resourcemanager.store.class</name>     <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore</value>
+</property>
+<!-- 环境变量的继承 -->
+ <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property>
+<!-- 开启日志聚集功能 -->
+<property>
+    <name>yarn.log-aggregation-enable</name>
+    <value>true</value>
+</property>
+<!-- 设置日志聚集服务器地址 -->
+<property>
+    <name>yarn.log.server.url</name>
+    <value>http://10.0.22.87:19888/jobhistory/logs</value>
+</property>
+<!-- 设置日志保留时间为7天 -->
+<property>
+    <name>yarn.log-aggregation.retain-seconds</name>
+    <value>604800</value>
+</property>
+<!-- 设置重试次数 -->
+<property>
+  <name>yarn.resourcemanager.am.max-attempts</name>
+  <value>5</value>
+  <description>
+The maximum number of application master execution attempts.
+  </description>
+</property>
+<!-- 虚拟核数和物理核数乘数 -->
+<property>
+<description>Multiplier to determine how to convert phyiscal cores to vcores. This value is used if yarn.nodemanager.resource.cpu-vcores  is set to -1(which implies auto-calculate vcores) and
+yarn.nodemanager.resource.detect-hardware-capabilities is set to true.
+The number of vcores will be calculated as number of CPUs * multiplier.
+</description>
+<name>yarn.nodemanager.resource.pcores-vcores-multiplier</name>
+<value>2.0</value>
+</property>
+<!-- NodeManager 使用内存数，默认 8G，总内存约 24 G 设置为 10G 内存 -->
+<property>
+<description>Amount of physical memory, in MB, that can be allocated for containers. If set to -1 and
+yarn.nodemanager.resource.detect-hardware-capabilities is true, it is automatically calculated(in case of Windows and Linux).In other cases, the default is 8192MB.
+</description>
+<name>yarn.nodemanager.resource.memory-mb</name>
+<value>10240</value>
+</property>
+<!-- nodemanager 的 CPU 核数，默认是 8 个，总数为 24 设置为 16 个 -->
+<property>
+<description>Number of vcores that can be allocated
+for containers. This is used by the RM scheduler when allocating resources for containers. This is not used to limit the number of CPUs used by YARN containers. If it is set to -1 and yarn.nodemanager.resource.detect-hardware-capabilities is true, it is
+automatically determined from the hardware in case of Windows and Linux. In other cases, number of vcores is 8 by default.</description>
+<name>yarn.nodemanager.resource.cpu-vcores</name>
+<value>16</value>
+</property>
+<!-- 容器最小内存，默认 1G 设置为 512 MB-->
+<property>
+<description>The minimum allocation for every container request at the RM in MBs. Memory requests lower than this will be set to the value of this property. Additionally, a node manager that is configured to have less memory than this value will be shut down by the resource manager.
+</description>
+<name>yarn.scheduler.minimum-allocation-mb</name>
+<value>1024</value>
+</property>
+
+<!-- 容器最大内存，默认 8G，修改为 4G -->
+<property>
+<description>The maximum allocation for every container request at the RM in MBs. Memory requests higher than this will throw an InvalidResourceRequestException.
+</description>
+<name>yarn.scheduler.maximum-allocation-mb</name>
+<value>4096</value>
+</property>
+
+<!-- 容器最小 CPU 核数，默认 1 个 -->
+<property>
+<description>The minimum allocation for every container request at the RM in terms of virtual CPU cores. Requests lower than this will be set to the value of this property. Additionally, a node manager that is configured to have fewer virtual cores than this value will be shut down by the resource manager.
+</description>
+<name>yarn.scheduler.minimum-allocation-vcores</name>
+<value>1</value>
+</property>
+
+<!-- 容器最大 CPU 核数，默认 4 个，设置为 4 个 -->
+<property>
+<description>The maximum allocation for every container request at the RM in terms of virtual CPU cores. Requests higher than this will throw an InvalidResourceRequestException.</description>
+<name>yarn.scheduler.maximum-allocation-vcores</name>
+<value>4</value>
+</property>
+
+<!-- 虚拟内存和物理内存设置比例,默认 2.1 -->
+<property>
+<description>Ratio between virtual memory to physical memory when setting memory limits for containers. Container allocations are expressed in terms of physical memory, and virtual memory usage is
+allowed to exceed this allocation by this ratio.
+</description>
+<name>yarn.nodemanager.vmem-pmem-ratio</name>
+<value>2.1</value>
+</property>
+
+</configuration>

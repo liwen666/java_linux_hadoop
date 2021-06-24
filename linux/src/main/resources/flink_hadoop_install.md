@@ -146,7 +146,7 @@ http://192.168.60.181:8088/cluster
 
 #设置jobmanager 大小6G  taskmanager 大小 6G 自动启动的taskmanager的slot数量10 
 ./bin/yarn-session.sh -d -jm 6048m -tm 6048m -nm any-data-hub-flink  -s 10
-./bin/yarn-session.sh -d -jm 2048m -tm 6048m -nm any-data-hub-flink  -s 6
+./bin/yarn-session.sh -d -jm 2048m -tm 6048m -nm flink-session   -s 6
 
 
   
@@ -178,12 +178,18 @@ http://192.168.60.181:8088/cluster
  
   ./bin/flink run ./examples/batch/WordCount.jar
   ./bin/flink run ./examples/SocketWindowWordCount.jar
+    /home/liwen/flink12/bin/flink cancel -s hdfs://172.16.101.12:9082/flink/example/out/save.txt 14709c3ee2be770f8f4140635dec8cc7
+
 
  ./bin/flink run -t yarn-session -p 2 -Dyarn.application.id=application_1622765492225_0001   ./examples/SocketWindowWordCount.jar
  ./bin/flink run -t yarn-session -p 2 -Dyarn.application.id=application_1622752782185_0010   ./examples/SocketWindowWordCount.jar
  ./bin/flink run -t yarn-session -Dyarn.application.id=application_1622765492225_0001   ./examples/batch/WordCount.jar
+ ./bin/flink run -t yarn-session -Dyarn.application.id=application_1622876415661_0001   ./examples/batch/WordCount.jar
  
- ./bin/flink run -t yarn-session -Dyarn.application.id=application_1622775363840_0003   ./examples/batch/WordCount.jar
+ ./bin/flink run -t yarn-session -Dyarn.application.id=application_1623203280675_0003   ./examples/batch/WordCount.jar
+ 
+ #cdc测试
+ ./bin/flink run -t yarn-session -Dyarn.application.id=application_1622776677104_0002 -p 3  -c com.riveretech.est.cdc.JobCdcApp ./examples/job-cdc-1.0.0-SNAPSHOT.jar
  重新连接
  ./bin/yarn-session.sh -id application_1622749901168_0003
  

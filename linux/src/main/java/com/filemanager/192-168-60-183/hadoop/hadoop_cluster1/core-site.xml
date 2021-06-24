@@ -8,6 +8,22 @@
     <name>fs.defaultFS</name>
     <value>hdfs://mycluster</value>
   </property>
+  <property>
+    <name>hadoop.proxyuser.hdfs.groups</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hdfs.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.yarn.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.yarn.groups</name>
+    <value>*</value>
+  </property>
   <!-- 指定hadoop运行时产生文件的存储目录 -->
   <property>
     <name>hadoop.tmp.dir</name>
