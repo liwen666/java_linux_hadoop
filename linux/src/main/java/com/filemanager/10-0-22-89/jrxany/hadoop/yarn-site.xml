@@ -145,7 +145,7 @@ The number of vcores will be calculated as number of CPUs * multiplier.
 yarn.nodemanager.resource.detect-hardware-capabilities is true, it is automatically calculated(in case of Windows and Linux).In other cases, the default is 8192MB.
 </description>
 <name>yarn.nodemanager.resource.memory-mb</name>
-<value>10240</value>
+<value>16384</value>
 </property>
 <!-- nodemanager 的 CPU 核数，默认是 8 个，总数为 24 设置为 16 个 -->
 <property>
@@ -168,7 +168,7 @@ automatically determined from the hardware in case of Windows and Linux. In othe
 <description>The maximum allocation for every container request at the RM in MBs. Memory requests higher than this will throw an InvalidResourceRequestException.
 </description>
 <name>yarn.scheduler.maximum-allocation-mb</name>
-<value>4096</value>
+<value>5096</value>
 </property>
 
 <!-- 容器最小 CPU 核数，默认 1 个 -->
@@ -194,5 +194,37 @@ allowed to exceed this allocation by this ratio.
 <name>yarn.nodemanager.vmem-pmem-ratio</name>
 <value>2.1</value>
 </property>
+
+<!--关闭检查虚拟内存 -->
+<property>
+    <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+</property>
+
+    <!--指定调度器的类型 -->
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</value>
+    </property>
+
+    <!--指定调度器所需的配置文件所在路径 -->
+    <property>
+        <name>yarn.scheduler.fair.allocation.file</name>
+        <value>/data/apps/hadoop/etc/hadoop/fair-scheduler.xml</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.fair.preemption</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.fair.user-as-default-queue</name>
+        <value>true</value>
+        <description>default is True</description>
+    </property>
+    <property>
+        <name>yarn.scheduler.fair.allow-undeclared-pools</name>
+        <value>false</value>
+        <description>default is True</description>
+    </property>
 
 </configuration>

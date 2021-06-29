@@ -19,7 +19,7 @@ public class FlinkConfig878889Only_New {
      */
     @Test
     public void installRedis() throws Exception {
-        boolean getConfigs = false;
+        boolean getConfigs = true;
         FileManager fileManager = new FileManager();
         String filePath = "D:/workspace/java_linux_hadoop/linux/src/main/resources/file-path.json";
         String upLoadFile = "D:\\workspace\\java_linux_hadoop\\linux\\src\\main\\java\\com\\filemanager\\";

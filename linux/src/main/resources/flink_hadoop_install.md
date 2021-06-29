@@ -176,6 +176,9 @@ http://192.168.60.181:8088/cluster
 
  #session
  
+ ./bin/yarn-session.sh -d  -nm any-data-hub-flink -Dyarn.application.type=flink-session-master 
+
+
   ./bin/flink run ./examples/batch/WordCount.jar
   ./bin/flink run ./examples/SocketWindowWordCount.jar
     /home/liwen/flink12/bin/flink cancel -s hdfs://172.16.101.12:9082/flink/example/out/save.txt 14709c3ee2be770f8f4140635dec8cc7
@@ -220,3 +223,10 @@ Container exited with a non-zero exit code 127. Error file: prelaunch.err.
     
 
 
+
+测试session是否可用
+
+ /data/apps/any-data-processor/flink12/bin/yarn-session.sh -d  -nm any-data-hub-flink -Dyarn.application.type=flink-session-test 
+ yarn application -list
+ 
+ /data/apps/any-data-processor/flink12/bin/flink run -t yarn-session -Dyarn.application.id=application_1624518383783_0005   /data/apps/any-data-processor/flink12/examples/batch/WordCount.jar

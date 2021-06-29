@@ -19,7 +19,7 @@ public class Hadoop878889Only_New {
      */
     @Test
     public void installRedis() throws Exception {
-        boolean getConfigs = true;
+        boolean getConfigs = false;
         FileManager fileManager = new FileManager();
         String filePath = "D:/workspace/java_linux_hadoop/linux/src/main/resources/file-path.json";
         String upLoadFile = "D:\\workspace\\java_linux_hadoop\\linux\\src\\main\\java\\com\\filemanager\\";
@@ -51,6 +51,9 @@ public class Hadoop878889Only_New {
             }}); fileManager.getLinuxFileCategory("hadoop", "10.0.22.87", "jrxany", "jrx@36ec88.com", 22, "mapred-site.xml", "/data/apps/hadoop/etc/hadoop", new HashMap() {{
                 put("file_linux_cfg", filePath);
             }});
+           fileManager.getLinuxFileCategory("hadoop", "10.0.22.87", "jrxany", "jrx@36ec88.com", 22, "fair-scheduler.xml", "/data/apps/hadoop/etc/hadoop", new HashMap() {{
+                put("file_linux_cfg", filePath);
+            }});
 
             fileManager.getLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "core-site.xml", "/data/apps/hadoop/etc/hadoop", new HashMap() {{
                 put("file_linux_cfg", filePath);
@@ -66,6 +69,9 @@ public class Hadoop878889Only_New {
             }}); fileManager.getLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "yarn-env.sh", "/data/apps/hadoop/etc/hadoop", new HashMap() {{
                 put("file_linux_cfg", filePath);
             }}); fileManager.getLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "mapred-site.xml", "/data/apps/hadoop/etc/hadoop", new HashMap() {{
+                put("file_linux_cfg", filePath);
+            }});
+ fileManager.getLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "fair-scheduler.xml", "/data/apps/hadoop/etc/hadoop", new HashMap() {{
                 put("file_linux_cfg", filePath);
             }});
 
@@ -86,6 +92,10 @@ fileManager.getLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.c
                 put("file_linux_cfg", filePath);
             }});
 
+fileManager.getLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.com", 22, "fair-scheduler.xml", "/data/apps/hadoop/etc/hadoop", new HashMap() {{
+                put("file_linux_cfg", filePath);
+            }});
+
 
         } else {
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.87", "jrxany", "jrx@36ec88.com", 22, "core-site.xml");
@@ -94,6 +104,7 @@ fileManager.getLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.c
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.87", "jrxany", "jrx@36ec88.com", 22, "yarn-site.xml");
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.87", "jrxany", "jrx@36ec88.com", 22, "yarn-env.sh");
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.87", "jrxany", "jrx@36ec88.com", 22, "mapred-site.xml");
+            fileManager.upLinuxFileCategory("hadoop", "10.0.22.87", "jrxany", "jrx@36ec88.com", 22, "fair-scheduler.xml");
 
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "core-site.xml");
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "hadoop-env.sh");
@@ -101,6 +112,7 @@ fileManager.getLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.c
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "yarn-site.xml");
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "yarn-env.sh");
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "mapred-site.xml");
+            fileManager.upLinuxFileCategory("hadoop", "10.0.22.88", "jrxany", "jrx@dda575.com", 22, "fair-scheduler.xml");
 
     fileManager.upLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.com", 22, "core-site.xml");
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.com", 22, "hadoop-env.sh");
@@ -108,6 +120,7 @@ fileManager.getLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.c
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.com", 22, "yarn-site.xml");
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.com", 22, "yarn-env.sh");
             fileManager.upLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.com", 22, "mapred-site.xml");
+            fileManager.upLinuxFileCategory("hadoop", "10.0.22.89", "jrxany", "jrx@d898db.com", 22, "fair-scheduler.xml");
 
 
         }
