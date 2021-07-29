@@ -28,7 +28,7 @@ iptables -I INPUT -p tcp --dport 8848 -j ACCEPT;
 iptables -I INPUT -p tcp --dport 2181 -j ACCEPT;
 iptables -I INPUT -p tcp --dport 9092 -j ACCEPT;
 #启动NG
-/usr/local/nginx/sbin/nginx -c conf/nginx.conf
+/usr/local/nginx/sbin/nginx -c conf/nginx.conf;
 iptables -I INPUT -p tcp --dport 8886 -j ACCEPT;
 #启动zeppelin
 /home/liwen/application/flink/zeppelin/bin/zeppelin-daemon.sh start 
@@ -59,3 +59,25 @@ systemctl stop firewalld
 systemctl disable firewalld
 
 #
+
+iptables -I INPUT -p tcp --dport 9618 -j ACCEPT;
+
+
+ /home/liwen/application/kafka_2.12-2.1.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic mydemo5
+/home/liwen/application/kafka_2.12-2.1.1/bin/kafka-topics.sh --list --zookeeper localhost:2181
+/home/liwen/application/kafka_2.12-2.1.1/bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic mydemo5
+/home/liwen/application/kafka_2.12-2.1.1/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic mydemo5
+/home/liwen/application/kafka_2.12-2.1.1/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --consumer-property group.id=test_kafka_game_x_g1 --topic mydemo5
+/home/liwen/application/kafka_2.12-2.1.1/bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list  
+/home/liwen/application/kafka_2.12-2.1.1/bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group  test_kafka_game_x_g1
+
+
+
+
+
+
+ /home/liwen/application/kafka_2.12-2.1.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 5 --topic test_kafka_maxwell
+
+
+
+bin/kafka-topics.sh --bootstrap-server  39.0.158.101:9092,39.0.158.102:9092,39.0.158.120:9092 --describe --topic 101_dml_maxwell

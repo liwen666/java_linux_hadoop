@@ -260,6 +260,8 @@ historyserver.archive.fs.dir: file:///home/liwen/application/flink/flink12/histo
 # Interval in milliseconds for refreshing the monitored directories.
 #historyserver.archive.fs.refresh-interval: 10000
 
+#自定义日志储存目录
+#env.log.dir: /data/log
 
 jobmanager.web.tmpdir: /home/liwen/application/flink-tempdir
 jobmanager.web.upload.dir: /home/liwen/application/flink-tempdir
